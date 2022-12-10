@@ -14,7 +14,7 @@ Los productos que se venderán serán alimentos, suplementos, snacks, juguetes, 
 El ecommerce es una tienda de mascotas, y el público es de Argentina, mayores de 18 años.
 
 ## * Tipografía Principal:
-En Google Fonts elegí la tipografía Catamaran y Overlock
+En Google Fonts elegí la tipografía **Catamaran** y **Overlock**
 
 Link: https://fonts.google.com/share?selection.family=Catamaran:wght@100;300;500;800;900%7COverlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900
 
@@ -23,7 +23,11 @@ Los colores elegidos son en la gama de los verdes, rojizos oscuros, maiz, grises
 
 Generador de paleta a partir del logo: https://coolors.co/fcfcfc-628c72-85938a-e4efe8-16552e
 
+![image](https://user-images.githubusercontent.com/97200944/206865904-7f816834-3268-469b-92d5-0df8a12afc2f.png)
+
 Combinación de colores: https://coolors.co/0b4d24-bf2f2f-face54-828c84-d3fcd5
+
+![palette](https://user-images.githubusercontent.com/97200944/206865926-42280768-d3bc-4bc9-92dd-32cc06c9960c.svg)
 
 ## * Creación de logo 
 
