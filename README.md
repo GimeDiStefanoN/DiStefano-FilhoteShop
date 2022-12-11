@@ -10,7 +10,7 @@
 Es un ecommerce dedicado a la venta de productos para mascotas
 
 ## :point_right: Historia de la página:
-La página se llama Filhote Shop, Tienda de Mascotas (Filhote en portugues significa cachorro), se comercializarán en principio productos para perros y gatos.
+La página se llama Filhote Shop, Tienda de Mascotas (Filhote en portugues significa cachorro), se comercializarán en principio productos para perros 	:dog: y gatos 	:smiley_cat:.
 
 Algunos de los productos que se venderán serán:
 - Alimentos
