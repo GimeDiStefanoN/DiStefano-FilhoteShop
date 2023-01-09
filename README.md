@@ -47,8 +47,7 @@ Combinación de colores: https://coolors.co/0b4d24-bf2f2f-face54-828c84-d3fcd5
 
 El bocetado de cada wireframe fue realizado utilizando Figma, y se puede ver en este [LINK](https://www.figma.com/file/zmelQEQOEfQyVFEAD5Bfhh/FILHOTE-SHOP?t=WY1bXL3pqTCzA4nd-6).
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ## :point_right: Previsualización
 
 ![proyecto web_FILHOTE SHOP_GDN DEV](https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop/assets/97200944/04b7f6ab-7e0c-4e96-848c-b43856c0ef9e)
