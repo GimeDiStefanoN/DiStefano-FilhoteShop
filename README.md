@@ -39,6 +39,11 @@ Combinación de colores: https://coolors.co/0b4d24-bf2f2f-face54-828c84-d3fcd5
 
 ![palette](https://user-images.githubusercontent.com/97200944/206865926-42280768-d3bc-4bc9-92dd-32cc06c9960c.svg)
 
-## :point_right: Creación de logo 
+## :point_right: Logo 
 
 ![FILHOTE SHOP](https://user-images.githubusercontent.com/97200944/206865164-799a7ed3-30a6-4ab5-a71d-153e9deb4b89.png)
+
+## :point_right: Diseño en FIGMA
+
+El bocetado de cada wireframe fue realizado utilizando Figma, y se puede ver en este [LINK](https://www.figma.com/file/zmelQEQOEfQyVFEAD5Bfhh/FILHOTE-SHOP?t=WY1bXL3pqTCzA4nd-6).
+
