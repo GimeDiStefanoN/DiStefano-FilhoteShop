@@ -33,34 +33,36 @@ body{
 /*HEADER*/
 header{
     background-color:#0B4D24;
-    height: 80px;
     margin: auto;
     position: fixed;
+    height: 7rem;
     
 }
 .contenedor-header{
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 .contenedor-logo {
-    width: 250px;
-    height: 80px;
+    width: 16rem;
     display: flex;
     flex-direction: row;
 
 }
 .contenedor-logo img{
-    width: 80px;
+    height: 6rem;
+    width: 6rem;
     margin: 5px 0 5px 10px;
 }
 
-.contenedor-menu nav{
-    margin-top: 15px;
+.contenedor-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
 .contenedor-menu ul li{
     list-style: none;
-    width: 165px;
-
 }
 .contenedor-menu ul li a{
     text-decoration: none;
@@ -69,7 +71,11 @@ header{
     padding:  15px;
     display: block;
     text-align: end;
-    font-size: 14px;
+    font-size: 1rem;
+}
+
+.contenedor-menu ul li a span{
+    color: #E4EFE8; 
 }
 
 .contenedor-menu ul li a:hover{
@@ -104,17 +110,135 @@ header{
     display: block;
 }
 
+.menuresponsive{
+    width: 250px;
+}
+
+.menuresponsive i{
+    color: #E4EFE8;
+    font-size: 6rem;
+    display: none;
+}
+
+/* ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- */
 
 
-/*MAIN*/
-main{
-    margin-top: 70px;
+/* CONTENIDO */
+
+.contenedorDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8rem auto;
+    height: 100vh;
+    width: 1184px;
+    gap: 1rem;
+}
+
+.section1{
+    display: flex;
+    flex-direction: row;
+    height: 55%;
+}
+
+.imgProducto{
+    width: 60%;
+}
+
+.imgProducto img{
+    height: 26rem;
+    object-fit: scale-down;
+}
+.detalleProducto{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40%;
+    border: 1px solid grey;
+    border-radius: 14px;
+}
+
+.detalleProducto > h5{
+    height: 40%;
+    font-size: 1.9rem;
+}
+.precio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.textValor{
+    line-height: 50px;
+}
+.valor{
+    font-size: 2.25rem;
+    text-align: end;
+}
+
+.botonesDetail{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 1rem;
+    height: 25%;
+}
+
+.cantidad{
+    width: 65%;
+}
+.cantidad p{
+    text-align: center;
+}
+.contadorCantidad{
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+}
+.contadorCantidad input{
+    text-align: center;
+}
+.comprar button{
+    background-color: #D3FCD5;
+    border-radius: 5px;
+    border-color: #D3FCD5;
+    height: 3rem;
+}
+
+.comprar button:hover >span{
+    color: #BF2F2F;
+}
+
+.comprar button span{
+    color: black;
 }
 
 
+.section2{
+    border: 1px solid grey;
+    border-radius: 14px;
+    height: 45%;
+}
+
+.titleDescripcion{
+    margin: 0 2rem 0 1rem;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+    letter-spacing: 0.1rem;
+}
+.descripcionCompleta{
+    margin: 0 2rem 4rem 1rem;
+    max-height: fit-content;
+    padding: 0 1.5rem 0 1rem;
+}
+
+/* ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- */
+
 /*FOOTER*/
 footer{
-    background-color: #0B4D24 ;
+    background-color: #0B4D24;
+    height: 8rem;
     margin-top: auto; /*Con esto hago que el footer vaya abajo*/
    
 }
@@ -128,6 +252,7 @@ footer{
 .TextoEmpresa{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 .TextoEmpresa span{
     color: #E4EFE8;
@@ -164,7 +289,7 @@ footer{
 }
 
 /* COPYRIGHT */
-.copy{
+.copy p{
     color: #E4EFE8;
     text-align: center;
 }
