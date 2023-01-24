@@ -17,6 +17,8 @@ body{
     display: flex; /*Con esto hago que el footer vaya abajo*/
     flex-direction: column; /*Con esto hago que el footer vaya abajo*/
     min-height: 100vh; /*Con esto hago que el footer vaya abajo*/
+    background-color: #E4EFE8;
+
 }
 
 /*OTROS COLORES
@@ -129,11 +131,13 @@ header{
 .contenedorDetail{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 8rem auto;
+    justify-content: center;
+    margin: 4rem auto 0.1rem auto ;
+    padding: 80px;
     height: 100vh;
     width: 1184px;
     gap: 1rem;
+    background-color: #ffffff;
 }
 
 .section1{
@@ -144,11 +148,21 @@ header{
 
 .imgProducto{
     width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.imgProducto > i{
+    width: 5%;
+    font-size: 1rem;
+    cursor: pointer;
+   
+}
 .imgProducto img{
     height: 26rem;
     object-fit: scale-down;
+    border-radius: 40px;
 }
 .detalleProducto{
     display: flex;
@@ -158,22 +172,31 @@ header{
     border: 1px solid grey;
     border-radius: 14px;
 }
+.detalleProducto > h6{
+    padding-left: 10px;
+    padding-top: 10px;
 
+}
 .detalleProducto > h5{
     height: 40%;
     font-size: 1.9rem;
+    padding-left: 10px;
 }
 .precio{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    padding: 10px;
+
 }
 .textValor{
-    line-height: 50px;
+    line-height: 80px;
 }
 .valor{
     font-size: 2.25rem;
     text-align: end;
+    padding: 10px;
+
 }
 
 .botonesDetail{
@@ -182,6 +205,7 @@ header{
     align-items: end;
     gap: 1rem;
     height: 25%;
+    padding: 10px;
 }
 
 .cantidad{
@@ -199,7 +223,7 @@ header{
     text-align: center;
 }
 .comprar button{
-    background-color: #D3FCD5;
+    background-color: #628C72;
     border-radius: 5px;
     border-color: #D3FCD5;
     height: 3rem;
@@ -221,7 +245,7 @@ header{
 }
 
 .titleDescripcion{
-    margin: 0 2rem 0 1rem;
+    margin: 0.5rem 2rem 0 1rem;
     text-decoration: underline;
     padding-bottom: 1rem;
     letter-spacing: 0.1rem;
@@ -278,6 +302,10 @@ footer{
    text-decoration: none;
    color: #E4EFE8;
    font-size: 25px;
+}
+
+.redes ul li a:hover{
+    color: #BF2F2F;
 }
 
 /* LINEA DIVISORIA */

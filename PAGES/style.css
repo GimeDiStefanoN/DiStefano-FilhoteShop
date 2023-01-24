@@ -177,14 +177,28 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
 }
 
 .producto:hover{
     box-shadow: 5px 5px 10px #FACE54, -5px -5px 10px rgb(184, 182, 182);
   }
 
+.carruselProducto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.carruselProducto > i{
+    width: 5%;
+    font-size: 1rem;
+    cursor: pointer;
+   
+}
+
 .carruselProducto img{
-    padding: 10px;
     display: flex;
     justify-content: center;
 }
@@ -213,6 +227,7 @@ main{
     display: flex;
     flex-direction: row;
     padding: 5px;
+
 }
 
 .botones button{
@@ -220,6 +235,8 @@ main{
     border-radius: 5px;
     border-color: #D3FCD5;
     margin-left: 10px;
+    cursor: pointer;
+
 }
 
 .botones button:hover, .botones button:hover >span{
@@ -276,6 +293,10 @@ footer{
    text-decoration: none;
    color: #E4EFE8;
    font-size: 25px;
+}
+
+.redes ul li a:hover{
+    color: #BF2F2F;
 }
 
 /* LINEA DIVISORIA */
