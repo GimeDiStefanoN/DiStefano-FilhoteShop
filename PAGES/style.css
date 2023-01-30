@@ -17,6 +17,8 @@ body{
     display: flex; /*Con esto hago que el footer vaya abajo*/
     flex-direction: column; /*Con esto hago que el footer vaya abajo*/
     min-height: 100vh; /*Con esto hago que el footer vaya abajo*/
+    background-color: antiquewhite;
+
 }
 
 /*OTROS COLORES
@@ -34,122 +36,132 @@ body{
 ---------------------------------------------------------------------------------------------- */
 
 /*HEADER*/
+
 header{
     background-color:#0B4D24;
-    margin: auto;
-    position: fixed;
-    height: 7rem;
-    
-}
-.contenedor-header{
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 2rem;
 }
-.contenedor-logo {
-    width: 16rem;
-    display: flex;
-    flex-direction: row;
 
+.contenedor-logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
+
 .contenedor-logo img{
-    height: 6rem;
-    width: 6rem;
-    margin: 5px 0 5px 10px;
+    width: 9.4rem;
+    height: 9.4rem;
+    object-fit: scale-down;
 }
-
-.contenedor-menu{
+.menuresponsive{
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.contenedor-menu ul li{
-    list-style: none;
-}
-.contenedor-menu ul li a{
-    text-decoration: none;
-    background-color: #0B4D24;
-    color: #E4EFE8; 
-    padding:  15px;
-    display: block;
-    text-align: end;
-    font-size: 1rem;
-}
-
-.contenedor-menu ul li a span{
-    color: #E4EFE8; 
-}
-
-.contenedor-menu ul li a:hover{
-    background-color: #628C72;
-}
-
-.contenedor-menu ul li a span{
     text-align: center;
-
 }
-.contenedor-menu nav ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
+.checkbtn{
+    color: #E4EFE8;
+    font-size: 3rem;
+    cursor: pointer;
 }
 
-.contenedor-menu nav ul li .menu-productos {
+
+.sidebar ul{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    background-color: #0B4D24;
 }
 
-.contenedor-menu nav ul li .menu-productos li a{
+.sidebar ul li{
+    list-style: none;
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
 }
-
-.contenedor-menu .nav ul li ul{
-    display: none;
-}
-
-.contenedor-menu .nav ul li:hover ul{
-    display: block;
-}
-
-.menuresponsive{
-    width: 250px;
-}
-
-.menuresponsive i{
+.sidebar ul li a{
+    text-decoration: none;
     color: #E4EFE8;
-    font-size: 6rem;
+    text-align: center;
+    border-bottom: 2px solid #85938A;
+    font-size: 1rem;
+}
+.sidebar ul li a i{
+    font-size: 1.2rem;
+
+}
+.sidebar ul li a:hover{
+    background-color: #628C72;
+}
+.menuresponsive .sidebar ul li ul{
     display: none;
 }
+
+.menuresponsive .sidebar ul li:hover ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+   
+}
+
+.menudesktop{
+    display: none;
+}
+
+/* funcionalidad menu responsive - NO FUNCIONO*/
+/* .sidebar{
+    visibility: hidden ;
+} */
+/* .checkbtn:hover ~ .sidebar{
+    visibility: inherit ;
+    } */
 
 /* ----------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------- */
 
-/*MAIN*/
-main{
-    margin-top: 7rem;
+/*CONTENIDO*/
+
+.contenedor-main{
+    height: calc(100% - 288px -497px);
+    background-color: #FACE54;
 }
 
 /* IMAGEN BANNER */
+
 .imgBanner{
-    height: 400px;
-}
-.imgBanner img{
-    height: 400px;
+    width: 100%;
+    height: 100%;
+    background-color: #5f6861;
 }
 
+
 /* OPCIONES BANNER */
-.opcionesBanner{
-    background-color: #828C84;
-    height: 80px;
+ .opcionesBanner{
+    background-color: #5f6861;
+    display: flex;
+    align-items: center;
 }
 
 .opcionesBanner ul{
     display: flex;
-    flex-direction: row;
-    padding-top: 10px;
+    flex-direction: column;
     justify-content: space-around;
+    gap: 2rem;
+    padding: 1rem 0;
 }
 .opcionesBanner ul li{
     justify-content: space-around;
@@ -165,29 +177,31 @@ main{
 /* CATALOGO */
 .catalogo{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
 }
+
 .producto{
     background-color: #828C84;
-    width: 20.625rem;
-    height: 26.875rem;
-    margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    border-radius: 2rem;
+    height: 27rem;
+    width: 18rem;
 
 }
 
-.producto:hover{
-    box-shadow: 5px 5px 10px #FACE54, -5px -5px 10px rgb(184, 182, 182);
-  }
-
 .carruselProducto{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    object-fit: contain;
     height: 50%;
 }
 
@@ -201,10 +215,15 @@ main{
 .carruselProducto img{
     display: flex;
     justify-content: center;
+    width: 90%;
+    height: 90%;
+    object-fit: scale-down;
+    border-radius: 2rem;
+
 }
 
 .dataProducto{
-    height: 100px;
+    height: 6.25rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -216,17 +235,21 @@ main{
     font-size: 0.8rem;
     padding-right: 10px;
 }
+
 .dataProducto p> span{
     text-align: end;
     color: black;
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding-left: 2rem;
 }
 
 .botones{
     display: flex;
-    flex-direction: row;
-    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 20px;
 
 }
 
@@ -236,6 +259,7 @@ main{
     border-color: #D3FCD5;
     margin-left: 10px;
     cursor: pointer;
+    height: 30px;
 
 }
 
@@ -248,67 +272,316 @@ main{
 }
 
 
+
+
 /* ----------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------- */
 
 /*FOOTER*/
+
 footer{
     background-color: #0B4D24 ;
     margin-top: auto; /*Con esto hago que el footer vaya abajo*/
-   
+}
+
+footer ul li{
+    list-style: none;
+}
+
+footer ul li a{
+    text-decoration: none;
+    color: #E4EFE8;
 }
 /* INFO DEL NEGOCIO */
 .info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
+.contenedor-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer .contenedor-logo img{
+    width: 9.4rem;
+    height: 9.4rem;
+}
 .TextoEmpresa{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-}
-.TextoEmpresa span{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: #E4EFE8;
-    padding: 10px 0 0 10px;
+}
+.TextoEmpresa > span{
+    color: #E4EFE8;
+
+}
+.TextoEmpresa > .name{
+    font-size: 1.5rem;
 }
 
-/* REDES SOCIALES */
 .redes{
-    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
 .redes ul{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
 }
 
 .redes ul li{
-   list-style: none;
-   padding-top: 20px;
-}
+    padding-top: 20px;
+ }
+ 
+ .redes ul li a{
+    font-size: 25px;
+ }
+ 
+ .redes ul li a:hover{
+     color: #BF2F2F;
+ }
 
-.redes ul li a{
-   text-decoration: none;
-   color: #E4EFE8;
-   font-size: 25px;
-}
-
-.redes ul li a:hover{
-    color: #BF2F2F;
-}
-
-/* LINEA DIVISORIA */
+ /* LINEA DIVISORIA */
 .linea{
-        border-top: 1px solid #E4EFE8;
-        height: 2px;
-        max-width: auto;
-        padding: 0;
+    border-top: 1px solid #E4EFE8;
+    max-width: auto;
 }
 
+.data{
+    color: #E4EFE8;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.data > h3{
+    text-decoration: underline;
+}
+
+.data > ul li a:hover{
+    color: #FACE54;
+}
 /* COPYRIGHT */
 .copy p{
-    color: #E4EFE8;
-    text-align: center;
+color: #E4EFE8;
+text-align: center;
+padding: 1rem;
+}
+/* ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- */
+
+/*MEDIA QUERIES*/
+
+/* TABLET */
+@media (min-width: 768px) {
+
+    /* header */
+    .contenedor-logo img{
+        width: 7.5rem;
+        height: 7.5rem;
+    }
+    .menuresponsive{
+        display: block;
+        margin-top: 2rem;
+        z-index: 99;
+    }
+    header{
+        max-height: 8rem;
+    }
+
+    .sidebar{
+        margin-top: 1rem;
+    }
+
+    /* contenido */
+
+    .imgBanner{
+        width: 100%;
+        height: 350px;
+    }
+    .imgBanner img{
+        height: inherit;
+        object-fit: cover;
+    }
+    .opcionesBanner ul{
+        flex-direction: row;
+    }
+
+    .catalogo{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .producto{
+        width: 18rem;
+    }
+    .carruselProducto{
+        height: 40%;
+    }
+
+    
+
+    /* footer */
+    .info{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .contenedor-logo{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        width: 50%;
+    }
+    footer .contenedor-logo > img{
+        height: 8rem;
+        width: 8rem;
+    }
+
+    .TextoEmpresa{
+       text-align: left;
+       width: 50%;
+    }
+
+    .name{
+        font-size: 1.3rem;
+    }
+    .redes{
+        width: 30%;
+    }
+
+
+    .data{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .data ul{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+
+/* ESCRITORIO */
+@media (min-width: 1200px) {
+    /* header */
+    header{
+        justify-content: space-between;
+    }
+    .contenedor-logo{
+        width: 25%;
+    }
+
+    .contenedor-logo img{
+        width: 7.5rem;
+        height: 7.5rem;;
+    }
+
+    .menuresponsive{
+        display: none;
+    }
+
+    .menudesktop{
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+    }
+
+    .nav ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .nav ul li{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        text-align: center;
+        gap: 2rem;
+        background-color: #0B4D24;
+
+    }
+
+
+    .nav ul li a{
+        text-decoration: none;
+        color: #E4EFE8;
+        text-align: center;
+        font-size: 1.4rem;
+        border-bottom: 2px solid #85938A;
+    }
+    
+    .nav ul li a i{
+        font-size: 1.5rem;
+    
+    }
+    .nav ul li a:hover{
+        background-color: #628C72;
+    }
+    .menudesktop .nav ul li ul{
+        display: none;
+        padding-top: 12rem;
+
+    }
+    
+    .menudesktop .nav ul li:hover ul{
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        text-align: center;
+        gap: 1rem; 
+        z-index: 99;
+        background-color: #0B4D24;
+    }
+
+    /* contenido */
+    .imgBanner img{
+        height: 350px;
+    }
+    .opcionesBanner {
+        height: 6rem;
+        align-items: center;
+    }
+
+    /* footer */
+    footer .contenedor-logo{
+        width: 50%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .TextoEmpresa{
+        width: 100%;
+        align-items: flex-start;
+    }
+    .TextoEmpresa span{
+        width: 100%;
+        text-align: start;
+     }
+
+    .redes{
+        width: 20%;
+    }
+
+    .data ul li a{
+        font-size: 1.2rem;
+    }
 }
