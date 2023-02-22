@@ -53,7 +53,7 @@
                     <a href="./contact.html" class="main-menu-link">CONTACTO</a>
                 </li>
                 <li class="main-menu-item">
-                    <a href="./login.html" class="main-menu-link" id="sesion" ><i class="bi bi-person"></i></a>
+                    <a href="#" class="main-menu-link" id="sesion" ><i class="bi bi-person"></i></a>
                 </li>
             </ul>
         </nav>
@@ -61,137 +61,147 @@
 
         
     <!-- CONTENIDO -->
-    <main class="contenedor-main-cart">
-        <div class="ruta">
-            <nav class="pasosCompra">
-                <span class="rayaConectora">
-                </span>
-                <ul>
-                    <li class="pasoUno activo">
-                    <i class="bi bi-cart4"></i>
-                    <p>Mi Carrito</p>
-                    </li>
-                    <li class="pasoTres ">
-                        <i class="bi bi-truck"></i>
-                        <p>Envío</p>
-                    </li>
-                    <li class="pasoCuatro ">
-                        <i class="bi bi-credit-card"></i>
-                        <p>Pago</p>
-                    </li>
-                </ul>
-                <hr>
-            </nav>
-        </div>
-        <!-- ------ -->
-        <div class="tablaCarrito">
-            <div class="detalleProductos">
-                <div class="title">
-                    <ul>
-                        <li id="titleeliminar"> </li>
-                        <li id="titleproducto">PRODUCTO</li>
-                        <li id="titlecantidad">CANTIDAD</li>
-                        <li id="titlesubtotal">SUBTOTAL</li>
-                    </ul>
-                </div>
-                <div class="cadaproductos">
-                    <div class="productoindividual">
-                        <div class="eliminar">
-                            <i class="bi bi-trash3"></i>
-                        </div>
-                        <div class="elemento">
-                            <div class="datosElemento">
-                                <div class="imagen">
-                                    <img src="https://media.istockphoto.com/id/147282061/es/foto/verde-bowl-equipada-con-la-comida-del-animal.jpg?s=2048x2048&w=is&k=20&c=f6yq_eMPIRZkOPVrTOqA8OPW-92yFkUTPHCp9ChjDwU=" alt="">
-                                </div>
-                                <div class="nombre">
-                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                </div>
-                            </div>
-                            <div class="numerosElemento">
-                                <div class="contadorCantidad">
-                                    <button id="menos" type="button">-</button>
-        
-                                    <input type="text" id="contador" class="form-control" value="1" min="1" />
-                  
-                                    <button id="mas" type="button">+</button>
-                                </div>
-                                <div class="valor">
-                                    <p>$XX.XXX.XX</p>
-                                </div>
-                            </div>
+    <main class="contenedor-main">
+        <div class="contenedorMainregister">
+            <form class="formregister" action="">
+                <!-- TITULO DEL FORM -->
+                <h2>REGISTRO</h2>
+                <!-- DATOS -->
+                <div class="datosregister">
+                    <div class="elemento">
+                        <label for="name">Nombre Completo <span>*</span></label>
+                        <div class="inputs">
+                            <i class="bi bi-person"></i>
+                            <input type="text" id="name" name="name" maxlength="20" required>
                         </div>
                     </div>
-                    <div class="productoindividual">
-                        <div class="eliminar">
-                            <i class="bi bi-trash3"></i>
-                        </div>
-                        <div class="elemento">
-                            <div class="datosElemento">
-                                <div class="imagen">
-                                    <img src="https://media.istockphoto.com/id/147282061/es/foto/verde-bowl-equipada-con-la-comida-del-animal.jpg?s=2048x2048&w=is&k=20&c=f6yq_eMPIRZkOPVrTOqA8OPW-92yFkUTPHCp9ChjDwU=" alt="">
-                                </div>
-                                <div class="nombre">
-                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                </div>
-                            </div>
-                            <div class="numerosElemento">
-                                <div class="contadorCantidad">
-                                    <button id="menos" type="button">-</button>
-        
-                                    <input type="text" id="contador" class="form-control" value="1" min="1" />
-                  
-                                    <button id="mas" type="button">+</button>
-                                </div>
-                                <div class="valor">
-                                    <p>$XX.XXX.XX</p>
-                                </div>
-                            </div>
+    
+                    <div class="elemento">
+                        <label for="username">Nombre de Usuario  <span>*</span></label>
+                        <div class="inputs">
+                            <i class="bi bi-person"></i>
+                            <input type="text" id="username" name="username" maxlength="10" required>
                         </div>
                     </div>
-                </div>
-                <div class="btnSeguir">
-                    <button onclick="location.href='./index.html'">Seguir Comprando</button>
-                </div>
-            </div>
-
-            <div class="linea1"></div>
-
-            <div class="precios">
-                <h4>TOTAL DEL CARRITO</h4>
-                <div class="cuadro">
-                    <div class="cadaUno">
-                        <p>SUBTOTAL</p>
-                        <div class="cadaUnoDetalle">
-                            <p>$XX.XXX.XX</p>
+    
+                    <div class="elemento">
+                        <label for="password">Contraseña  <span>*</span></label>
+                        <div class="inputs">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" id="password" name="password" required>
                         </div>
                     </div>
-                    <div class="linea2"></div>
-                    <div class="cadaUno">
-                        <p>ENVIO</p>
-                        <div class="cadaUnoDetalle">
-                            <select name="Zip" id="Zip">
-                                <option value="value1">Capital Federal</option>
-                                <option value="value2">Interior del pais</option>
+    
+                    <div class="elemento">
+                        <label for="password">Repetir Contraseña  <span>*</span></label>
+                        <div class="inputs">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" id="password2" name="password2" required>
+                        </div>
+                    </div>
+    
+                    <div class="elemento">
+                        <label for="email">Correo Electrónico <span>*</span></label>
+                        <div class="inputs">
+                            <i class="bi bi-envelope"></i>
+                            <input type="email" id="email" name="email" required >
+                        </div>
+                    </div>
+    
+                    <div class="elemento">
+                        <label for="pais">Pais</label>
+                        <div class="inputs">
+                            <select name="pais" id="pais">
+                                <option disabled="true" selected="true" value="">Seleccionar un pais</option>
+                                <option value="A">Argentina</option>
                             </select>
-                            <p class="textEnvio"> Costo del Envio $1000</p>
-                            <p class="textEnvio2"> Costo del Envio $2000</p>
                         </div>
                     </div>
-                    <div class="linea2"></div>
-                    <div class="cadaUno">
-                        <p>TOTAL DE LA COMPRA</p>
-                        <div class="cadaUnoDetalle">
-                            <p>$XX.XXX.XX</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="btnFinalizarCompra">
-                    <button onclick="alert('¿Está seguro de continuar la compra?');">Finalizar Compra</button>
-                </div>
-            </div>
 
-        </div>
+                    <div class="elemento">
+                        <label for="provincia">Provincia</label>
+                        <div class="inputs">
+                            <select name="provincia" id="provincia">
+                                <option disabled="true" selected="true" value="">Seleccionar tu provincia</option>
+                                <option value="1">BUENOS AIRES</option>
+                                <option value="2">CATAMARCA</option>
+                                <option value="3">CHACO</option>
+                                <option value="4">CHUBUT</option>
+                                <option value="5">CIUDAD AUTONOMA DE Bs As</option>
+                                <option value="6">CORDOBA</option>
+                                <option value="7">CORRIENTES</option>
+                                <option value="8">ENTRE RIOS</option>
+                                <option value="9">FORMOSA</option>
+                                <option value="10">JUJUY</option>
+                                <option value="11">LA PAMPA</option>
+                                <option value="12">LA RIOJA</option>
+                                <option value="13">MENDOZA</option>
+                                <option value="14">MISIONES</option>
+                                <option value="15">NEUQUEN</option>
+                                <option value="16">RIO NEGRO</option>
+                                <option value="17">SALTA</option>
+                                <option value="18">SAN JUAN</option>
+                                <option value="19">SAN LUIS</option>
+                                <option value="20">SANTA CRUZ</option>
+                                <option value="21">SANTA FE</option>
+                                <option value="22">SANTIAGO DEL ESTERO</option>
+                                <option value="23">TIERRA DEL FUEGO</option>
+                                <option value="24">TUCUMAN</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <fieldset>
+                        <legend>Genero</legend>
+                        <label>
+                            <input type="radio" name="genero" value="femenino"> Femenino
+                        </label>
+                        <label>
+                            <input type="radio" name="genero" value="masculino"> Masculino
+                        </label>
+                        <label>
+                            <input type="radio" name="genero" value="otro"> Otro
+                        </label>
+                    </fieldset>
+    
+                    <div class="elemento">
+                        <label for="nacimiento">Fecha de Nacimiento  <span>*</span></label>
+                        <div class="inputs">
+                            <input type="date" name="nacimiento" id="nacimiento" min="2004-12-31" required>
+                        </div>
+                    </div>
+    
+                    <div class="contenedorPhone">
+                        <div class="elementoPhone">
+                            <label for="phone">Número de Celular <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-telephone"></i>
+                                <input type="tel" id="phone" name="phone" maxlength="10"  required >
+                            </div>
+                        </div>
+                        <small>Formato válido: 351 - 4545454</small>
+                    </div>
+                </div>
+                <!-- T&C -->
+                <div class="checks" id="registerChecks">                
+                    <div class="elemento">
+                        <input
+                            type="checkbox"
+                            id="aceptTerms"
+                            name="aceptTerms"
+                            value="aceptTerms" required/>
+    
+                        <label for="aceptTerms">Acepto los <a href="#" target="_blank">Términos y Condiciones</a>  <span>*</span></label>
+                    </div>
+                </div>
+                <!-- BOTONES -->
+                <div class="buttonsregister">
+                    <button class="resetear" type="reset" >Resetear</button>
+                    <button class="registrar" type="submit">Registrar</button>
+                </div>
+                <p class="textButton">Ya tengo Usuario, <a href="./login.html">Ingresar</a> </p>
+            </form>
+        </div>   
     </main>
     
     <!-- CIERRE -->

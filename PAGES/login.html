@@ -53,7 +53,7 @@
                     <a href="./contact.html" class="main-menu-link">CONTACTO</a>
                 </li>
                 <li class="main-menu-item">
-                    <a href="./login.html" class="main-menu-link" id="sesion" ><i class="bi bi-person"></i></a>
+                    <a href="#" class="main-menu-link" id="sesion" ><i class="bi bi-person"></i></a>
                 </li>
             </ul>
         </nav>
@@ -61,136 +61,54 @@
 
         
     <!-- CONTENIDO -->
-    <main class="contenedor-main-cart">
-        <div class="ruta">
-            <nav class="pasosCompra">
-                <span class="rayaConectora">
-                </span>
-                <ul>
-                    <li class="pasoUno activo">
-                    <i class="bi bi-cart4"></i>
-                    <p>Mi Carrito</p>
-                    </li>
-                    <li class="pasoTres ">
-                        <i class="bi bi-truck"></i>
-                        <p>Envío</p>
-                    </li>
-                    <li class="pasoCuatro ">
-                        <i class="bi bi-credit-card"></i>
-                        <p>Pago</p>
-                    </li>
-                </ul>
-                <hr>
-            </nav>
-        </div>
-        <!-- ------ -->
-        <div class="tablaCarrito">
-            <div class="detalleProductos">
-                <div class="title">
-                    <ul>
-                        <li id="titleeliminar"> </li>
-                        <li id="titleproducto">PRODUCTO</li>
-                        <li id="titlecantidad">CANTIDAD</li>
-                        <li id="titlesubtotal">SUBTOTAL</li>
-                    </ul>
-                </div>
-                <div class="cadaproductos">
-                    <div class="productoindividual">
-                        <div class="eliminar">
-                            <i class="bi bi-trash3"></i>
-                        </div>
-                        <div class="elemento">
-                            <div class="datosElemento">
-                                <div class="imagen">
-                                    <img src="https://media.istockphoto.com/id/147282061/es/foto/verde-bowl-equipada-con-la-comida-del-animal.jpg?s=2048x2048&w=is&k=20&c=f6yq_eMPIRZkOPVrTOqA8OPW-92yFkUTPHCp9ChjDwU=" alt="">
-                                </div>
-                                <div class="nombre">
-                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                </div>
-                            </div>
-                            <div class="numerosElemento">
-                                <div class="contadorCantidad">
-                                    <button id="menos" type="button">-</button>
-        
-                                    <input type="text" id="contador" class="form-control" value="1" min="1" />
-                  
-                                    <button id="mas" type="button">+</button>
-                                </div>
-                                <div class="valor">
-                                    <p>$XX.XXX.XX</p>
-                                </div>
-                            </div>
+    <main class="contenedor-main">
+        <div class="contenedorMainlogin">
+            <form class="formlogin" action="">
+                <!-- TITULO DEL FORM -->
+                <h2>INICIO DE SESIÓN</h2>
+                <!-- DATOS -->
+                <div class="datoslogin">
+                    <div class="elemento">
+                        <label for="username">Nombre de Usuario</label>
+                        <div class="inputs">
+                            <i class="bi bi-person"></i>
+                            <input type="text" id="username" name="username" maxlength="10" required>
                         </div>
                     </div>
-                    <div class="productoindividual">
-                        <div class="eliminar">
-                            <i class="bi bi-trash3"></i>
-                        </div>
-                        <div class="elemento">
-                            <div class="datosElemento">
-                                <div class="imagen">
-                                    <img src="https://media.istockphoto.com/id/147282061/es/foto/verde-bowl-equipada-con-la-comida-del-animal.jpg?s=2048x2048&w=is&k=20&c=f6yq_eMPIRZkOPVrTOqA8OPW-92yFkUTPHCp9ChjDwU=" alt="">
-                                </div>
-                                <div class="nombre">
-                                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                                </div>
-                            </div>
-                            <div class="numerosElemento">
-                                <div class="contadorCantidad">
-                                    <button id="menos" type="button">-</button>
-        
-                                    <input type="text" id="contador" class="form-control" value="1" min="1" />
-                  
-                                    <button id="mas" type="button">+</button>
-                                </div>
-                                <div class="valor">
-                                    <p>$XX.XXX.XX</p>
-                                </div>
-                            </div>
+    
+                    <div class="elemento">
+                        <label for="password">Contraseña</label>
+                        <div class="inputs">
+                            <i class="bi bi-lock"></i>
+                            <input type="password" id="password" name="password" required>
                         </div>
                     </div>
                 </div>
-                <div class="btnSeguir">
-                    <button onclick="location.href='./index.html'">Seguir Comprando</button>
-                </div>
-            </div>
-
-            <div class="linea1"></div>
-
-            <div class="precios">
-                <h4>TOTAL DEL CARRITO</h4>
-                <div class="cuadro">
-                    <div class="cadaUno">
-                        <p>SUBTOTAL</p>
-                        <div class="cadaUnoDetalle">
-                            <p>$XX.XXX.XX</p>
-                        </div>
+                <!-- T&C -->
+                <div class="checks">                
+                    <div class="elemento">
+                        <label for="recordarUs">Recordar Usuario</label>
+                        <input
+                            type="checkbox"
+                            id="recordarUs"
+                            name="recordarUs"
+                            value="recordarUs" required/>   
                     </div>
-                    <div class="linea2"></div>
-                    <div class="cadaUno">
-                        <p>ENVIO</p>
-                        <div class="cadaUnoDetalle">
-                            <select name="Zip" id="Zip">
-                                <option value="value1">Capital Federal</option>
-                                <option value="value2">Interior del pais</option>
-                            </select>
-                            <p class="textEnvio"> Costo del Envio $1000</p>
-                            <p class="textEnvio2"> Costo del Envio $2000</p>
-                        </div>
-                    </div>
-                    <div class="linea2"></div>
-                    <div class="cadaUno">
-                        <p>TOTAL DE LA COMPRA</p>
-                        <div class="cadaUnoDetalle">
-                            <p>$XX.XXX.XX</p>
-                        </div>
+                    <div class="elemento">
+                        <label for="mantenerlogin">Mantenerse Logueado</label>
+                        <input
+                            type="checkbox"
+                            id="mantenerlogin"
+                            name="mantenerlogin"
+                            value="mantenerlogin" required/>   
                     </div>
                 </div>
-                <div class="btnFinalizarCompra">
-                    <button onclick="alert('¿Está seguro de continuar la compra?');">Finalizar Compra</button>
+                <!-- BOTONES -->
+                <div class="buttonslogin">
+                    <button class="ingresar" type="submit">Ingresar</button>
                 </div>
-            </div>
-
+                <p class="textButton">No tengo Usuario, <a href="./register.html">Registrarme</a> </p>
+            </form>
         </div>
     </main>
     
