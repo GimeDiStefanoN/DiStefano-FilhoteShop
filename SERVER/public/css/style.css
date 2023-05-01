@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: bisque;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+header{
+    height: 15vh;
+    background-color: chocolate;
+}
+main{
+    height: 80vh;
+    overflow: auto;
+}
+footer{
+    height: 5vh;
+    background-color: chocolate;
+}
+h1{
+    color: red;
+}
+.catalogo{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.card {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 15rem;
+    margin: 1em;
+    text-align: center;
+    margin-inline: auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+  .card img {
+    max-width: 100%;
+    clip-path: polygon(0 0, 0 100%, 100% 85%, 100% 0%);
+  }
+  .description {
+    padding: 0 1em 1em 1em;
+  }
+  button {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    color: #fff;
+    background-color: #836953;
+    border: none;
+  }
