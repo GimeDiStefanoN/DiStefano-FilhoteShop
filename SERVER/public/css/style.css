@@ -54,7 +54,7 @@ header{
 
 .contenedor-logo img{
     width: 9.4rem;
-    height: 100%;
+    height: 95%;
     object-fit: scale-down;
 }
 
@@ -96,9 +96,9 @@ header{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #0B4D24;
     transition: transform 0.3s;
     z-index: 1;
+    background-color:#0B4D24;
 }
 
 .main-menu-item{
@@ -150,13 +150,10 @@ header{
 
 
 main{
-    height: 80vh;
+    height: 70vh;
     overflow: auto;
 }
-footer{
-    height: 5vh;
-    background-color: chocolate;
-}
+
 h1{
     color: red;
 }
@@ -191,9 +188,195 @@ h1{
 
 
 
+/* ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- */
 
+/*FOOTER*/
 
+footer{
+height: 15vh;
+background-color: #0B4D24 ;
+}
 
+footer ul li{
+    list-style: none;
+}
+
+footer ul li a{
+    text-decoration: none;
+    color: #E4EFE8;
+}
+/* INFO DEL NEGOCIO */
+.info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+footer .contenedor-footer  .contenedor-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+}
+
+footer .contenedor-logo img{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.TextoEmpresa{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #E4EFE8;
+}
+.TextoEmpresa > span{
+    color: #E4EFE8;
+    font-size: 0.5rem;
+
+}
+.TextoEmpresa > .name{
+    font-size: 0.5rem;
+}
+
+.redes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.redes ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.redes ul li a{
+    font-size: 15px;
+}
+
+.redes ul li a:hover{
+    color: #BF2F2F;
+}
+
+ /* LINEA DIVISORIA */
+.linea{
+    border-top: 1px solid #E4EFE8;
+    max-width: 100%
+}
+
+.data{
+    color: #E4EFE8;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.data > h3{
+    display: none;
+    /* text-decoration: underline; */
+}
+.data > ul {
+    display: flex;
+    flex-direction: row;
+}
+.data > ul li {
+    width: 25%;
+    height: 15px;
+    display: grid;
+}
+.data > ul li a{
+   font-size: 0.4rem;
+}
+.data > ul li a:hover{
+    color: #FACE54;
+}
+/* COPYRIGHT */
+.copy p{
+color: #E4EFE8;
+text-align: center;
+font-size: 0.4rem;
+}
+
+/* MODAL */
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+.modalDialog > div {
+	width: 250px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+}
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+.modalDialog > div h3, .modalDialog > div P{
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.mediospago{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.mediospago li{
+    max-width: 70px;
+    max-height: 70px;
+    display: flex;
+    justify-content: baseline;
+}
 
 
 
@@ -213,7 +396,62 @@ h1{
 @media (min-width: 768px) {
 
     /* header */
+    .toggle-menu label {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+    .toggle-menu label i {
+        display: inline-block;
+        height: 50%;
+    }
 
+    /* footer */
+    
+    .contenedor-footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 60%;
+    }
+    .info, .data{
+        width: 50%;
+    }
+    footer .contenedor-logo > img{
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .TextoEmpresa{
+       text-align: left;
+       width: 50%;
+    }
+    .TextoEmpresa span, .TextoEmpresa .name{
+        font-size: 0.6rem;
+        text-align: center
+    }
+    .redes ul{
+        gap: 2.5rem
+    }
+    .redes ul li a{
+        font-size: 20px;
+    }
+    .data{
+        padding: 0.5rem 0;
+    }
+    .data > ul li a{
+        font-size: 0.8rem;
+     }
+     .copy p{
+        padding-top: 0.5rem;
+        font-size: 0.8rem;
+        }
+
+    .modalDialog > div {
+        width: 500px;
+    }
 }
 
 /* ESCRITORIO */
@@ -224,7 +462,7 @@ h1{
         display: flex;
         flex-direction: row;
         gap: 1rem;
-        width: 100vw;
+        
     }
     .contenedor-logo{
         width: 20%;
@@ -243,5 +481,39 @@ h1{
         align-items: baseline;
         margin-top: 2rem;
         transform: translateX(0);
+        background-color: transparent;
+
     }
+    #menu-productos{
+        background-color: #0B4D24;
+        width: 200px;
+    }
+
+    /* footer */
+    .contenedor-footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: 70%;
+    }
+    footer .contenedor-logo > img{
+        height: 4rem;
+        width: 4rem;
+    }
+    .TextoEmpresa span, .TextoEmpresa .name{
+        font-size: 1rem;
+    }
+    .redes ul li a{
+        font-size: 30px;
+    }
+    .data > h3{
+        display: block;
+        text-decoration: underline;
+    }
+    .data{
+        padding: 0.5rem 0;
+    }
+    .data > ul li a{
+        font-size: 1rem;
+     }
 }
