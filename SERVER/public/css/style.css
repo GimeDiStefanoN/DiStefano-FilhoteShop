@@ -1,20 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;300;500;800;900&family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Catamaran', 'Overlock';
 }
+
+:root{
+    --primary: #0B4D24;
+    --secondary: #628C72;
+}
+
 body{
-    background-color: bisque;
+    background-color: antiquewhite;
 }
 
 img{
     width: 100%;
     height: 100%;
 }
+/*OTROS COLORES
+
+#BF2F2F > orange golden
+#FACE54 > maize
+#828C84 > grey
+#D3FCD5 > tea green
+#FCFCFC > white
+#85938A > verde agrisado
+#E4EFE8 > mint cream
+*/
+
+
+/*HEADER*/
+
 header{
     height: 15vh;
-    background-color: chocolate;
+    background-color:#0B4D24;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
+.contenedor-logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.contenedor-logo img{
+    width: 9.4rem;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+
+/* menu responsive */
+.main-nav{
+    display: flex;
+}
+.toggle-menu{
+    width: 50%;
+    height: 15vh;
+    position: absolute;
+    top: 0;
+    right: 1.5rem;
+    cursor: pointer;
+    filter: invert(1); /*PARA CAMBIAR EL COLOR DE NEGRO A BLANCO*/
+    z-index: 1;
+    font-size: 4rem;
+    text-align: end;
+}
+.toggle-menu label{
+    display: inline-block;
+    height: 100%;
+}
+.toggle-menu label i{
+    display: inline-block;
+    height: 100%;
+}
+.toggle-menu label i::before{
+    vertical-align: 0 !important
+}
+.main-menu{
+    display: none;
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0B4D24;
+    transition: transform 0.3s;
+    z-index: 1;
+}
+
+.main-menu-item{
+    padding: 0.5em;
+}
+.main-menu-link{
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
+#menu-productos{
+    display: none;
+}
+
+#menu-productos li{
+   list-style: none;
+}
+#segundomenu:hover > #menu-productos{
+   display: block;
+
+}
+#sesion i{
+    font-size: 1.5rem;
+    text-align: center;
+}
+.main-menu--show{
+    transform: translateY(0);
+}
+.toggle-menu__checkbox{
+    display: none;
+}
+
+header{
+    flex-direction: column;
+}
+.main-menu{
+    transform: translateX(-100%);
+}
+.toggle-menu__checkbox:checked + .main-menu{
+    transform: translateX(0);
+    width: 100%;
+}
+
+/* ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- */
+
+
 main{
     height: 80vh;
     overflow: auto;
@@ -54,3 +188,60 @@ h1{
     background-color: #836953;
     border: none;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------- */
+
+
+/*MEDIA QUERIES*/
+
+/* TABLET */
+@media (min-width: 768px) {
+
+    /* header */
+
+}
+
+/* ESCRITORIO */
+@media (min-width: 1200px) {
+    /* header */
+   
+    header{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100vw;
+    }
+    .contenedor-logo{
+        width: 20%;
+    }
+    .main-nav{
+        width:80%
+    }
+    .toggle-menu{
+        display: none;
+    }
+    .main-menu{
+        flex-direction: row;
+        width: 75%;
+        justify-content: flex-end;
+        gap: 5rem;
+        align-items: baseline;
+        margin-top: 2rem;
+        transform: translateX(0);
+    }
+}
