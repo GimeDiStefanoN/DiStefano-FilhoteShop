@@ -14,7 +14,7 @@ const productsView = (req,res) =>{
     const products = getProducts(); 
     res.render(path.join(__dirname, '../views/products.ejs'), 
     {
-        title: 'products title',
+        title: 'All Products FILHOTE SHOP',
         products
     } 
     )
@@ -27,7 +27,7 @@ const productView = (req,res) =>{
     const product = products.find(product => product.id == req.params.id) //busco el q tiene ese id
     res.render(path.join(__dirname,'../views/Detail_Product.ejs'),
         {
-            title: 'Detail_Product title',
+            title: product.nombre,
             product
         }
         )
@@ -35,46 +35,45 @@ const productView = (req,res) =>{
 
  // VISTA ABOUT
 
-const aboutView = (req,res) => { //about
+const aboutView = (req,res) => {
     //res.send('Estoy en About');
-    res.render('about', {title: 'about title'})
+    res.render('about', {title: 'About FILHOTE SHOP'})
 }
 
  // VISTA CART
 
-const cartView = (req,res) =>{ //cart
+const cartView = (req,res) =>{ 
     //res.send('Estoy en el Carrito');
-    res.render('cart', {title: 'cart title'})
+    res.render('cart', {title: 'My cart'})
 }
 
  // VISTA CONTACT
 
-const contactView = (req,res) =>{ //contact
+const contactView = (req,res) =>{ 
     //res.send('Estoy en Contactos');
-    res.render('contact', {title: 'contact title'})
+    res.render('contact', {title: 'Contact FILHOTE SHOP'})
 }
 
  // VISTA LOGIN
 
-const loginView = (req,res) => { //login
+const loginView = (req,res) => { 
     //res.send('Estoy en Login');
-    res.render('login', {title: 'login title'})
+    res.render('login', {title: 'Login FILHOTE SHOP'})
 }
 
  // VISTA REGISTER
 
-const registerView = (req,res) =>{ //register
+const registerView = (req,res) =>{ 
     //res.send('Estoy en Register');
-    res.render('register', {title: 'register title'})
+    res.render('register', {title: 'Register FILHOTE SHOP'})
 }
 
- // VISTA HOME?
+ // VISTA HOME
 
-const homeView = (req,res) =>{ //home
+const homeView = (req,res) =>{ 
     //res.send('Estoy en Home');
-    res.render('home', {title: 'home title'})
+    res.render('home', {title: 'FILHOTE SHOP'})
 }
-
 
 module.exports ={
     productsView,

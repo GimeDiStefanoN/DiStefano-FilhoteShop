@@ -28,7 +28,3 @@ routes(app);
 //inicio servidor
 
 app.listen(PORT, ()=> console.log(`Escuchando en el Puerto ${PORT}!`));
-
-
-// CLASE 30 - HS 1:25
-
