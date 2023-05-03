@@ -8,8 +8,149 @@
         <%-include('./partials/header') %>
     </header>
     <main>
-        <h1>REGISTER</h1>
-        <a href="/">home</a>
+        <h1>REGISTRATE</h1>
+        <div class="contenedor-main">
+            <div class="contenedorMainregister">
+                <form class="formregister" action="">
+                    <!-- TITULO DEL FORM -->
+                    <h2>Completá los datos</h2>
+                    <!-- DATOS -->
+                    <div class="datosregister">
+                        <div class="elemento">
+                            <label for="name">Nombre Completo <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-person"></i>
+                                <input type="text" id="name" name="name" maxlength="20" required>
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="username">Nombre de Usuario  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-person"></i>
+                                <input type="text" id="username" name="username" maxlength="10" required>
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="password">Contraseña  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-lock"></i>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="password">Repetir Contraseña  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-lock"></i>
+                                <input type="password" id="password2" name="password2" required>
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="email">Correo Electrónico <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-envelope"></i>
+                                <input type="email" id="email" name="email" required >
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="pais">Pais</label>
+                            <div class="inputs">
+                                <select name="pais" id="pais">
+                                    <option disabled="true" selected="true" value="">Seleccionar un pais</option>
+                                    <option value="A">Argentina</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="elemento">
+                            <label for="provincia">Provincia</label>
+                            <div class="inputs">
+                                <select name="provincia" id="provincia">
+                                    <option disabled="true" selected="true" value="">Seleccionar tu provincia</option>
+                                    <option value="1">BUENOS AIRES</option>
+                                    <option value="2">CATAMARCA</option>
+                                    <option value="3">CHACO</option>
+                                    <option value="4">CHUBUT</option>
+                                    <option value="5">CIUDAD AUTONOMA DE Bs As</option>
+                                    <option value="6">CORDOBA</option>
+                                    <option value="7">CORRIENTES</option>
+                                    <option value="8">ENTRE RIOS</option>
+                                    <option value="9">FORMOSA</option>
+                                    <option value="10">JUJUY</option>
+                                    <option value="11">LA PAMPA</option>
+                                    <option value="12">LA RIOJA</option>
+                                    <option value="13">MENDOZA</option>
+                                    <option value="14">MISIONES</option>
+                                    <option value="15">NEUQUEN</option>
+                                    <option value="16">RIO NEGRO</option>
+                                    <option value="17">SALTA</option>
+                                    <option value="18">SAN JUAN</option>
+                                    <option value="19">SAN LUIS</option>
+                                    <option value="20">SANTA CRUZ</option>
+                                    <option value="21">SANTA FE</option>
+                                    <option value="22">SANTIAGO DEL ESTERO</option>
+                                    <option value="23">TIERRA DEL FUEGO</option>
+                                    <option value="24">TUCUMAN</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <fieldset>
+                            <legend>Genero</legend>
+                            <label>
+                                <input type="radio" name="genero" value="femenino"> Femenino
+                            </label>
+                            <label>
+                                <input type="radio" name="genero" value="masculino"> Masculino
+                            </label>
+                            <label>
+                                <input type="radio" name="genero" value="otro"> Otro
+                            </label>
+                        </fieldset>
+        
+                        <div class="elemento">
+                            <label for="nacimiento">Fecha de Nacimiento  <span>*</span></label>
+                            <div class="inputs">
+                                <input type="date" name="nacimiento" id="nacimiento" min="2004-12-31" required>
+                            </div>
+                        </div>
+        
+                        <div class="contenedorPhone">
+                            <div class="elementoPhone">
+                                <label for="phone">Número de Celular <span>*</span></label>
+                                <div class="inputs">
+                                    <i class="bi bi-telephone"></i>
+                                    <input type="tel" id="phone" name="phone" maxlength="10"  required >
+                                </div>
+                            </div>
+                            <small>Formato válido: 351 - 4545454</small>
+                        </div>
+                    </div>
+                    <!-- T&C -->
+                    <div class="checks" id="registerChecks">                
+                        <div class="elemento">
+                            <input
+                                type="checkbox"
+                                id="aceptTerms"
+                                name="aceptTerms"
+                                value="aceptTerms" required/>
+        
+                            <label for="aceptTerms">Acepto los <a href="#" target="_blank">Términos y Condiciones</a>  <span>*</span></label>
+                        </div>
+                    </div>
+                    <!-- BOTONES -->
+                    <div class="buttonsregister">
+                        <button class="resetear" type="reset" >Resetear</button>
+                        <button class="registrar" type="submit">Registrar</button>
+                    </div>
+                    <p class="textButton">Ya tengo Usuario, <a href="/login">Ingresar</a> </p>
+                </form>
+            </div>   
+        </div>
     </main>
     <footer>
         <%-include('./partials/footer') %>
