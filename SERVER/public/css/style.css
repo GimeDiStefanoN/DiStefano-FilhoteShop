@@ -150,7 +150,7 @@ header{
 
 
 main{
-    height: 70vh;
+    height: 75vh;
     overflow: auto;
 }
 h1{
@@ -220,7 +220,185 @@ h1{
     border: none;
   }
 
+/* FORMS */
+.contenedor-main{
+    display: flex;
+    justify-content: center;
+}
+.contenedorMainlogin{
+    padding: 5px 10px;
+    background-color: white;
+    height: 70%;
+    margin: 1rem;
+    box-shadow: 5px 5px 5px grey;
+}
 
+.contenedorMaincontacto{
+    padding: 5px 10px;
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    margin: 1rem;
+    box-shadow: 5px 5px 5px grey;
+}
+.contenedorMainregister{
+    padding: 5px 10px;
+    background-color: white;
+    margin: 10px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.formlogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 10%;
+}
+
+.formregister, .formcontacto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 10% 0 10% 0;
+}
+.formlogin, .formregister, .formcontacto > h2{
+    text-align: center;
+}
+.datoslogin, .datosregister, .datoscontacto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    width: 90%;
+
+}
+
+.formregister > .datosregister, .buttons{
+    width: 70%;
+}
+
+.elemento{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+.elemento span, .elementoPhone span{
+    color: red;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    width: 100%;
+}
+
+.inputs i{
+    border: 1px solid gray;
+    width: 25%;
+    height: 25px;
+}
+
+.inputs input{
+    width: 100%;
+    height: 25px;
+}
+
+.inputs #accion{
+    text-align: center;
+    width: 100%;
+    height: 25px;
+}
+.inputs #accion option{
+    width: 100%;
+    height: 25px;
+    font-size: 0.8rem;
+}
+
+.inputs textarea{
+    width: 100%;
+}
+
+fieldset{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contenedorPhone{
+    width: 100%;
+}
+
+.contenedorPhone small{
+    font-weight: lighter;
+}
+
+.checks{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.checks > .elemento{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+#registerChecks{
+    width: 75%;
+}
+#registerChecks > .elemento input{
+    width: 20%;
+}
+
+.buttonslogin, .buttonscontacto{
+    width: 100%;
+    text-align: center;
+    height: 50px;
+}
+
+.buttonsregister{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 70%;
+    height: 100px;
+}
+
+.ingresar, .registrar, .consultar{
+    height: 100%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.resetear{
+    height: 50%;
+    width: 90%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.ingresar:hover, .registrar:hover, .consultar:hover{
+    color: brown;
+    transform: scale(1.2);
+}
+.textButton{
+    font-size: 1rem;
+}
 
 /* ----------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------- */
@@ -228,8 +406,10 @@ h1{
 /*FOOTER*/
 
 footer{
-height: 15vh;
+height: 10vh;
 background-color: #0B4D24 ;
+position: fixed;
+width: 100%;
 }
 
 footer ul li{
@@ -425,6 +605,18 @@ font-size: 0.4rem;
 
 
 /*MEDIA QUERIES*/
+/*IPHONE 4*/
+@media (MAX-width: 374px){
+    footer .contenedor-logo img{
+        width: 2rem;
+        height: 1.5rem;
+    }
+    .data > ul li {
+        width: 25%;
+        height: 10px;
+        display: grid;
+    }
+}
 
 /* TABLET */
 @media (min-width: 768px) {
@@ -441,6 +633,25 @@ font-size: 0.4rem;
         display: inline-block;
         height: 50%;
     }
+
+    /* FORMS */
+    .contenedorMainlogin{
+        height: 45%;
+        width: 80%;
+    }
+    .contenedorMaincontacto{
+        height: 55%;
+        margin: 5% 30%
+    }
+
+    .contenedorMainregister{
+        height: 88%;
+        margin:  1.5% 20%;
+    }
+    .formlogin, .formcontacto{
+        margin-top: 10%;
+    }
+    
 
     /* footer */
     
@@ -463,7 +674,7 @@ font-size: 0.4rem;
        width: 50%;
     }
     .TextoEmpresa span, .TextoEmpresa .name{
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         text-align: center
     }
     .redes ul{
@@ -529,26 +740,51 @@ font-size: 0.4rem;
     .textAbout p, .textAbout ul{
         font-size: 1.5rem;
     }
+
+/* forms */
+.contenedorMainlogin{
+    height: 60%;
+    margin: 10% 30%;
+}
+.contenedorMaincontacto{
+    height: 75%;
+    margin: 10% 30%;
+}
+.contenedorMainregister{
+    height: 90%;
+    margin: 10% 30%;
+}
+.formcontacto{
+    margin-top: 10%;
+}
+
+
+
     /* footer */
     .contenedor-footer{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        height: 70%;
+        height: 60%;
     }
     footer .contenedor-logo > img{
-        height: 4rem;
-        width: 4rem;
+        padding-top: 0.5rem;
+        height: 3rem;
+        width: 3rem;
+    }
+    .TextoEmpresa{
+        padding-top: 0.5rem;
     }
     .TextoEmpresa span, .TextoEmpresa .name{
         font-size: 1rem;
     }
     .redes ul li a{
-        font-size: 30px;
+        font-size: 25px;
     }
     .data > h3{
         display: block;
         text-decoration: underline;
+        font-size: 0.8rem;
     }
     .data{
         padding: 0.5rem 0;
