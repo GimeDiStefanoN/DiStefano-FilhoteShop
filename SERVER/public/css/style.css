@@ -246,6 +246,7 @@ h1{
     background-color: white;
     margin: 10px;
     box-shadow: 5px 5px 5px grey;
+    width: 80%;
 }
 
 .formlogin{
@@ -311,12 +312,12 @@ h1{
     height: 25px;
 }
 
-.inputs #accion{
+.inputs select{
     text-align: center;
     width: 100%;
     height: 25px;
 }
-.inputs #accion option{
+.inputs select option{
     width: 100%;
     height: 25px;
     font-size: 0.8rem;
@@ -595,11 +596,6 @@ font-size: 0.4rem;
 
 
 
-
-
-
-
-
   /* ----------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------- */
 
@@ -752,7 +748,7 @@ font-size: 0.4rem;
 }
 .contenedorMainregister{
     height: 90%;
-    margin: 10% 30%;
+    margin: 10% 20%;
 }
 .formcontacto{
     margin-top: 10%;
