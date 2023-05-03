@@ -153,10 +153,44 @@ main{
     height: 70vh;
     overflow: auto;
 }
-
 h1{
-    color: red;
+    font-family: Overlock;
+    font-size: 3rem;
+    color: #BF2F2F;
+    text-align: center;
+    padding: 1rem;
+    background-image: url('/img/mini_Banner2.png');
+    background-position: center top;
+    background-size: 100% auto;
+
 }
+
+/* SECCION CONOCENOS */
+.img_About{
+    object-fit: cover;
+}
+.contenidoAbout{
+    display: flex;
+    flex-direction: column;
+}
+.contenidoAbout .grupo1, .contenidoAbout .grupo2, .contenidoAbout .grupo3{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.contenidoAbout .grupo1 div, .contenidoAbout .grupo2 div, .contenidoAbout .grupo3 div{
+    width: 50%;
+}
+
+.textAbout{
+    background-color: #FACE54;
+}
+.textAbout p, .textAbout ul{
+    padding: 2rem;
+    font-size: 0.8rem;
+}
+/* //////// */
+
 .catalogo{
     display: flex;
     flex-direction: row;
@@ -488,7 +522,13 @@ font-size: 0.4rem;
         background-color: #0B4D24;
         width: 200px;
     }
+    /*main*/
 
+    /*SECCION CONOCENOS*/
+
+    .textAbout p, .textAbout ul{
+        font-size: 1.5rem;
+    }
     /* footer */
     .contenedor-footer{
         display: flex;
