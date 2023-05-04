@@ -20,7 +20,7 @@
                             <label for="name">Nombre Completo <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-person"></i>
-                                <input type="text" id="name" name="name" maxlength="20" required>
+                                <input class="inputs_Forms" type="text" id="name" name="name" maxlength="20" required>
                             </div>
                         </div>
         
@@ -28,7 +28,7 @@
                             <label for="username">Nombre de Usuario  <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-person"></i>
-                                <input type="text" id="username" name="username" maxlength="10" required>
+                                <input class="inputs_Forms" type="text" id="username" name="username" maxlength="10" required>
                             </div>
                         </div>
         
@@ -36,7 +36,7 @@
                             <label for="password">Contraseña  <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-lock"></i>
-                                <input type="password" id="password" name="password" required>
+                                <input class="inputs_Forms" type="password" id="password" name="password" required>
                             </div>
                         </div>
         
@@ -44,7 +44,7 @@
                             <label for="password">Repetir Contraseña  <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-lock"></i>
-                                <input type="password" id="password2" name="password2" required>
+                                <input class="inputs_Forms" type="password" id="password2" name="password2" required>
                             </div>
                         </div>
         
@@ -52,7 +52,7 @@
                             <label for="email">Correo Electrónico <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-envelope"></i>
-                                <input type="email" id="email" name="email" required >
+                                <input class="inputs_Forms" type="email" id="email" name="email" required >
                             </div>
                         </div>
         
@@ -115,7 +115,7 @@
                         <div class="elemento">
                             <label for="nacimiento">Fecha de Nacimiento  <span>*</span></label>
                             <div class="inputs">
-                                <input type="date" name="nacimiento" id="nacimiento" min="2004-12-31" required>
+                                <input class="inputs_Forms" type="date" name="nacimiento" id="nacimiento" min="2004-12-31" required>
                             </div>
                         </div>
         
@@ -124,7 +124,7 @@
                                 <label for="phone">Número de Celular <span>*</span></label>
                                 <div class="inputs">
                                     <i class="bi bi-telephone"></i>
-                                    <input type="tel" id="phone" name="phone" maxlength="10"  required >
+                                    <input class="inputs_Forms" type="tel" id="phone" name="phone" maxlength="10"  required >
                                 </div>
                             </div>
                             <small>Formato válido: 351 - 4545454</small>
@@ -134,6 +134,7 @@
                     <div class="checks" id="registerChecks">                
                         <div class="elemento">
                             <input
+                                class="inputs_Check"
                                 type="checkbox"
                                 id="aceptTerms"
                                 name="aceptTerms"
