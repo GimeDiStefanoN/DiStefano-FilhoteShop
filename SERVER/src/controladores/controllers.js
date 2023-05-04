@@ -72,7 +72,14 @@ const registerView = (req,res) =>{
 
 const homeView = (req,res) =>{ 
     //res.send('Estoy en Home');
-    res.render('home', {title: 'FILHOTE SHOP'})
+    // res.render('home', {title: 'FILHOTE SHOP'})
+    const products = getProducts(); 
+    res.render(path.join(__dirname, '../views/home.ejs'), 
+    {
+        title: 'FILHOTE SHOP',
+        products
+    } 
+    )
 }
 
 module.exports ={
