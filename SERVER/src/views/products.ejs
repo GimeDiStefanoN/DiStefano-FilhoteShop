@@ -19,16 +19,6 @@
         </div>
         <ul class="catalogo">
             <% products.forEach(function(product) { %>
-                <!-- <li>
-                    <div class="card" id="user-<%=product.id %>">
-                        <img src="<%= product.imagen %>" alt="">
-                        <div class="description">
-                          <h2><%= product.nombre %></h2>
-                          <p><%= product.detalle %></p>
-                          <button onclick="location.href='/detail_Product/<%=product.id %>'">Ver Mas</button>
-                        </div>
-                    </div>
-                </li> -->
                 <li>
                     <div class="card" id="user-<%=product.id %>">
                         <div class="container">
@@ -43,7 +33,7 @@
                             <%= product.nombre %>
                         </div>
                         <div class="text-red">
-                            PRECIO $ <%= product.precio %>
+                            PRECIO $ <%= product.precio.toLocaleString('es-AR') %>
                         </div>
                         <div class="botones">
                             <button onclick="location.href='/cart'">
