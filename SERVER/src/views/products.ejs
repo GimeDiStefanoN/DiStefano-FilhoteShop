@@ -9,10 +9,17 @@
     </header>
     <main>
         <h1>CATALOGO PRODUCTOS</h1>
-        <a href="/">home</a>
+        
+        <div class="buscador">
+            <p>Encontrá tu producto</p>
+            <div class="form">
+                <input type="text">
+                <button>Buscar</button>
+            </div>
+        </div>
         <ul class="catalogo">
             <% products.forEach(function(product) { %>
-                <li>
+                <!-- <li>
                     <div class="card" id="user-<%=product.id %>">
                         <img src="<%= product.imagen %>" alt="">
                         <div class="description">
@@ -21,6 +28,30 @@
                           <button onclick="location.href='/detail_Product/<%=product.id %>'">Ver Mas</button>
                         </div>
                     </div>
+                </li> -->
+                <li>
+                    <div class="card" id="user-<%=product.id %>">
+                        <div class="container">
+                            <i class="bi bi-chevron-left"></i>
+                            <img src="<%= product.imagen %>" alt="Image 1" class="img_Cards">
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                        <div class="text-grey">
+                            <%= product.categoria %>
+                        </div>
+                        <div class="text-black">
+                            <%= product.nombre %>
+                        </div>
+                        <div class="text-red">
+                            PRECIO $ <%= product.precio %>
+                        </div>
+                        <div class="botones">
+                            <button onclick="location.href='/cart'">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                            </button>
+                            <button onclick="location.href='/detail_Product/<%=product.id %>'"><span>Ver Detalle</span></button>
+                        </div>
+                  </div>
                 </li>
             <% }); %>
         </ul>
