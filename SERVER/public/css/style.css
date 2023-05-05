@@ -204,7 +204,7 @@ h1{
 }
 .opcionesBanner ul li a, span, p{
     text-decoration: none;
-    color:#FACE54;
+    color:black;
     text-align: center;
     width: 100%;
 }
@@ -237,7 +237,7 @@ h1{
     padding: 2rem;
     font-size: 0.8rem;
 }
-/* //////// */
+
 /* SECCION PRODUCTOS */
 .buscador{
     padding: 1rem;
@@ -286,6 +286,124 @@ h1{
 .catalogo li{
     list-style: none;
 }
+/* SECCION DETAIL*/
+.main_Detail{
+    background-color: #FACE54;
+}
+
+.ruta_Product{
+    margin: 5% 5%;
+    text-align: center;
+}
+.ruta_Product a{
+    text-decoration: none;
+    color: #000;
+}
+.ruta_Product span{
+    color: #000;
+}
+.btn_regresar{
+    margin-left: 5%;
+    background-color: #f8f8b1;
+}
+
+.contenedor_Card{
+    display: grid;
+    place-items: center;
+
+}
+
+.card_detail{
+    width: 250px;
+    height: 700px;
+    background-color: #99a19b;
+    margin: 5% 10%;
+    border-radius:10px;
+    box-sizing: border-box; 
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.grupoDetail1{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+}
+.grupoDetail1 .container i{
+    width: 10%;
+}
+.grupoDetail1 .container i:before{
+    width: 100%;
+    text-align: center;
+}
+.description, .botonesDetail{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.description .text-black, .description .text-red{
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.botonesDetail{
+    width: 100%;
+}
+.cantidad, .comprar{
+    width: 90%;
+}
+.contadorCantidad{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.contadorCantidad input{
+    width: 50px;
+    
+}
+.contadorCantidad button{
+    width: 30px;
+}
+.contadorCantidad #menos{
+    border-radius: 20px 0 0 20px;
+}
+.contadorCantidad #mas{
+    border-radius: 0 20px 20px  0;
+}
+.contadorCantidad input, p{
+    text-align: center;
+}
+
+.comprar button{
+    background-color: #D3FCD5;
+    border-radius: 5px;
+    border-color: #D3FCD5;
+    height: 3rem;
+    width: 90%;
+    margin: 1rem 1.5rem;
+}
+.comprar button:hover, .comprar button:hover >span{
+    color: #BF2F2F;
+}
+
+.grupoDetail2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20%;
+}
+
+.grupoDetail2 p{
+    color: #000;
+}
+
 
   /*CATALOGO CARDS*/
   .card {
@@ -790,8 +908,8 @@ font-size: 0.4rem;
 }
 
 /* TABLET */
-@media (min-width: 768px) {
-
+@media (min-width: 710px) {
+ 
     /* header */
     
 
@@ -826,6 +944,12 @@ font-size: 0.4rem;
     input{
         width: 500px;
     }
+
+    /*SECCION DETAIL*/
+    .card_detail{
+        width: 600px;
+    }
+
     /* footer */
     
     .contenedor-footer{
@@ -873,7 +997,8 @@ font-size: 0.4rem;
 }
 
 /* ESCRITORIO */
-@media (min-width: 1200px) {
+@media (min-width: 1199px) {
+   
     /* header */
    
     header{
@@ -916,7 +1041,7 @@ font-size: 0.4rem;
 
 /* forms */
 .contenedor-main{
-    margin: 0 30%;
+    margin: 0 10%;
 }
 .contenedorMainlogin{
     height: 60%;
@@ -938,6 +1063,25 @@ font-size: 0.4rem;
     width: 800px;
 }
 
+/*SECCION DETAIL*/
+.card_detail{
+    width: 900px;
+}
+.grupoDetail1{
+    flex-direction: row;
+    height: 60%;
+}
+.grupoDetail1 .container, .grupoDetail1 .description{
+    width: 50%;
+    height: 100%;
+}
+.grupoDetail1 .description{
+    justify-content: space-between;
+}
+.grupoDetail2{
+    height: 40%;
+    padding: 5%;
+}
 
     /* footer */
     .contenedor-footer{
