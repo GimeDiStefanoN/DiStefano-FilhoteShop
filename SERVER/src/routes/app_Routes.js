@@ -9,7 +9,7 @@ module.exports = function(app){
 
     app.get('/detail_Product/:id', controllers.productView);
 
-    app.get('/cart', controllers.cartView);
+    app.get('/cart/:id', controllers.cartView);
 
     app.get('/contact', controllers.contactView);
 
