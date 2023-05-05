@@ -44,7 +44,16 @@ const aboutView = (req,res) => {
 
 const cartView = (req,res) =>{ 
     //res.send('Estoy en el Carrito');
-    res.render('cart', {title: 'My cart'})
+    // res.render('cart', {title: 'My cart'})
+    const products = getProducts(); //traigo todos los productos
+    const product = products.find(product => product.id == req.params.id) //busco el q tiene ese id
+    res.render(path.join(__dirname,'../views/cart.ejs'),
+        {
+            title: 'Mi Carrito',
+            product
+        }
+        )
+    
 }
 
  // VISTA CONTACT

@@ -20,6 +20,7 @@
         </div>
 
         <button onclick="location.href='/products %>'" class="btn_regresar">Volver al Catálogo</button>
+        
         <div class="contenedor_Card">
             <div class="card_detail">
                 <div class="grupoDetail1">
@@ -59,7 +60,7 @@
                             </div>
         
                             <div class="comprar">
-                                <button onclick="location.href='/cart'">
+                                <button onclick="location.href='/cart/<%=product.id %>'">
                                     <span class="material-symbols-outlined">
                                     shopping_cart
                                     </span></button>
