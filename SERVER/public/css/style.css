@@ -647,7 +647,9 @@ hr {
     padding: 3rem 1rem;
     background-color: whitesmoke;
 }
-
+.cuadro{
+    width: 100%;
+}
 .precios h4{
     text-decoration: underline;
 }
