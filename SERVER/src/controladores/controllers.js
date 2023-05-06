@@ -91,6 +91,13 @@ const homeView = (req,res) =>{
     )
 }
 
+const errorView = (req,res) =>{
+    res.render(path.join(__dirname, '../views/error.ejs'),
+    {
+        title: 'No Encontrado'
+    }
+    )
+}
 module.exports ={
     productsView,
     productView,
@@ -99,5 +106,6 @@ module.exports ={
     contactView,
     loginView,
     registerView,
-    homeView
+    homeView,
+    errorView
 }

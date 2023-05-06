@@ -16,4 +16,6 @@ module.exports = function(app){
     app.get('/login', controllers.loginView);
 
     app.get('/register', controllers.registerView);
+
+    app.get('/error', controllers.errorView);
 }

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Admin",
+        "username": "Admin",
+        "password": "Admin",
+        "repeatPassword": "Admin",
+        "email": "Admin@gmail.com",
+        "pais": "Argentina",
+        "provincia": "Cordoba",
+        "nacimiento": "19/06/1988",
+        "telefono": "0000303456"
+    },
+    {
+        "id": 1,
+        "nombre": "Gime",
+        "username": "GimeDN",
+        "password": "gime88",
+        "repeatPassword": "gime88",
+        "email": "gimedistefano@gmail.com",
+        "pais": "Argentina",
+        "provincia": "Cordoba",
+        "nacimiento": "19/06/1988",
+        "telefono": "3511234567"
+    }
+]

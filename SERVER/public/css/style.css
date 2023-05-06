@@ -1153,8 +1153,55 @@ font-size: 0.4rem;
     justify-content: baseline;
 }
 
+/*SECCION ERROR*/
 
-
+.body_Error{
+    background-color: #BF2F2F;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+.contenido_Error{
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.img_Error{
+    height: 60%;
+    display: flex;
+    align-items: baseline;
+}
+.img_Error img{
+    margin: auto;
+    height: 80%;
+    object-fit: contain;
+    filter: brightness(1.1); /*con esto hago transparente el fondo de la img*/
+    mix-blend-mode: multiply; /*con esto hago transparente el fondo de la img*/
+}
+.texto_Error{
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center
+}
+.title_Error{
+    font-size: 2rem;
+}
+.subtitle_Error{
+    padding: 3% 0;
+    font-size: 1rem;
+}
+.btn_Error{
+    text-decoration: none;
+    color: #0B4D24;
+    font-size: 0.8rem;
+}
 
   /* ----------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------- */
@@ -1337,6 +1384,23 @@ nav.pasosCompra span.rayaConectora {
 
     .modalDialog > div {
         width: 500px;
+    }
+
+    /*SECCION ERROR*/
+    .contenido_Error{
+        height: 600px;
+        width: 600px;
+    }
+    .title_Error{
+        font-size: 3rem;
+    }
+    .subtitle_Error{
+       
+        font-size: 2rem;
+    }
+    .btn_Error{
+       
+        font-size: 1.5rem;
     }
 }
 
@@ -1523,6 +1587,23 @@ nav.pasosCompra span.rayaConectora {
         width: 1px;
         border: 1px solid grey;
         
+    }
+
+    /*SECCION ERROR*/
+    .contenido_Error{
+        height: 800px;
+        width: 800px;
+    }
+    .title_Error{
+        font-size: 3.5rem;
+    }
+    .subtitle_Error{
+       
+        font-size: 2.5rem;
+    }
+    .btn_Error{
+       
+        font-size: 2rem;
     }
 }
 
