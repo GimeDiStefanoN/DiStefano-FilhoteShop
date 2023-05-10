@@ -17,5 +17,13 @@ module.exports = function(app){
 
     app.get('/register', controllers.registerView);
 
+    app.post('/addUser', controllers.addUser)
+
+    app.post('/deleteUser/:id', controllers.deleteUser)
+    app.get('/adminUsers', controllers.adminView);
+
+   
+    app.post('/updateUser/:id', controllers.updateUser)
+
     app.get('/error', controllers.errorView);
 }

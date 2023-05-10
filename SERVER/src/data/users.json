@@ -1,26 +1,43 @@
-[
+{
+  "users": [
     {
-        "id": 1,
-        "nombre": "Admin",
-        "username": "Admin",
-        "password": "Admin",
-        "repeatPassword": "Admin",
-        "email": "Admin@gmail.com",
-        "pais": "Argentina",
-        "provincia": "Cordoba",
-        "nacimiento": "19/06/1988",
-        "telefono": "0000303456"
+      "id": 1,
+      "nombre": "Admin",
+      "username": "Admin",
+      "password": "Admin",
+      "repeatPassword": "Admin",
+      "email": "Admin@admin.com",
+      "pais": "Argentina",
+      "provincia": "CORDOBA",
+      "genero": "otro",
+      "nacimiento": "2000-01-01",
+      "telefono": "0000000000"
     },
     {
-        "id": 1,
-        "nombre": "Gime",
-        "username": "GimeDN",
-        "password": "gime88",
-        "repeatPassword": "gime88",
-        "email": "gimedistefano@gmail.com",
-        "pais": "Argentina",
-        "provincia": "Cordoba",
-        "nacimiento": "19/06/1988",
-        "telefono": "3511234567"
+      "id": 2,
+      "nombre": "gIME",
+      "username": "GIMD",
+      "password": "456",
+      "repeatPassword": "456",
+      "email": "GIMED@GMAIL.COM",
+      "pais": "Argentina",
+      "provincia": "CORDOBA",
+      "genero": "femenino",
+      "nacimiento": "1988-06-19",
+      "telefono": "0000000000"
+    },
+    {
+      "id": 3,
+      "nombre": "PRUEBA",
+      "username": "PRUEBA",
+      "password": "PRUEBA",
+      "repeatPassword": "PRUEBA",
+      "email": "PRUEBA@PRUEBA.COM",
+      "pais": "Argentina",
+      "provincia": "CATAMARCA",
+      "genero": "femenino",
+      "nacimiento": "2000-01-01",
+      "telefono": "0000000000"
     }
-]
+  ]
+}
