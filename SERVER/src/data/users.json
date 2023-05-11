@@ -16,7 +16,7 @@
     {
       "id": 2,
       "nombre": "gIME",
-      "username": "GIMD",
+      "username": "GIME.DN",
       "password": "456",
       "repeatPassword": "456",
       "email": "GIMED@GMAIL.COM",
@@ -28,14 +28,14 @@
     },
     {
       "id": 3,
-      "nombre": "PRUEBA",
-      "username": "PRUEBA",
-      "password": "PRUEBA",
-      "repeatPassword": "PRUEBA",
-      "email": "PRUEBA@PRUEBA.COM",
+      "nombre": "prueba",
+      "username": "prueba",
+      "password": "prueba",
+      "repeatPassword": "prueba",
+      "email": "prueba@prueba.com",
       "pais": "Argentina",
-      "provincia": "CATAMARCA",
-      "genero": "femenino",
+      "provincia": "BUENOS AIRES",
+      "genero": "otro",
       "nacimiento": "2000-01-01",
       "telefono": "0000000000"
     }

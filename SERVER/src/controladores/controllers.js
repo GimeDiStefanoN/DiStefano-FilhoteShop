@@ -111,8 +111,16 @@ const addUser = (req,res) => {
 }
 
 // MODIFICAR USUARIO
- // a desarrollar en futuras actualizaciones
-    const updateUser = (req,res)=>{
+ const editUser = (req,res) =>{
+    const users =  getUsers(); //llamo a todos los usuarios
+    const userEdit = users.find((user)=>user.id == req.params.id) //busco el usuario a modificar por id
+    res.render(path.resolve(__dirname, './views/admin/all_Users.ejs'),
+     {
+        users,
+        userEdit: userEdit
+      })
+ }
+const updateUser = (req,res)=>{
         const users =  getUsers(); //llamo a todos los usuarios
         const user = users.find((user)=>user.id == req.params.id) //busco el usuario a modificar por id
                 
@@ -133,6 +141,7 @@ const addUser = (req,res) => {
     
         //redirecciono
         res.redirect('/adminUsers');
+          
     }
 
 // ELIMINAR USUARIO
@@ -194,5 +203,6 @@ module.exports ={
     addUser,
     adminView,
     deleteUser,
-    updateUser,
+    editUser,
+    updateUser
 }

@@ -22,8 +22,8 @@ module.exports = function(app){
     app.post('/deleteUser/:id', controllers.deleteUser)
     app.get('/adminUsers', controllers.adminView);
 
-   
-    app.post('/updateUser/:id', controllers.updateUser)
+    app.get('/adminUsers/:id', controllers.editUser);
+    app.post('/adminUsers/:id', controllers.updateUser)
 
     app.get('/error', controllers.errorView);
 }

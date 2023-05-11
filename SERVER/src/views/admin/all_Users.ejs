@@ -50,7 +50,7 @@
               </td>
               <td>
                 <form >
-                  <button class="btnAdmin" onclick="location.href='#openModal'"><i class="bi bi-pencil"></i></button>
+                  <button class="btnAdmin" onclick="location.href='#openModal<%= user.id %>'"><i class="bi bi-pencil"></i></button>
                 </form>
               </td>
             </tr>
@@ -61,14 +61,15 @@
     </div>
 
    <div class="modales">
+    <% users.forEach(function(user) { %>
 
-    <div id="openModal" class="modalDialog">
+    <div id="openModal<%= user.id %>" class="modalDialog">
       <div>
           <a href="/adminUsers" title="Close" class="close">X</a>
           <div>
             <h5 class="modal-title" id="editModalLabel">Editar Usuario</h5>
             <div class="modal-body">
-              <form action="/updateUser/<%= user.id  %>" method="post">
+              <form action="/adminUsers/<%= user.id %>" method="post">
                 <div>
                   <label for="nombre">Nombre:</label>
                   <input type="text" name="nombre" value="<%= user.nombre%>">
@@ -112,6 +113,7 @@
         </div>
       </div>
     </div>
+    <% }); %>
 
    </div>
    
