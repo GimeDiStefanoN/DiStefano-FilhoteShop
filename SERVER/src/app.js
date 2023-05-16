@@ -27,6 +27,15 @@ app.use(bodyParser.urlencoded({extended: false})); //indico que  vamos a usar bo
 //creo rutas
 routes(app);
 
+// Middleware  de ruta no encontrada (404)
+app.use((req, res, next) => {
+    res.status(404).render('error', {
+      title: 'Página no encontrada',
+      subtitle: 'Página no encontrada',
+      errorNumber: '404'
+    });
+  });
+
 //inicio servidor
 
 app.listen(PORT, ()=> console.log(`Escuchando en el Puerto ${PORT}!`));

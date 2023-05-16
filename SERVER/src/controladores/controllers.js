@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const product = require('../models/product_Models');
 const user = require('../models/user_Models');
+const { validationResult } = require('express-validator');
 const productsFilePath = path.join(__dirname, '../data/database.json');
 const usersFilePath = path.join(__dirname, '../data/users.json');
 
@@ -33,12 +34,23 @@ const productView = (req,res) =>{
     // res.send('Estoy en Detail Product');
     const products = getProducts(); //traigo todos los productos
     const product = products.find(product => product.id == req.params.id) //busco el q tiene ese id
-    res.render(path.join(__dirname,'../views/Detail_Product.ejs'),
-        {
-            title: product.nombre,
-            product
+
+     // Si el ID no existe > muestro web de error
+        if (!product) {
+        res.status(404).render('error', {
+            title: 'Página no encontrada',
+            subtitle: 'Página no encontrada',
+            errorNumber: '404'
+        });
+        return; // Terminar la ejecución del controlador
         }
-        )
+     // Si el ID si existe > muestro el detalle
+        res.render(path.join(__dirname,'../views/Detail_Product.ejs'),
+            {
+                title: product.nombre,
+                product
+            }
+            )
 }
 
  // VISTA ABOUT
@@ -76,6 +88,11 @@ const loginView = (req,res) => {
     //res.send('Estoy en Login');
     res.render('login', {title: 'Login FILHOTE SHOP'})
 }
+//! LOGIN / INICIAR SESION
+
+const loginUser = (req, res) =>{
+
+}
 
  // VISTA REGISTER
 
@@ -86,7 +103,16 @@ const registerView = (req,res) =>{
 
 //! REGISTRAR/AGREGAR USUARIO
 
-const addUser = (req,res) => {
+const addUser = (req,res, next) => {
+
+    const error = validationResult(req);
+    if(!error.isEmpty()){
+        const err = {}
+        err['status'] = 422,
+        err['message'] = error.array()
+        return next(err.status)
+    }
+    
     const users =  getUsers();
     const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
     const newUserId = lastUserId + 1;
@@ -204,5 +230,6 @@ module.exports ={
     adminView,
     deleteUser,
     editUser,
-    updateUser
+    updateUser,
+    loginUser
 }
