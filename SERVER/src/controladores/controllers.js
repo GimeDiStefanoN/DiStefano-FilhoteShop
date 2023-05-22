@@ -3,20 +3,14 @@ const path = require('path');
 const product = require('../models/product_Models');
 const user = require('../models/user_Models');
 const { validationResult } = require('express-validator');
-const { log } = require('console');
 const productsFilePath = path.join(__dirname, '../data/database.json');
-const usersFilePath = path.join(__dirname, '../data/users.json');
+const { getUsers, writeUser, reWriteUser, delUsers } = require('../services/userAccess')
 
 const getProducts = () =>{
     const products = fs.readFileSync(productsFilePath, 'utf-8');
     return JSON.parse(products);
 }
 
-const getUsers = () =>{
-    const users = fs.readFileSync(usersFilePath, 'utf-8');
-    const userObjetc = JSON.parse(users);
-    return userObjetc.users;
-}
 
 // VISTA CATALOGO : PRODUCTOS
 const productsView = (req,res) =>{
@@ -148,9 +142,9 @@ const addUser = (req,res, next) => {
             telefono: req.body.telefono
         }
         users.push(newUser);
-        const userJson = JSON.stringify({users}, null, 2);
-        fs.writeFileSync(path.join(__dirname, '../data/users.json'), userJson)
        
+        writeUser(users) 
+
         res.render('register', {
           title: 'Register FILHOTE SHOP',
           showModal: true
@@ -185,8 +179,7 @@ const updateUser = (req,res)=>{
         user.telefono = req.body.telefono;
 
         //guardo la lista actualizada
-        const newDatabaseUsers = '{"users": ' + JSON.stringify(users, null, 2) + '}';
-        fs.writeFileSync(path.join(__dirname, '../data/users.json'), newDatabaseUsers);
+        reWriteUser(users)
     
         //redirecciono
         res.redirect('/adminUsers');
@@ -197,8 +190,8 @@ const updateUser = (req,res)=>{
     const deleteUser = (req, res) =>{
         const users =  getUsers();
         const deleted = users.filter((user)=>user.id != req.params.id)
-        const newDatabaseUsers = '{"users": '+ JSON.stringify(deleted, null, 2) +'}'
-        fs.writeFileSync(usersFilePath, newDatabaseUsers)
+        delUsers(deleted)
+
         res.redirect('/adminUsers');
         
     }
