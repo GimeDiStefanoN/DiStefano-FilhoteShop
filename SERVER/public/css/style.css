@@ -176,7 +176,7 @@ h1{
 .imgBanner{
     width: 100%;
     height: 300px;
-    background-color: #5f6861;
+    background-color: #dee5d2;
 }
 .imgBanner img{
     object-fit: cover;
@@ -185,7 +185,7 @@ h1{
 
 /* OPCIONES BANNER */
  .opcionesBanner{
-    background-color: #777e78;
+    background-color: #dee5d2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -314,16 +314,17 @@ h1{
 }
 
 .card_detail{
-    width: 250px;
+    width: 80%;
     height: 700px;
-    background-color: #99a19b;
+    background-color: #c6c9c0;
     margin: 5% 10%;
-    border-radius:10px;
+    border-radius:30px;
     box-sizing: border-box; 
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    overflow: hidden;
 }
 
 .grupoDetail1{
@@ -604,6 +605,15 @@ hr {
     height: 50%;
 }
 
+.elemento .datosElemento .nombre, .productoindividual .valor{
+    display: grid;
+    place-items: center;
+    padding-left: 1rem;
+}
+.productoindividual .contadorCantidad{
+    width: 50%;
+    height: 100%;
+}
 .valor p{
     font-size: 1.2rem;
     font-weight: bold;
@@ -621,6 +631,19 @@ hr {
 }
 .btnSeguir button:hover, .btnFinalizarCompra button:hover{
     color: #BF2F2F;
+}
+
+.btn-user{
+    background-color: #D3FCD5;
+    border-radius: 5px;
+    border-color: #D3FCD5;
+    height: 3rem;
+    width: 85%;
+    margin: 1rem 2rem;
+    cursor: pointer;
+}
+.contenedorMainregister .modal{
+    text-align: center;
 }
 
  /* LINEA DIVISORIA */
@@ -663,7 +686,9 @@ hr {
     text-align: left;
     color: rgb(27, 27, 27);
 }
-
+.cadaUnoDetalle{
+    width: 30%;
+}
 .cadaUnoDetalle p{
     text-align: end;
 }
@@ -677,7 +702,7 @@ hr {
     position: relative;
     width:200px;
     height:350px;
-    background:#99a19b;
+    background:#c6c9c0;
     float:left;
     border-radius:10px;
     box-sizing: border-box; 
@@ -686,6 +711,11 @@ hr {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
+  }
+  .card:hover{
+    box-shadow: 5px 5px 20px grey;
+    transform: translateY(-3%);
   }
   .container{
     height: 40%;
@@ -720,6 +750,7 @@ hr {
     font-weight: bolder;
     font-family: sans-serif;
     padding-left:5px;
+    text-align: center;
   }
   .text-red{
     color: #BF2F2F;
@@ -773,8 +804,9 @@ hr {
     padding: 5px 10px;
     background-color: white;
     height: 70%;
-    margin: 1rem;
+    margin: 10px;
     box-shadow: 5px 5px 5px grey;
+    width: 80%;
 }
 
 .contenedorMaincontacto{
@@ -826,6 +858,14 @@ hr {
 
 .formregister > .datosregister, .buttons{
     width: 70%;
+}
+
+
+.datoslogin #recuperarPass{
+    position: relative;
+    width: 100%;
+    text-align: end;
+    padding-top: 0;
 }
 
 .elemento{
@@ -952,6 +992,8 @@ fieldset{
 .textButton{
     font-size: 1rem;
 }
+
+
 
 /* ----------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------- */
@@ -1097,6 +1139,7 @@ font-size: 0.4rem;
 	transition: opacity 400ms ease-in;
 	pointer-events: none;
     overflow-y: auto;
+    display: block;
 }
 .modalDialog:target {
 	opacity:1;
@@ -1223,7 +1266,7 @@ font-size: 0.4rem;
     padding: auto;
     margin: auto;
   }
-  .container{
+  .containerdataTable .container{
     justify-content: center;
     align-items: center;
     width: auto;
@@ -1334,9 +1377,16 @@ nav.pasosCompra span.rayaConectora {
     /* FORMS */
     .contenedorMainlogin{
         height: 45%;
-        width: 80%;
         margin:  1.5% 20%;
     }
+
+    .datoslogin .elemento label{
+        width: 30%;
+    }
+    .datoslogin .elemento .inputs{
+        width: 70%;
+    }
+    
     .contenedorMaincontacto{
         height: 55%;
         margin: 5% 30%

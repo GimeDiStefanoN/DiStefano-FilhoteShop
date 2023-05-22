@@ -11,6 +11,43 @@
         <h1>REGISTRATE</h1>
         <div class="contenedor-main">
             <div class="contenedorMainregister">
+
+                 <!-- DIV CON ALERTS DE ERRORES -->
+                 <% if(typeof validaciones != 'undefined') { %>
+                    <% validaciones.forEach( (validacion => { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><%= validacion.msg %></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                    <% })) %>
+                <% } %>
+
+                <!-- DIV MODAL REGISTRO EXITOSO -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          ¡Usuario registrado con Éxito!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-user" onclick="location.href='/login'">Iniciar Sesión</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                <% if (typeof showModal !== 'undefined' && showModal) { %>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                          $('#exampleModal').modal('show');
+                        });
+                      </script>
+                <% } %>
+                
+                <!-- FOMRULARIO DE REGISTRO -->
+
                 <form class="formregister" action="addUser" method="post">
                     <!-- TITULO DEL FORM -->
                     <h2>Completá los datos</h2>
@@ -20,7 +57,7 @@
                             <label for="nombre">Nombre Completo <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-person"></i>
-                                <input class="inputs_Forms" type="text" id="nombre" name="nombre"  >
+                                <input class="inputs_Forms" type="text" id="nombre" name="nombre" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.nombre %> <% } %>">
                             </div>
                         </div>
         
@@ -28,7 +65,7 @@
                             <label for="username">Nombre de Usuario  <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-person"></i>
-                                <input class="inputs_Forms" type="text" id="username" name="username"  >
+                                <input class="inputs_Forms" type="text" id="username" name="username"  value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.username %> <% } %>">
                             </div>
                         </div>
         
@@ -36,7 +73,7 @@
                             <label for="password">Contraseña  <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-lock"></i>
-                                <input class="inputs_Forms" type="password" id="password" name="password" >
+                                <input class="inputs_Forms" type="password" id="password" name="password" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.password %> <% } %>">
                             </div>
                         </div>
         
@@ -44,7 +81,7 @@
                             <label for="repeatPassword">Repetir Contraseña  <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-lock"></i>
-                                <input class="inputs_Forms" type="password" id="repeatPassword" name="repeatPassword" >
+                                <input class="inputs_Forms" type="password" id="repeatPassword" name="repeatPassword" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.repeatPassword %> <% } %>">
                             </div>
                         </div>
         
@@ -52,7 +89,7 @@
                             <label for="email">Correo Electrónico <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-envelope"></i>
-                                <input class="inputs_Forms" type="email" id="email" name="email" >
+                                <input class="inputs_Forms" type="email" id="email" name="email" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.email %> <% } %>">
                             </div>
                         </div>
         
@@ -115,7 +152,7 @@
                         <div class="elemento">
                             <label for="nacimiento">Fecha de Nacimiento  <span>*</span></label>
                             <div class="inputs">
-                                <input class="inputs_Forms" type="date" name="nacimiento" id="nacimiento" >
+                                <input class="inputs_Forms" type="date" name="nacimiento" id="nacimiento" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.nacimiento %> <% } %>">
                             </div>
                         </div>
         
@@ -124,7 +161,7 @@
                                 <label for="telefono">Número de Celular <span>*</span></label>
                                 <div class="inputs">
                                     <i class="bi bi-telephone"></i>
-                                    <input class="inputs_Forms" type="tel" id="telefono" name="telefono" >
+                                    <input class="inputs_Forms" type="tel" id="telefono" name="telefono" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.telefono %> <% } %>">
                                 </div>
                             </div>
                             <small>Formato válido: 351 - 4545454</small>
@@ -138,7 +175,8 @@
                                 type="checkbox"
                                 id="aceptTerms"
                                 name="aceptTerms"
-                                value="aceptTerms" required/>
+                                value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.aceptTerms %> <% } %>"
+                            />
         
                             <label for="aceptTerms">Acepto los <a href="#" target="_blank">Términos y Condiciones</a>  <span>*</span></label>
                         </div>
@@ -150,6 +188,12 @@
                     </div>
                     <p class="textButton">Ya tengo Usuario, <a href="/login">Ingresar</a> </p>
                 </form>
+
+                
+                  
+
+                
+
             </div>   
         </div>
     </main>

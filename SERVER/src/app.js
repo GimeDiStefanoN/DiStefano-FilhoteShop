@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const routes = require('./routes/app_Routes');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 //inicializar express
 
@@ -23,11 +24,13 @@ app.set('views', viewsPath);
 //defino rutas
 app.use(express.static(publicPath)); //indico que todo lo estatico va estar en la direccion "public" (inicializamos valores y los paso al app)
 app.use(bodyParser.urlencoded({extended: false})); //indico que  vamos a usar bodyparser (inicializamos valores y los paso al app)
+app.use(morgan('dev'));
 
 //creo rutas
 routes(app);
 
 // Middleware  de ruta no encontrada (404)
+//si le pongo >> (err, req, res, next) >> me arroja al validar forms el EJS 404
 app.use((req, res, next) => {
     res.status(404).render('error', {
       title: 'Página no encontrada',

@@ -1,12 +1,20 @@
 const controllers = require('../controladores/controllers');
 const {check} = require('express-validator');
 
+const fs = require('fs');
+const path = require('path');
+const usersFilePath = path.join(__dirname, '../data/users.json');
+function getUsers() {
+    const jsonData = fs.readFileSync(usersFilePath);
+    return JSON.parse(jsonData).users;
+  }
+
 module.exports = function(app){
     app.get('/', controllers.homeView);
 
     app.get('/about', controllers.aboutView);
 
-    app.get('/products', controllers.productsView);
+    app.get('/products/:category?', controllers.productsView); //la categoria es opcional
 
     app.get('/detail_Product/:id', controllers.productView);
 
@@ -18,24 +26,75 @@ module.exports = function(app){
 
     app.post('/login', 
             [
-
+            check('username')
+                .exists()
+                .trim()
+                .isLength({min: 5})
+                .withMessage('El Usuario debe tener al menos 5 caracteres'),
+            check('password')
+                .exists()
+                .trim()
+                .isLength({min: 6})
+                .withMessage('La contraseña debe tener al menos 6 caracteres')
             ], controllers.loginUser)
 
     app.get('/register', controllers.registerView);
 
     app.post('/addUser', 
             [
-                check('nombre').trim().isAlpha().isLength({min: 3}).withMessage('El Nombre debe tener al menos 3 caracteres alfabéticos'),
-                check('username').trim().isLength({min: 5}).withMessage('El Usuario debe tener al menos 5 caracteres'),
-                check('password').trim().isLength({min: 6}).withMessage('La contraseña debe tener al menos 6 caracteres'),
-                check('repeatPassword').trim().isLength({min: 6}).withMessage('La contraseña debe tener al menos 6 caracteres').custom((value, { req }) => {
-                    if (value !== req.body.password) {
-                      throw new Error('Las contraseñas no coinciden');
-                    }
-                    return true;
-                  }),
-                check('email').trim().isEmail().withMessage('Debe ser un email válido'),
+                check('nombre')
+                    .exists()
+                    .trim()
+                    .isAlpha()
+                    .isLength({min: 3})
+                    .withMessage('El Nombre debe tener al menos 3 caracteres alfabéticos'),
+                check('username')
+                    .exists()
+                    .trim()
+                    .isLength({min: 5})
+                    .withMessage('El Usuario debe tener al menos 5 caracteres')
+                    .custom(value => {
+                        const users = getUsers();
+                        const existingUser = users.find(user => user.username.toLowerCase() === value.toLowerCase());
+                        if (existingUser) {
+                            throw new Error('El usuario ya está en uso');
+                        }
+                        return true;
+                    }),
+                check('password')
+                    .exists()
+                    .trim()
+                    .isLength({min: 5})
+                    .withMessage('La contraseña debe tener al menos 5 caracteres'),
+                check('repeatPassword')
+                    .exists()
+                    .trim()
+                    .isLength({min: 5})
+                    .withMessage('La contraseña debe tener al menos 5 caracteres')
+                    .custom((value, { req }) => {
+                        if (value !== req.body.password) {
+                        throw new Error('Las contraseñas no coinciden');
+                        }
+                        return true;
+                    }),
+                check('email')
+                    .exists()
+                    .trim()
+                    .isEmail()
+                    .normalizeEmail()
+                    .withMessage('Debe ser un email válido')
+                    .custom(value => {
+                        const users = getUsers();
+                        const existingEmail = users.find(user => user.email === value);
+                        if (existingEmail) {
+                            throw new Error('El Email ya está registrado');
+                        }
+                        return true;
+                    }),
                 check('nacimiento')
+                    .exists()
+                    .isDate()
+                    .withMessage('Ingresá una fecha de nacimiento válida')
                     .custom(value => {
                         const birthDate = new Date(value);
                         const currentDate = new Date();
@@ -45,7 +104,19 @@ module.exports = function(app){
                         }
                         return true;
                     }),
-                check('telefono').trim().isNumeric().isLength({min:10, max: 10}).withMessage('Debe tener 10 números. Sin 0 ni 15')
+                check('telefono')
+                    .exists()
+                    .trim()
+                    .isNumeric()
+                    .isLength({min:10, max: 10})
+                    .withMessage('Debe tener 10 números. Sin 0 ni 15'),
+                    check('aceptTerms')
+                    .custom((value, { req }) => {
+                        if (!value) {
+                            throw new Error('Debes aceptar los términos y condiciones');
+                        }
+                        return true;
+                    })
             ],
             controllers.addUser)
 
