@@ -10,7 +10,7 @@
 Es un ecommerce dedicado a la venta de productos para mascotas
 
 ## :point_right: Historia de la página:
-La página se llama Filhote Shop, Tienda de Mascotas (Filhote en portugues significa cachorro), se comercializarán en principio productos para perros 	:dog: y gatos 	:smiley_cat:.
+La página se llama Filhote Shop, Tienda de Mascotas (Filhote en portugues significa cachorro), se comercializarán en principio productos para perros 	:dog: y gatos 	:smiley_cat:. Adicionandosé exóticos 	:hamster:
 
 Algunos de los productos que se venderán serán:
 - Alimentos
@@ -47,3 +47,6 @@ Combinación de colores: https://coolors.co/0b4d24-bf2f2f-face54-828c84-d3fcd5
 
 El bocetado de cada wireframe fue realizado utilizando Figma, y se puede ver en este [LINK](https://www.figma.com/file/zmelQEQOEfQyVFEAD5Bfhh/FILHOTE-SHOP?t=WY1bXL3pqTCzA4nd-6).
 
+## :point_right: Previsualización
+
+![proyecto web_FILHOTE SHOP_GDN DEV](https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop/assets/97200944/04b7f6ab-7e0c-4e96-848c-b43856c0ef9e)
