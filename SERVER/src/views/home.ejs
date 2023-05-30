@@ -46,9 +46,11 @@
                                     PRECIO $ <%= product.precio.toLocaleString('es-AR') %>
                                 </div>
                                 <div class="botones">
-                                    <button onclick="location.href='/cart/<%=product.id %>'">
-                                        <span class="material-symbols-outlined">shopping_cart</span>
-                                    </button>
+                                    <form action="/addProduct/<%= product.id  %>" method="post">
+                                        <button class="btnAdmin">
+                                            <span class="material-symbols-outlined">shopping_cart</span>
+                                        </button>
+                                    </form>
                                     <button onclick="location.href='/detail_Product/<%=product.id %>'"><span>Ver Detalle</span></button>
                                 </div>
                           </div>

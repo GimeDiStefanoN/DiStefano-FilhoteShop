@@ -1,0 +1,23 @@
+{"productsCart": [
+  {
+    "id": 1,
+    "idProduct": 4,
+    "nombre": "Jaula para roedores N2",
+    "precio": 11800,
+    "imagen": "/img/productos/jaula_roedor.jpg",
+    "categoria": "EXOTICOS",
+    "stock": 500
+  },
+  {
+    "id": 2,
+    "idProduct": 3,
+    "nombre": "Cepillo Autolimpiante Macostas Perros Gatos",
+    "precio": 2500,
+    "imagen": "/img/productos/cepillo_cardina.jpg",
+    "categoria": [
+      "GATOS",
+      "PERROS"
+    ],
+    "stock": 100
+  }
+]}

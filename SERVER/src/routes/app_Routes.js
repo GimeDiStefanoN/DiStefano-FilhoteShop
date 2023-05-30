@@ -18,7 +18,13 @@ module.exports = function(app){
 
     app.get('/detail_Product/:id', controllers.productView);
 
-    app.get('/cart/:id', controllers.cartView);
+    app.get('/cart', controllers.cartView);
+    
+    // EXTRA
+    app.post('/addProduct/:id', controllers.addProduct);
+    app.post('/deleteProduct/:id', controllers.deleteProduct);
+
+    //
 
     app.get('/contact', controllers.contactView);
 
@@ -119,12 +125,13 @@ module.exports = function(app){
                     })
             ],
             controllers.addUser)
-
+    
+    // EXTRA
     app.post('/deleteUser/:id', controllers.deleteUser)
     app.get('/adminUsers', controllers.adminView);
-
     app.get('/adminUsers/:id', controllers.editUser);
     app.post('/adminUsers/:id', controllers.updateUser)
+    //
 
     app.get('/error', controllers.errorView);
 }

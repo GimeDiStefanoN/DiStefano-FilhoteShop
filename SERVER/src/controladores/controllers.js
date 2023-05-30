@@ -3,13 +3,9 @@ const path = require('path');
 const product = require('../models/product_Models');
 const user = require('../models/user_Models');
 const { validationResult } = require('express-validator');
-const productsFilePath = path.join(__dirname, '../data/database.json');
-const { getUsers, writeUser, reWriteUser, delUsers } = require('../services/userAccess')
+const { getUsers, writeUser, reWriteUser, delUsers } = require('../services/userAccess');
+const { getProducts, writeProduct, getCart, delProd } = require('../services/productAccess');
 
-const getProducts = () =>{
-    const products = fs.readFileSync(productsFilePath, 'utf-8');
-    return JSON.parse(products);
-}
 
 
 // VISTA CATALOGO : PRODUCTOS
@@ -64,19 +60,74 @@ const aboutView = (req,res) => {
 }
 
  // VISTA CART
-
+const contadorIdProduct = 1 //inicio el contador de ID para el carrito en 1
 const cartView = (req,res) =>{ 
     //res.send('Estoy en el Carrito');
     // res.render('cart', {title: 'My cart'})
-    const products = getProducts(); //traigo todos los productos
-    const product = products.find(product => product.id == req.params.id) //busco el q tiene ese id
+    const cart = getCart()
+    const totalPrice = cart.productsCart.reduce((total, product) => total + parseFloat(product.precio), 0);
+
     res.render(path.join(__dirname,'../views/cart.ejs'),
         {
             title: 'Mi Carrito',
-            product
+            cart,
+            product: cart.productsCart,
+            totalPrice: totalPrice
         }
         )
 }
+
+// -EXTRA - AGREGAR PRODUCTO AL CARRITO
+
+const addProduct = (req,res) =>{
+    const products = getProducts(); //traigo todos los productos
+
+    const selectedProductId = parseInt(req.params.id); //obtengo el ID del producto elegido
+    const selectedProduct = products.find(product => product.id === selectedProductId); //lo busco 
+
+    if (!selectedProduct) {
+        // Si hay algun problema, arroja error
+        res.status(404).send("Intentá nuevamente");
+        return;
+      }
+
+      const cart = getCart();
+      
+      const maxID = cart.productsCart.length + 1;  //obtengo el ID del ultimo producto agregado al carrito
+      const newProduct = { //creo el producto dentro del carrito con el ID para el carrito y los datos de la base
+        id: maxID,
+        idProduct: selectedProduct.id,
+        nombre: selectedProduct.nombre,
+        precio: selectedProduct.precio,
+        imagen: selectedProduct.imagen,
+        descripcion: selectedProduct.descripcion,
+        categoria: selectedProduct.categoria,
+        stock: selectedProduct.stock
+      }
+   
+    cart.productsCart.push(newProduct); // Agrego el producto al carrito
+    writeProduct(cart.productsCart); // Guardo el carrito actualizado
+    
+    res.redirect('/cart');
+    
+    console.log('producto agregado ok');
+}
+
+// -EXTRA - ELIMINAR PRODUCTO DEL CARRITO
+
+const deleteProduct = (req,res) =>{
+    const cart = getCart();
+
+    const deleted = cart.productsCart.filter((prod)=>prod.id != req.params.id)
+    
+    delProd(deleted)
+    //actualizarIDs( crear funcion para actualizar ids correctamente)
+
+    res.redirect('/cart');
+    console.log('producto eliminado ok');
+
+}
+
 
  // VISTA CONTACT
 
@@ -247,5 +298,7 @@ module.exports ={
     deleteUser,
     editUser,
     updateUser,
-    loginUser
+    loginUser,
+    addProduct,
+    deleteProduct
 }

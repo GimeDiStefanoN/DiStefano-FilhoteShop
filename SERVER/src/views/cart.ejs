@@ -31,7 +31,8 @@
                 <hr>
             </nav>
         </div>
-
+        
+        <!-- CARRITO DINAMICO -->
         <div class="tablaCarrito">
             <div class="detalleProductos">
                 <div class="title">
@@ -43,9 +44,14 @@
                     </ul>
                 </div>
                 <div class="cadaproductos">
+
+                    <!-- ACA VA EL FOREACH -->
+                    <% cart.productsCart.forEach(function(product) { %>
                     <div class="productoindividual">
                         <div class="eliminar">
-                            <i class="bi bi-trash3"></i>
+                            <form action="/deleteProduct/<%= product.id  %>" method="post">
+                                <button class="btnAdmin"><i class="bi bi-trash3"></i></button>
+                            </form>
                         </div>
                         <div class="elemento">
                             <div class="datosElemento">
@@ -70,33 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="productoindividual">
-                        <div class="eliminar">
-                            <i class="bi bi-trash3"></i>
-                        </div>
-                        <div class="elemento">
-                            <div class="datosElemento">
-                                <div class="imagen">
-                                    <img src="<%= product.imagen %>" alt="">
-                                </div>
-                                <div class="nombre">
-                                    <p><%= product.nombre %></p>
-                                </div>
-                            </div>
-                            <div class="numerosElemento">
-                                <div class="contadorCantidad">
-                                    <button id="menos" type="button">-</button>
-        
-                                    <input type="text" id="contador" class="form-control" value="1" min="1" />
-                  
-                                    <button id="mas" type="button">+</button>
-                                </div>
-                                <div class="valor">
-                                    <p>$ <%= product.precio.toLocaleString('es-AR') %></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% }); %>
                 </div>
                 <div class="btnSeguir">
                     <button onclick="location.href='/products'">Seguir Comprando</button>
@@ -111,7 +91,7 @@
                     <div class="cadaUno">
                         <p>SUBTOTAL</p>
                         <div class="cadaUnoDetalle">
-                            <p>$ <%= product.precio.toLocaleString('es-AR') %></p>
+                            <p>$ <%= totalPrice.toLocaleString('es-AR') %> </p>
                         </div>
                     </div>
                     <div class="linea2"></div>
@@ -130,7 +110,7 @@
                     <div class="cadaUno">
                         <p>TOTAL DE LA COMPRA</p>
                         <div class="cadaUnoDetalle">
-                            <p>$ <%= product.precio.toLocaleString('es-AR') %></p>
+                            <p>$  <%= totalPrice.toLocaleString('es-AR') %> </p>
                         </div>
                     </div>
                 </div>
@@ -140,6 +120,8 @@
             </div>
 
         </div>
+
+        
     </main>
     <footer>
         <%-include('./partials/footer') %>

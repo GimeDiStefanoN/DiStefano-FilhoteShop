@@ -60,10 +60,15 @@
                             </div>
         
                             <div class="comprar">
-                                <button onclick="location.href='/cart/<%=product.id %>'">
-                                    <span class="material-symbols-outlined">
-                                    shopping_cart
-                                    </span></button>
+                                <form action="/addProduct/<%= product.id  %>" method="post">
+                                    <button class="btnAdmin">
+                                        <span class="material-symbols-outlined">shopping_cart</span>
+                                    </button>
+                                </form>
+                                <!-- <button onclick="location.href='/cart/<%=product.id %>'">
+                                        <span class="material-symbols-outlined">
+                                        shopping_cart</span>
+                                    </button> -->
                             </div>
                         </div>
                     </div>

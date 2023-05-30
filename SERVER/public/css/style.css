@@ -185,7 +185,7 @@ h1{
 
 /* OPCIONES BANNER */
  .opcionesBanner{
-    background-color: #dee5d2;
+    background-color: #c5a44b;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -202,11 +202,18 @@ h1{
     justify-content: space-around;
     list-style: none;
 }
-.opcionesBanner ul li a, span, p{
+
+.opcionesBanner ul li a, .opcionesBanner ul li a span,.opcionesBanner ul li a p{
     text-decoration: none;
-    color:black;
+    color:rgb(48, 47, 47);
     text-align: center;
     width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.opcionesBanner ul li a span{
+    font-size: 3rem;
+
 }
 /*CARDS INDEX*/
 .productosHome{
@@ -232,12 +239,22 @@ h1{
 
 .textAbout{
     background-color: #FACE54;
+    line-height: 2;
 }
 .textAbout p, .textAbout ul{
     padding: 2rem;
     font-size: 0.8rem;
 }
 
+.textAbout ul{
+    flex-direction: column;
+}
+.textAbout ul li{
+    width: 100%;
+}
+.textAbout ul ol{
+    padding-inline-start: 10px
+}
 /* SECCION PRODUCTOS */
 .buscador{
     padding: 1rem;
@@ -350,7 +367,6 @@ h1{
     transform: scale(1.4);
 }
 .description, .botonesDetail{
-    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -360,6 +376,7 @@ h1{
 .description .text-black, .description .text-red{
     padding: 1rem 0;
     text-align: center;
+    font-size: 1.5rem;
 }
 
 .botonesDetail{
@@ -368,15 +385,23 @@ h1{
 .cantidad, .comprar{
     width: 90%;
 }
+.cantidad{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .contadorCantidad{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 50px;
 }
 .contadorCantidad input{
     width: 50px;
+    height: 100%;
     
 }
 .contadorCantidad button{
@@ -596,7 +621,9 @@ hr {
     flex-direction: column;
 }
 
-
+.tablaCarrito .contadorCantidad input{
+    height: 50px;
+}
 
 .datosElemento, .numerosElemento{
     display: flex;
@@ -770,15 +797,15 @@ hr {
     padding-bottom: 1rem;
 }
 
-.botones button{
+.botones button, .botones form{
     background-color: #D3FCD5;
     border-radius: 5px;
     border-color: #D3FCD5;
     cursor: pointer;
     height: 30px;
     width: 90%;
-
 }
+
 
 .botones button:hover, .botones button:hover >span{
     color: #BF2F2F;
@@ -1389,7 +1416,7 @@ nav.pasosCompra span.rayaConectora {
     
     .contenedorMaincontacto{
         height: 55%;
-        margin: 5% 30%
+        margin: 5% 15%
     }
 
     .contenedorMainregister{
