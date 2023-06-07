@@ -1,23 +1,31 @@
-{"productsCart": [
-  {
-    "id": 1,
-    "idProduct": 4,
-    "nombre": "Jaula para roedores N2",
-    "precio": 11800,
-    "imagen": "/img/productos/jaula_roedor.jpg",
-    "categoria": "EXOTICOS",
-    "stock": 500
-  },
-  {
-    "id": 2,
-    "idProduct": 3,
-    "nombre": "Cepillo Autolimpiante Macostas Perros Gatos",
-    "precio": 2500,
-    "imagen": "/img/productos/cepillo_cardina.jpg",
-    "categoria": [
-      "GATOS",
-      "PERROS"
-    ],
-    "stock": 100
-  }
-]}
+{
+  "productsCart": [
+    {
+      "id": 1,
+      "idProduct": 2,
+      "nombre": "Alimento Balanceado para Gatos 7.5kg",
+      "precio": 12000,
+      "imagen": "/img/productos/balanceado_Gato.jpg",
+      "categoria": "GATOS",
+      "stock": 40
+    },
+    {
+      "id": 2,
+      "idProduct": 1,
+      "nombre": "Correa Larga para Perros",
+      "precio": 1500,
+      "imagen": "/img/productos/correa_Perro.jpg",
+      "categoria": "PERROS",
+      "stock": 500
+    },
+    {
+      "id": 3,
+      "idProduct": 5,
+      "nombre": "Cucha Moises para Perros",
+      "precio": 10000,
+      "imagen": "/img/productos/moises_Perro.jpg",
+      "categoria": "PERROS",
+      "stock": 30
+    }
+  ]
+}

@@ -24,18 +24,5 @@
     "genero": "femenino",
     "nacimiento": "1988-06-19",
     "telefono": "3510000000"
-  },
-  {
-    "id": 4,
-    "nombre": "juan",
-    "username": "juance2",
-    "password": "741852",
-    "repeatPassword": "741852",
-    "email": "junacito2@gmail.com",
-    "nacimiento": "1940-03-03",
-    "telefono": "1234567890",
-    "pais": "ARGENTINA",
-    "provincia": "LA RIOJA",
-    "genero": "masculino"
   }
 ]}

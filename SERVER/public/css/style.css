@@ -53,9 +53,15 @@ header{
 }
 
 .contenedor-logo img{
-    width: 9.4rem;
-    height: 95%;
+    /* width: 9.4rem;
+    height: 95%; */
     object-fit: scale-down;
+    height: 100px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
 }
 
 
@@ -1056,7 +1062,7 @@ footer .contenedor-footer  .contenedor-logo{
     width: 50%;
 }
 .contenedor-footer{
-    height: 80%;
+    height: 75%;
 }
 
 footer .contenedor-logo img{
@@ -1377,7 +1383,7 @@ nav.pasosCompra span.rayaConectora {
 }
 /*FOOTER*/
     footer .contenedor-logo img{
-        width: 2rem;
+        width: 1.5rem;
         height: 1.5rem;
     }
     .data > ul li {
@@ -1656,7 +1662,7 @@ nav.pasosCompra span.rayaConectora {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        height: 60%;
+        height: 55%;
     }
     footer .contenedor-logo > img{
         padding-top: 0.5rem;
