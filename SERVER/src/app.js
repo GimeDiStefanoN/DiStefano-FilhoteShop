@@ -6,6 +6,9 @@ const routes = require('./routes/app_Routes');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
+const quinceMinutos = 1000 * 60 * 15;
 
 //inicializar express
 
@@ -27,7 +30,13 @@ app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(express.static(publicPath)); //indico que todo lo estatico va estar en la direccion "public" (inicializamos valores y los paso al app)
 app.use(bodyParser.urlencoded({extended: false})); //indico que  vamos a usar bodyparser (inicializamos valores y los paso al app)
-
+app.use(sessions({
+  secret: '123456',
+  saveUninitialized: true,
+  cookie: { maxAge: quinceMinutos },
+  resave: false
+}));
+app.use(cookieParser());
 //creo rutas
 routes(app);
 
@@ -43,3 +52,4 @@ app.use((err, req, res, next) => {
 //inicio servidor
 
 app.listen(PORT, ()=> console.log(`Escuchando en el Puerto ${PORT}!`));
+

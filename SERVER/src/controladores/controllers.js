@@ -1,10 +1,10 @@
-const fs = require('fs');
 const path = require('path');
 const product = require('../models/product_Models');
 const user = require('../models/user_Models');
 const { validationResult } = require('express-validator');
 const { getUsers, writeUser, reWriteUser, delUsers } = require('../services/userAccess');
 const { getProducts, writeProduct, getCart, delProd } = require('../services/productAccess');
+const bcrypt = require('bcrypt');
 
 
 
@@ -60,7 +60,6 @@ const aboutView = (req,res) => {
 }
 
  // VISTA CART
-const contadorIdProduct = 1 //inicio el contador de ID para el carrito en 1
 const cartView = (req,res) =>{ 
     //res.send('Estoy en el Carrito');
     // res.render('cart', {title: 'My cart'})
@@ -165,14 +164,12 @@ const addUser = (req,res, next) => {
         const valoresCapturados = req.body
         const validaciones = errors.array()
         console.log(validaciones);
-        return res.render('register', {title: 'Register FILHOTE SHOP', validaciones, valoresCapturados})
-        // return res.status(422).json({errors: errors}),
-        // console.log(errors)
+        return res.render('register', {
+            title: 'Register FILHOTE SHOP',
+            validaciones,
+            valoresCapturados
+            })
         
-        // const err = {}
-        // err['status'] = 422,
-        // err['message'] = error.array()
-        // return next(err.status)
     } else{
             
         const users =  getUsers();
@@ -183,7 +180,7 @@ const addUser = (req,res, next) => {
             id: newUserId,
             nombre: req.body.nombre,
             username: req.body.username.toLowerCase(),
-            password: req.body.password,
+            password: bcrypt.hashSync(req.body.password, 10),
             repeatPassword: req.body.repeatPassword,
             email: req.body.email.toLowerCase(),
             pais: req.body.pais.toUpperCase(),
