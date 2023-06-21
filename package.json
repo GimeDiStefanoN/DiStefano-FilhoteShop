@@ -16,6 +16,6 @@
   },
   "scripts": {
     "main": "./SERVER/src/app.js",
-    "start": "node ."
+    "start": "nodemon ."
   }
 }
