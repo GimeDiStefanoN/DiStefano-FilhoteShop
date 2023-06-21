@@ -15,7 +15,6 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "main": "./SERVER/src/app.js",
-    "start": "nodemon ."
+    "start": "cd SERVER && cd src && node app.js"
   }
 }
