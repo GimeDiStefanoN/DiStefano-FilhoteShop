@@ -4,6 +4,7 @@ const {check} = require('express-validator');
 const fs = require('fs');
 const path = require('path');
 const usersFilePath = path.join(__dirname, '../data/users.json');
+
 function getUsers() {
     const jsonData = fs.readFileSync(usersFilePath);
     return JSON.parse(jsonData).users;
@@ -30,7 +31,7 @@ module.exports = function(app){
 
     app.get('/login', controllers.loginView);
 
-    app.post('/login', 
+    app.post('/loginUser', 
             [
             check('username')
                 .exists()
@@ -40,10 +41,12 @@ module.exports = function(app){
             check('password')
                 .exists()
                 .trim()
-                .isLength({min: 6})
-                .withMessage('La contraseña debe tener al menos 6 caracteres')
+                .isLength({min: 5})
+                .withMessage('La contraseña debe tener al menos 5 caracteres')
             ], controllers.loginUser)
 
+    app.post('/logOut', controllers.logOut)
+    
     app.get('/register', controllers.registerView);
 
     app.post('/addUser', 

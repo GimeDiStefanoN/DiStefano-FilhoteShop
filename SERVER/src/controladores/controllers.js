@@ -137,14 +137,62 @@ const contactView = (req,res) =>{
 
  // VISTA LOGIN
 
-const loginView = (req,res) => { 
+const loginView = (req,res) =>{ 
     //res.send('Estoy en Login');
-    res.render('login', {title: 'Login FILHOTE SHOP'})
+    const rememberUser = req.body.recordarUs === 'recordarUs'; //determino si esta marcada la casilla
+
+    res.render('login', {
+        title: 'Login FILHOTE SHOP',
+        showModal: false,
+        username: rememberUser ? username : '',
+        rememberUser: rememberUser 
+        
+    })
 }
 //! LOGIN / INICIAR SESION
 
 const loginUser = (req, res) =>{
+    let {username, password} = req.body;
+    const users =  getUsers()
+    const user = users.find((user) => user.username === username.toLowerCase());
+    
+    // validar valores minimos y mostrar mensajes:
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const validaciones = errors.array();
+        return res.render('login', {
+        title: 'Login FILHOTE SHOP',
+        showModal: true,
+        username: req.body.recordarUs === 'recordarUs' ? username : '',
+        rememberUser: req.body.recordarUs === 'recordarUs',
+        validaciones  // Pasar los mensajes de error a la vista
+        });
+    }
+    // Si el usuario existe y la contraseña es correcta, lo redirecciono al catalogo
+    if(user && bcrypt.compareSync(password, user.password)){
+        req.session.username = username
+        //res.send('Bienvenido')
+        req.session.showGreeting = true;
+        res.redirect('/products')
+        console.log('Login OK');
+    }else{ //sino, muestro modal de datos incorrectos
+        //res.send('Usuario o contraseña incorrecto')
+        req.session.showGreeting = false;
+        const rememberUser = req.body.recordarUs === 'recordarUs'; //determino si esta marcada la casilla
+        res.render('login', {
+            title: 'Login FILHOTE SHOP',
+            showModal: true,
+            username: rememberUser ? username : '',
+            rememberUser: rememberUser || req.body.recordarUs === 'recordarUs'
+        })
+        console.log('Login FALLO');
+    };
+}
 
+// CIERRO SESION
+const logOut = (req,res) =>{
+    req.session.destroy(); // Destruye la sesión
+    res.redirect('/login'); // va al login
 }
 
  // VISTA REGISTER
@@ -181,7 +229,7 @@ const addUser = (req,res, next) => {
             nombre: req.body.nombre,
             username: req.body.username.toLowerCase(),
             password: bcrypt.hashSync(req.body.password, 10),
-            repeatPassword: req.body.repeatPassword,
+            //repeatPassword: req.body.repeatPassword,
             email: req.body.email.toLowerCase(),
             pais: req.body.pais.toUpperCase(),
             provincia: req.body.provincia,
@@ -297,5 +345,6 @@ module.exports ={
     updateUser,
     loginUser,
     addProduct,
-    deleteProduct
+    deleteProduct,
+    logOut
 }

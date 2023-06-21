@@ -36,6 +36,10 @@ app.use(sessions({
   cookie: { maxAge: quinceMinutos },
   resave: false
 }));
+app.use(function(req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
 app.use(cookieParser());
 //creo rutas
 routes(app);

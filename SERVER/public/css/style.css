@@ -824,8 +824,41 @@ hr {
     justify-content: center;
     align-items: center;
 }
-  /**/
-  
+
+.greeting{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 2rem;
+    padding-right: 1rem;
+    
+}
+.greeting p, .greeting span{
+    color: #BF2F2F;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Overlock';
+    display: flex;
+    justify-content: end;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.btn_cart{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100%;
+    background-color: #D3FCD5;
+    border-radius: 5px;
+    border-color: #D3FCD5;
+    cursor: pointer;
+}
+.greeting .username {
+    text-transform: capitalize;
+  }
 
 /* FORMS */
 .contenedor-main{

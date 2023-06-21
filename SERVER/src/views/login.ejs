@@ -11,6 +11,27 @@
         <h1>INICIAR SESION</h1>
         <div class="contenedor-main">
             <div class="contenedorMainlogin">
+                
+
+                <!-- MODAL CON ERROR -->
+                <% if (showModal) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Usuario o contraseña incorrecto</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <% } %>
+                <!-- MENSAJES DE ERRORES VALORES MINIMOS -->
+                <% if(typeof validaciones != 'undefined') { %>
+                    <% validaciones.forEach( (validacion => { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><%= validacion.msg %></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                    <% })) %>
+                <% } %>
+
+
+                <!-- FORMULARIO DE LOGIN -->
                 <form class="formlogin" action="loginUser" method="POST">
                     <!-- TITULO DEL FORM -->
                     <h2>Ingresá tus datos</h2>
@@ -20,7 +41,7 @@
                             <label for="username">Nombre de Usuario</label>
                             <div class="inputs">
                                 <i class="bi bi-person"></i>
-                                <input class="inputs_Forms" type="text" id="username" name="username" maxlength="10" required>
+                                <input class="inputs_Forms" type="text" id="username" name="username" maxlength="10" value="<%= username !== '' ? username : '' %>"    required>
                             </div>
                         </div>
         
@@ -42,7 +63,9 @@
                                 type="checkbox"
                                 id="recordarUs"
                                 name="recordarUs"
-                                value="recordarUs"/>   
+                                value="recordarUs"
+                                <% if (rememberUser) { %>checked<% } %>
+                                />   
                         </div>
                         <div class="elemento">
                             <label for="mantenerlogin">Mantenerse Logueado</label>

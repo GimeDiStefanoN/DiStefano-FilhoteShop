@@ -10,6 +10,21 @@
     <main>
         <h1>CATALOGO PRODUCTOS</h1>
         
+        <!-- Aca deberia ir el span que diga "¡Hola! y el username" -->
+        <div class="greeting" <% if (!session.showGreeting) { %>style="display: none;"<% } %>>
+            <p>¡Hola! <span class="username"> <%= session.username %></span></p>
+            <button class="btn_cart" onclick="location.href='/cart'">
+                Mi Carrito --
+                <i class="bi bi-cart3"></i>
+            </button>
+            <form action="logOut" method="post">
+                <button class="btn_cart" >
+                    Cerrar Sesion --
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </form>
+        </div>
+
         <div class="buscador">
             <p>Encontrá tu producto</p>
             <div class="form">
