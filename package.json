@@ -13,5 +13,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "path": "^0.12.7"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
