@@ -118,9 +118,12 @@ const deleteProduct = (req,res) =>{
     const cart = getCart();
 
     const deleted = cart.productsCart.filter((prod)=>prod.id != req.params.id)
-    
-    delProd(deleted)
     //actualizarIDs( crear funcion para actualizar ids correctamente)
+    const listaConIdNew = deleted.map((prod, index) => ({
+        ...prod,
+        id: index + 1,
+      }));
+    delProd(listaConIdNew)
 
     res.redirect('/cart');
     console.log('producto eliminado ok');
@@ -286,7 +289,12 @@ const updateUser = (req,res)=>{
     const deleteUser = (req, res) =>{
         const users =  getUsers();
         const deleted = users.filter((user)=>user.id != req.params.id)
-        delUsers(deleted)
+        // Actualizar los IDs de forma correlativa
+    const listaConIdNew = deleted.map((user, index) => ({
+        ...user,
+        id: index + 1,
+    }));
+    delUsers(listaConIdNew)
 
         res.redirect('/adminUsers');
         

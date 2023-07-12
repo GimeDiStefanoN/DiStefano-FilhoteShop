@@ -1332,11 +1332,7 @@ font-size: 0.4rem;
     padding: auto;
     margin: auto;
   }
-  .containerdataTable .container{
-    justify-content: center;
-    align-items: center;
-    width: auto;
-  }
+ 
   .btnAdmin{
     width: 100%;
   }

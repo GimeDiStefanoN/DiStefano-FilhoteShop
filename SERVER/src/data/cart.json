@@ -10,15 +10,6 @@
   },
   {
     "id": 2,
-    "idProduct": 1,
-    "nombre": "Correa Larga para Perros",
-    "precio": 1500,
-    "imagen": "/img/productos/correa_Perro.jpg",
-    "categoria": "PERROS",
-    "stock": 500
-  },
-  {
-    "id": 3,
     "idProduct": 5,
     "nombre": "Cucha Moises para Perros",
     "precio": 10000,

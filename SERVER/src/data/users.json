@@ -1,30 +1,28 @@
-{
-  "users": [
-    {
-      "id": 1,
-      "nombre": "admin",
-      "username": "admin",
-      "password": "$2b$10$O4Hm9vfC6C1kmPzS8LzKCeY7s8Tz.fUk0ermWmKExk12RSSh88y2S",
-      "repeatPassword": "admin",
-      "email": "admin@admin.com",
-      "pais": "ARGENTINA",
-      "provincia": "CORDOBA",
-      "genero": "otro",
-      "nacimiento": "2000-01-01",
-      "telefono": "0000000000"
-    },
-    {
-      "id": 2,
-      "nombre": "gimena",
-      "username": "gimedn",
-      "password": "$2b$10$OVZ4Pjj3Ij9N1luYF1z/yO8P8kqsUlmavBD/T3l.uFfJvSJa0NxjO",
-      "repeatPassword": "123456",
-      "email": "gimedn@gmail.com",
-      "pais": "ARGENTINA",
-      "provincia": "CORDOBA",
-      "genero": "femenino",
-      "nacimiento": "1988-06-19",
-      "telefono": "3510000000"
-    }
-  ]
-}
+{"users": [
+  {
+    "id": 1,
+    "nombre": "admin",
+    "username": "admin",
+    "password": "$2b$10$O4Hm9vfC6C1kmPzS8LzKCeY7s8Tz.fUk0ermWmKExk12RSSh88y2S",
+    "repeatPassword": "admin",
+    "email": "admin@admin.com",
+    "pais": "ARGENTINA",
+    "provincia": "CORDOBA",
+    "genero": "otro",
+    "nacimiento": "2000-01-01",
+    "telefono": "0000000000"
+  },
+  {
+    "id": 2,
+    "nombre": "gimena",
+    "username": "gimedn",
+    "password": "$2b$10$OVZ4Pjj3Ij9N1luYF1z/yO8P8kqsUlmavBD/T3l.uFfJvSJa0NxjO",
+    "repeatPassword": "123456",
+    "email": "gimedn@gmail.com",
+    "pais": "ARGENTINA",
+    "provincia": "CORDOBA",
+    "genero": "femenino",
+    "nacimiento": "1988-06-19",
+    "telefono": "3510000000"
+  }
+]}
