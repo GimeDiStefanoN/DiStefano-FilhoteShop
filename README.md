@@ -52,7 +52,4 @@ El bocetado de cada wireframe fue realizado utilizando Figma, y se puede ver en 
 ## :point_right: Previsualización
 
 ![proyecto web_FILHOTE SHOP_GDN DEV](https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop/assets/97200944/04b7f6ab-7e0c-4e96-848c-b43856c0ef9e)
-=======
->>>>>>> 57fcdf3 (agrego link FIGMA en readme)
-=======
->>>>>>> 57fcdf3 (agrego link FIGMA en readme)
+
