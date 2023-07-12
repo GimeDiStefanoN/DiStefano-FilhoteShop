@@ -21,7 +21,7 @@ const publicPath = path.join(__dirname, '../public');
 
 //configuro
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs'); //la ingenieria que usamos para las vistas es "ejs"
 app.set('views', viewsPath);
 
@@ -55,5 +55,5 @@ app.use((err, req, res, next) => {
 
 //inicio servidor
 
-app.listen(PORT, ()=> console.log(`Escuchando en el Puerto ${PORT}!`));
+app.listen(PORT, ()=> console.log(`Port runing in http://localhost:${PORT}`));
 

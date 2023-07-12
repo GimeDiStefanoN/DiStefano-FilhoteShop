@@ -1,4 +1,9 @@
 {
+  "name": "Filhote Shop",
+  "version": "1.0.0",
+  "description": "E-commerce para trabajo integrador final de la Diplomatura en Desarrollo Web Full Stack",
+  "main": "index.js",
+  "author": "Gimena Di Stefano Nicolina",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
@@ -14,7 +19,7 @@
     "nodemon": "^2.0.22",
     "path": "^0.12.7"
   },
-  "scripts": {
-    "start": "cd SERVER && cd src && node app.js"
+    "scripts": {
+    
   }
 }
