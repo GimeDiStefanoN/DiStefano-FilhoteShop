@@ -1,0 +1,5 @@
+            ENTREGABLE 9 (BASE DE DATOS)
+
+Creada con MySQL Workbench (en repositorio aparte: https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop-SQL)
+
+Aqui, creación de base de datos usando Sequelize
