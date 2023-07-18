@@ -4,13 +4,10 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Producto extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+      Producto.belongsToMany(models.Categoria, { through: 'Producto_Categoria', foreignKey: 'id_producto' }); /** 1 producto puede pertenecer a varias categoria */
+      Producto.belongsToMany(models.Carrito_Compras, { through: 'Carrito_Producto', foreignKey: 'id_producto' });/** 1 producto puede estar en varios carritos de compra de usuarios diferentes */
     }
   }
   Producto.init({

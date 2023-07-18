@@ -4,13 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Usuario extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
-      // define association here
+      Usuario.hasOne(models.Carrito_Compras, { foreignKey: 'id_usuario' }); /** 1 usuario solo tiene 1 carrito de compras */
     }
   }
   Usuario.init({
@@ -19,10 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     email: DataTypes.STRING,
     direccion: DataTypes.STRING,
-    pais: DataTypes.STRING,
     provincia: DataTypes.STRING,
+    pais: DataTypes.STRING,
     nacimiento: DataTypes.DATE,
-    telefono: DataTypes.STRING
+    telefono: DataTypes.STRING,
+    rol: DataTypes.ENUM('admin', 'customer')
   }, {
     sequelize,
     modelName: 'Usuario',
