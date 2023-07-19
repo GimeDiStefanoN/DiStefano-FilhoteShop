@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Producto extends Model {
 
     static associate(models) {
-      Producto.belongsToMany(models.Categoria, { through: 'Producto_Categoria', foreignKey: 'id_producto' }); /** 1 producto puede pertenecer a varias categoria */
-      Producto.belongsToMany(models.Carrito_Compras, { through: 'Carrito_Producto', foreignKey: 'id_producto' });/** 1 producto puede estar en varios carritos de compra de usuarios diferentes */
+      // Producto.belongsToMany(models.Categoria, { through: 'Producto_Categoria', foreignKey: 'id_producto' }); /** 1 producto puede pertenecer a varias categoria */
+      // Producto.belongsToMany(models.Carrito_Compras, { through: 'Carrito_Producto', foreignKey: 'id_producto' });/** 1 producto puede estar en varios carritos de compra de usuarios diferentes */
     }
   }
   Producto.init({

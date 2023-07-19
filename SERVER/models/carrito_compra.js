@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Carrito_Compras.belongsTo(models.Usuario, { foreignKey: 'id_usuario' }); /** 1 carrito solo tiene 1 usuario */
-      Carrito_Compras.belongsToMany(models.Producto, { through: 'Carrito_Producto', foreignKey: 'id_carrito' });   /** 1 carrito puede tener varios productos */
+      // Carrito_Compras.belongsTo(models.Usuario, { foreignKey: 'id_usuario' }); /** 1 carrito solo tiene 1 usuario */
+      // Carrito_Compras.belongsToMany(models.Producto, { through: 'Carrito_Producto', foreignKey: 'id_carrito' });   /** 1 carrito puede tener varios productos */
      }
   }
   Carrito_Compra.init({

@@ -157,6 +157,7 @@ const loginView = (req,res) =>{
 const loginUser = (req, res) =>{
     let {username, password} = req.body;
     const users =  getUsers()
+    console.log("🚀 ~ file: controllers.js:160 ~ loginUser ~ users:", users)
     const user = users.find((user) => user.username === username.toLowerCase());
     
     // validar valores minimos y mostrar mensajes:
@@ -326,7 +327,8 @@ const errorView = (req,res) =>{
 //vistas para el ADMIN (TODOS LOS USUARIOS)
 const adminView = (req,res) =>{
     const users = getUsers();
-    
+    //res.send(users)
+
     res.render(path.join(__dirname, '../views/admin/all_Users.ejs'),
     {
         title: 'Lista Usuarios',

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Usuario extends Model {
     
     static associate(models) {
-      Usuario.hasOne(models.Carrito_Compras, { foreignKey: 'id_usuario' }); /** 1 usuario solo tiene 1 carrito de compras */
+      // Usuario.hasOne(models.Carrito_Compras, { foreignKey: 'id_usuario' }); /** 1 usuario solo tiene 1 carrito de compras */
     }
   }
   Usuario.init({

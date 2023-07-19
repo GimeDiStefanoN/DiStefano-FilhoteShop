@@ -9,7 +9,19 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const sessions = require('express-session');
 const quinceMinutos = 1000 * 60 * 15;
+const { Sequelize } = require('sequelize');
+const config = require('../config/config.json');
 
+const sequelize = new Sequelize(config.development);
+
+
+sequelize.authenticate()
+  .then(()=>{
+    console.log('CONEXION A BASE DE DATOS OK');
+  })
+  .catch(error =>{
+    console.log('EL ERROR DE CONEXION A LA BD ES '+error);
+  })
 //inicializar express
 
 const app = express();
