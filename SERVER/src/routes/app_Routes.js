@@ -51,10 +51,10 @@ module.exports = function(app){
 
     app.post('/addUser', 
             [
-                check('nombre')
+                check('nombre_completo')
                     .exists()
                     .trim()
-                    .isAlpha()
+                    .matches(/^[A-Za-z0-9\s]+$/)
                     .isLength({min: 3})
                     .withMessage('El Nombre debe tener al menos 3 caracteres alfabéticos'),
                 check('username')

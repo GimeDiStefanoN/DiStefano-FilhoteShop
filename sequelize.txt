@@ -164,3 +164,12 @@ sequelize model:generate --name Detalle_Compra --attributes numero_factura:integ
     agrego mas codigo para que no se dupliquen datos
     
 CONSOLA: sequelize-cli db:seed:all
+
+para borrar todos los registros ingresados en el seed usuario:
+sequelize-cli db:seed:undo --seed 20230719005049-usuarios_seed.js
+
+para reiniciar los id de usuarios (en mysql)
+ALTER TABLE usuarios AUTO_INCREMENT = 1;
+
+para agregar solo el seed usuario:
+sequelize-cli db:seed --seed 20230719005049-usuarios_seed.js

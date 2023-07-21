@@ -5,8 +5,7 @@ const { validationResult } = require('express-validator');
 const { getUsers, writeUser, reWriteUser, delUsers } = require('../services/userAccess');
 const { getProducts, writeProduct, getCart, delProd } = require('../services/productAccess');
 const bcrypt = require('bcrypt');
-
-
+const {Usuario} = require('../../models');
 
 // VISTA CATALOGO : PRODUCTOS
 const productsView = (req,res) =>{
@@ -208,10 +207,53 @@ const registerView = (req,res) =>{
 
 //! REGISTRAR/AGREGAR USUARIO
 
-const addUser = (req,res, next) => {
+// const addUser = (req,res, next) => {
 
+//     const errors = validationResult(req);
+//     if(!errors.isEmpty()){
+//         console.log(req.body);
+//         const valoresCapturados = req.body
+//         const validaciones = errors.array()
+//         console.log(validaciones);
+//         return res.render('register', {
+//             title: 'Register FILHOTE SHOP',
+//             validaciones,
+//             valoresCapturados
+//             })
+        
+//     } else{
+            
+//         const users =  getUsers();
+//         const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
+//         const newUserId = lastUserId + 1;
+
+//         const newUser = {
+//             id: newUserId,
+//             nombre: req.body.nombre,
+//             username: req.body.username.toLowerCase(),
+//             password: bcrypt.hashSync(req.body.password, 10),
+//             //repeatPassword: req.body.repeatPassword,
+//             email: req.body.email.toLowerCase(),
+//             pais: req.body.pais.toUpperCase(),
+//             provincia: req.body.provincia,
+//             genero: req.body.genero,
+//             nacimiento: req.body.nacimiento,
+//             telefono: req.body.telefono
+//         }
+//         users.push(newUser);
+       
+//         writeUser(users) 
+
+//         res.render('register', {
+//           title: 'Register FILHOTE SHOP',
+//           showModal: true
+//         });
+//         console.log('usuario registrado ok');
+//     }
+// }
+const addUser = async (req, res, next) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         console.log(req.body);
         const valoresCapturados = req.body
         const validaciones = errors.array()
@@ -220,86 +262,137 @@ const addUser = (req,res, next) => {
             title: 'Register FILHOTE SHOP',
             validaciones,
             valoresCapturados
-            })
-        
-    } else{
-            
-        const users =  getUsers();
-        const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
-        const newUserId = lastUserId + 1;
-
-        const newUser = {
-            id: newUserId,
-            nombre: req.body.nombre,
-            username: req.body.username.toLowerCase(),
-            password: bcrypt.hashSync(req.body.password, 10),
-            //repeatPassword: req.body.repeatPassword,
-            email: req.body.email.toLowerCase(),
-            pais: req.body.pais.toUpperCase(),
-            provincia: req.body.provincia,
-            genero: req.body.genero,
-            nacimiento: req.body.nacimiento,
-            telefono: req.body.telefono
-        }
-        users.push(newUser);
-       
-        writeUser(users) 
-
-        res.render('register', {
-          title: 'Register FILHOTE SHOP',
-          showModal: true
         });
-        console.log('usuario registrado ok');
-    }
-}
+    } else {
+        try {
+            const lastUser = await Usuario.findOne({
+                order: [['id', 'DESC']],
+            });
 
+            const newUserId = lastUser ? lastUser.id + 1 : 1;
+
+            const userData = {
+                id: newUserId,
+                nombre_completo: req.body.nombre_completo,
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email,
+                direccion: req.body.direccion,
+                provincia: req.body.provincia,
+                pais: req.body.pais,
+                nacimiento: req.body.nacimiento,
+                telefono: req.body.telefono
+            };
+
+            await writeUser(userData);
+
+            res.render('register', {
+                title: 'Register FILHOTE SHOP',
+                showModal: true
+            });
+
+            console.log('usuario registrado ok');
+        } catch (error) {
+            console.error('Error al agregar usuario:', error);
+            // Manejar el error de forma apropiada, por ejemplo, renderizar una página de error o devolver una respuesta de error.
+            res.status(500).send('Error al agregar usuario'+ error.message);
+        }
+    }
+};
 // MODIFICAR USUARIO
- const editUser = (req,res) =>{
-    const users =  getUsers(); //llamo a todos los usuarios
-    const userEdit = users.find((user)=>user.id == req.params.id) //busco el usuario a modificar por id
-    res.render(path.resolve(__dirname, './views/admin/all_Users.ejs'),
-     {
-        users,
-        userEdit: userEdit
-      })
- }
-const updateUser = (req,res)=>{
-        const users =  getUsers(); //llamo a todos los usuarios
-        const user = users.find((user)=>user.id == req.params.id) //busco el usuario a modificar por id
+//  const editUser = (req,res) =>{
+//     const users =  getUsers(); //llamo a todos los usuarios
+//     const userEdit = users.find((user)=>user.id == req.params.id) //busco el usuario a modificar por id
+//     res.render(path.resolve(__dirname, './views/admin/all_Users.ejs'),
+//      {
+//         users,
+//         userEdit: userEdit
+//       })
+//  }
+// const updateUser = (req,res)=>{
+//         const users =  getUsers(); //llamo a todos los usuarios
+//         const user = users.find((user)=>user.id == req.params.id) //busco el usuario a modificar por id
                 
-        //actualizo datos
-        user.nombre = req.body.nombre;
-        user.username = req.body.username.toLowerCase();
-        user.password = req.body.password;
-        user.email = req.body.email.toLowerCase();
-        user.pais = req.body.pais.toUpperCase();
-        user.provincia = req.body.provincia.toUpperCase();
-        user.genero = req.body.genero.toLowerCase();
-        user.nacimiento = req.body.nacimiento;
-        user.telefono = req.body.telefono;
+//         //actualizo datos
+//         user.nombre = req.body.nombre;
+//         user.username = req.body.username.toLowerCase();
+//         user.password = req.body.password;
+//         user.email = req.body.email.toLowerCase();
+//         user.pais = req.body.pais.toUpperCase();
+//         user.provincia = req.body.provincia.toUpperCase();
+//         user.genero = req.body.genero.toLowerCase();
+//         user.nacimiento = req.body.nacimiento;
+//         user.telefono = req.body.telefono;
 
-        //guardo la lista actualizada
-        reWriteUser(users)
+//         //guardo la lista actualizada
+//         reWriteUser(users)
     
-        //redirecciono
-        res.redirect('/adminUsers');
+//         //redirecciono
+//         res.redirect('/adminUsers');
           
+//     }
+const editUser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const userEdit = await Usuario.findByPk(userId);
+  
+      // Lógica para mostrar la vista de edición del usuario (Si es necesario)
+  
+      res.render(path.resolve(__dirname, './views/admin/all_Users.ejs'), {
+        users: [], // Puedes incluir aquí la lista de usuarios si es necesario para la vista
+        userEdit: userEdit,
+      });
+    } catch (error) {
+      console.error('Error al obtener usuario para editar:', error);
+      // Manejar el error de forma apropiada, por ejemplo, renderizar una página de error o devolver una respuesta de error.
+      res.status(500).send('Error al obtener usuario para editar: ' + error.message);
     }
-
+  };
+  
+  const updateUser = async (req, res) => {
+    const userId = req.params.id;
+    const userData = {
+      nombre_completo: req.body.nombre_completo,
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      direccion: req.body.direccion,
+      provincia: req.body.provincia,
+      pais: req.body.pais,
+      nacimiento: req.body.nacimiento,
+      telefono: req.body.telefono,
+    };
+  
+    try {
+      const user = await Usuario.findByPk(userId);
+      if (!user) {
+        // Manejar el caso si el usuario no existe en la base de datos
+        res.status(404).send('Usuario no encontrado');
+        return;
+      }
+      console.log(userData.nacimiento)
+      await user.update(userData);
+      res.redirect('/adminUsers');
+    } catch (error) {
+      console.error('Error al actualizar usuario:', error);
+      // Manejar el error de forma apropiada, por ejemplo, renderizar una página de error o devolver una respuesta de error.
+      res.status(500).send('Error al actualizar usuario: ' + error.message);
+    }
+  };
+  
 // ELIMINAR USUARIO
-    const deleteUser = (req, res) =>{
-        const users =  getUsers();
-        const deleted = users.filter((user)=>user.id != req.params.id)
-        // Actualizar los IDs de forma correlativa
-    const listaConIdNew = deleted.map((user, index) => ({
-        ...user,
-        id: index + 1,
-    }));
-    delUsers(listaConIdNew)
 
-        res.redirect('/adminUsers');
-        
-    }
+    const deleteUser = async (req, res) => {
+        const userId = req.params.id;
+
+        try {
+          await delUsers(userId);
+          res.redirect('/adminUsers');
+        } catch (error) {
+          console.error('Error al eliminar usuario:', error);
+          res.status(500).send('Error al eliminar usuario');
+        }
+    };
 
  // VISTA HOME
 
@@ -325,17 +418,22 @@ const errorView = (req,res) =>{
 }
 
 //vistas para el ADMIN (TODOS LOS USUARIOS)
-const adminView = (req,res) =>{
-    const users = getUsers();
-    //res.send(users)
-
-    res.render(path.join(__dirname, '../views/admin/all_Users.ejs'),
-    {
-        title: 'Lista Usuarios',
-        users,
-        user
+const adminView = async (req,res) =>{
+    try{
+        const users = await getUsers();
+        //res.send(users)
+    
+        res.render(path.join(__dirname, '../views/admin/all_Users.ejs'),
+        {
+            title: 'Lista Usuarios',
+            users,
+            user
+        });
+    } catch (error) {
+        console.error('Error al obtener usuarios:', error);
+        // Handle the error appropriately, e.g., render an error page or return an error response.
+        res.status(500).send('Error al obtener usuarios');
     }
-    )
 }
 
 module.exports ={

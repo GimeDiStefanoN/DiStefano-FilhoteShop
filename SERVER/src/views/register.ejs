@@ -54,10 +54,10 @@
                     <!-- DATOS -->
                     <div class="datosregister">
                         <div class="elemento">
-                            <label for="nombre">Nombre Completo <span>*</span></label>
+                            <label for="nombre_completo">Nombre Completo <span>*</span></label>
                             <div class="inputs">
                                 <i class="bi bi-person"></i>
-                                <input class="inputs_Forms" type="text" id="nombre" name="nombre" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.nombre %> <% } %>">
+                                <input class="inputs_Forms" type="text" id="nombre_completo" name="nombre_completo" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.nombre_completo %> <% } %>">
                             </div>
                         </div>
         
@@ -92,14 +92,12 @@
                                 <input class="inputs_Forms" type="email" id="email" name="email" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.email %> <% } %>">
                             </div>
                         </div>
-        
+                        
                         <div class="elemento">
-                            <label for="pais">Pais</label>
+                            <label for="direccion">Direccion  <span>*</span></label>
                             <div class="inputs">
-                                <select name="pais" id="pais">
-                                    <option disabled="true" selected="true" value="">Seleccionar un pais</option>
-                                    <option value="Argentina">Argentina</option>
-                                </select>
+                                <i class="bi bi-person"></i>
+                                <input class="inputs_Forms" type="text" id="direccion" name="direccion"  value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.direccion %> <% } %>">
                             </div>
                         </div>
     
@@ -135,8 +133,18 @@
                                 </select>
                             </div>
                         </div>
-        
-                        <fieldset>
+                        
+                        <div class="elemento">
+                            <label for="pais">Pais</label>
+                            <div class="inputs">
+                                <select name="pais" id="pais">
+                                    <option disabled="true" selected="true" value="">Seleccionar un pais</option>
+                                    <option value="Argentina">Argentina</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- <fieldset>
                             <legend>Genero</legend>
                             <label>
                                 <input type="radio" name="genero" id="genero" value="femenino"> Femenino
@@ -147,7 +155,7 @@
                             <label>
                                 <input type="radio" name="genero" id="genero" value="otro"> Otro
                             </label>
-                        </fieldset>
+                        </fieldset> -->
         
                         <div class="elemento">
                             <label for="nacimiento">Fecha de Nacimiento  <span>*</span></label>

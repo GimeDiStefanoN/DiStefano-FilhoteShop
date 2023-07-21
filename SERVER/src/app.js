@@ -14,14 +14,9 @@ const config = require('../config/config.json');
 
 const sequelize = new Sequelize(config.development);
 
+process.env.TZ='America/Argentina/Buenos_Aires'
 
-sequelize.authenticate()
-  .then(()=>{
-    console.log('CONEXION A BASE DE DATOS OK');
-  })
-  .catch(error =>{
-    console.log('EL ERROR DE CONEXION A LA BD ES '+error);
-  })
+
 //inicializar express
 
 const app = express();
@@ -64,7 +59,14 @@ app.use((err, req, res, next) => {
       errorNumber: '404'
     });
   });
-
+//autentico sequelize
+sequelize.authenticate()
+  .then(()=>{
+    console.log('CONEXION A BASE DE DATOS OK');
+  })
+  .catch(error =>{
+    console.log('EL ERROR DE CONEXION A LA BD ES '+error);
+  })
 //inicio servidor
 
 app.listen(PORT, ()=> console.log(`Port runing in http://localhost:${PORT}`));

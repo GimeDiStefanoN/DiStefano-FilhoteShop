@@ -9,12 +9,12 @@ const path = require('path');
 //     return userObjetc.users;
 //}
 const {Usuario} = require('../../models');
-console.log("🚀 ~ file: userAccess.js:12 ~ Usuario:", Usuario.findAll)
+const bcrypt = require('bcrypt');
 
+//traer todos usuarios
 const getUsers = async () => {
   try {
     const usuarios = await Usuario.findAll();
-    console.log("🚀 ~ file: userAccess.js:17 ~ getUsers ~ usuarios:", usuarios)
     return usuarios;
   } catch (error) {
     console.error('Error al obtener usuarios:', error);
@@ -22,21 +22,65 @@ const getUsers = async () => {
   }
 };
 
-const writeUser = (users)=>{
-    const userJson = JSON.stringify({users}, null, 2);
-    fs.writeFileSync(path.join(__dirname, '../data/users.json'), userJson)
-}
+//agregar usuario
+// const writeUser = (users)=>{
+//     const userJson = JSON.stringify({users}, null, 2);
+//     fs.writeFileSync(path.join(__dirname, '../data/users.json'), userJson)
+// }
 
-const reWriteUser = (users) =>{
-    const newDatabaseUsers = '{"users": ' + JSON.stringify(users, null, 2) + '}';
-        fs.writeFileSync(path.join(__dirname, '../data/users.json'), newDatabaseUsers);
-}
+const writeUser  = async (userData) => {
+  try {
+    const newUser = {
+      nombre_completo: userData.nombre_completo,
+      username: userData.username.toLowerCase(),
+      password: bcrypt.hashSync(userData.password, 10),
+      email: userData.email.toLowerCase(),
+      direccion: userData.direccion.toLowerCase(),
+      provincia: userData.provincia,
+      pais: userData.pais.toUpperCase(),
+      nacimiento: userData.nacimiento,
+      telefono: userData.telefono
+    };
 
-const delUsers = (deleted) => {
+    return await Usuario.create(newUser);
     
-    const newDatabaseUsers = '{"users": '+ JSON.stringify(deleted, null, 2) +'}'
-    fs.writeFileSync(usersFilePath, newDatabaseUsers)
-}
+  } catch (error) {
+    console.error('Error al agregar usuario:', error);
+    throw error;
+  }
+};
+
+//editar usuario
+// const reWriteUser = (users) =>{
+//     const newDatabaseUsers = '{"users": ' + JSON.stringify(users, null, 2) + '}';
+//         fs.writeFileSync(path.join(__dirname, '../data/users.json'), newDatabaseUsers);
+// }
+
+const reWriteUser = async (users) => {
+  try {
+    // Suponiendo que `users` es un array de objetos que contiene los datos de los usuarios
+    await Usuario.bulkCreate(users, { updateOnDuplicate: ['nombre_completo', 'username', 'password', 'email', 'direccion', 'provincia','pais', 'nacimiento', 'telefono'] });
+
+  } catch (error) {
+    console.error('Error al reescribir usuarios:', error);
+    throw error;
+  }
+};
+
+//eliminar usuario
+
+const delUsers = async (userId) => {
+  try {
+    await Usuario.destroy({
+      where: {
+        id: userId,
+      },
+    });
+  } catch (error) {
+    console.error('Error al eliminar usuario:', error);
+    throw error;
+  }
+};
 
 module.exports = {
     getUsers,

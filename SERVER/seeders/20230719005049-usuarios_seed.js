@@ -21,21 +21,22 @@ module.exports = {
         rol: 'admin',
         createdAt: new Date(),
         updatedAt: new Date(),
-      },
-      {
-        nombre_completo: 'Gimena Di Stefano',
-        username: 'GimeDN',
-        password: '12345',
-        email: 'gimedn@gmail.com',
-        direccion: 'colon 220',
-        provincia: 'CORDOBA',
-        pais: 'Argentina',
-        nacimiento: '1988-06-19',
-        telefono: '0000303456',
-        rol: 'customer',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      }
+      // ,
+      // {
+      //   nombre_completo: 'Gimena Di Stefano',
+      //   username: 'GimeDN',
+      //   password: '12345',
+      //   email: 'gimedn@gmail.com',
+      //   direccion: 'colon 220',
+      //   provincia: 'CORDOBA',
+      //   pais: 'Argentina',
+      //   nacimiento: '1988-06-19',
+      //   telefono: '0000303456',
+      //   rol: 'customer',
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+      // },
     ];
 
     const usersToAddFiltered = usersToAdd.filter(

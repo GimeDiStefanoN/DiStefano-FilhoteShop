@@ -25,24 +25,26 @@
               <td>EMAIL</td>
               <td>PAIS</td>
               <td>PROVINCIA</td>
-              <td>GENERO</td>
+              <td>DIRECCION</td>
               <td>NACIMIENTO</td>
               <td>TELEFONO</td>
+              <td>ROL</td>
               <td>BORRAR</td>
               <td>EDITAR</td>
             </tr>
             <% users.forEach(function(user) { %>
             <tr>
               <td><%= user.id %></td>
-              <td><%= user.nombre %></td>
+              <td><%= user.nombre_completo %></td>
               <td><%= user.username %></td>
               <td><%= user.password %></td>
               <td><%= user.email %></td>
               <td><%= user.pais %></td>
               <td><%= user.provincia %></td>
-              <td><%= user.genero || '' %></td>
-              <td><%= user.nacimiento %></td>
+              <td><%= user.direccion || '' %></td>
+              <td><%= user.nacimiento.toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' }) %></td>
               <td><%= user.telefono %></td>
+              <td><%= user.rol %></td>
               <td>
                 <form action="/deleteUser/<%= user.id  %>" method="post">
                   <button class="btnAdmin"><i class="bi bi-trash3"></i></button>
@@ -71,8 +73,8 @@
             <div class="modal-body">
               <form action="/adminUsers/<%= user.id %>" method="post">
                 <div>
-                  <label for="nombre">Nombre:</label>
-                  <input type="text" name="nombre" value="<%= user.nombre%>">
+                  <label for="nombre_completo">Nombre:</label>
+                  <input type="text" name="nombre_completo" value="<%= user.nombre_completo%>">
                 </div>
                 <div>
                   <label for="nombre">Usuario:</label>
@@ -87,19 +89,20 @@
                   <input type="email" name="email" value="<%= user.email%>">
                 </div>
                 <div>
-                  <label for="nombre">Pais:</label>
-                  <input type="text" name="pais" value="<%= user.pais%>">
+                  <label for="direccion">Direccion:</label>
+                  <input type="text" name="direccion" value="<%= user.direccion%>">
                 </div>
                 <div>
                   <label for="nombre">Provincia:</label>
                   <input type="text" name="provincia" value="<%= user.provincia%>">
                 </div>
                 <div>
-                  <label for="nombre">Genero:</label>
-                  <input type="text" name="genero" value="<%= user.genero%>">
+                  <label for="nombre">Pais:</label>
+                  <input type="text" name="pais" value="<%= user.pais%>">
                 </div>
+                
                 <div>
-                  <label for="nombre">Fecha Nacimiento:</label>
+                  <label for="nacimiento">Fecha Nacimiento:</label>
                   <input type="date" name="nacimiento" value="<%= user.nacimiento%>">
                 </div>
                 <div>
