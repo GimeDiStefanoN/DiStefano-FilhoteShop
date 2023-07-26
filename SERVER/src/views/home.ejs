@@ -33,17 +33,20 @@
                             <div class="card" id="user-<%=product.id %>">
                                 <div class="container">
                                     <i class="bi bi-chevron-left"></i>
-                                    <img src="<%= product.imagen %>" alt="Image 1" class="img_Cards">
+                                    <img src="<%= product.url_imagen_producto %>" alt="Imagen <%= product.nombre_producto %>" class="img_Cards">
                                     <i class="bi bi-chevron-right"></i>
                                 </div>
-                                <div class="text-grey">
-                                    <%= product.categoria %>
-                                </div>
+                                <% product.Categoria.forEach(categoria => { %>
+                                    <div class="text-grey">
+                                        <%= categoria.nombre_categoria %>
+                                    </div>
+                                <% }) %>
+                                
                                 <div class="text-black">
-                                    <%= product.nombre %>
+                                    <%= product.nombre_producto %>
                                 </div>
                                 <div class="text-red">
-                                    PRECIO $ <%= product.precio.toLocaleString('es-AR') %>
+                                    PRECIO $ <%= product.precio_producto.toLocaleString('es-AR') %>
                                 </div>
                                 <div class="botones">
                                     <form action="/addProduct/<%= product.id  %>" method="post">
@@ -53,7 +56,7 @@
                                     </form>
                                     <button onclick="location.href='/detail_Product/<%=product.id %>'"><span>Ver Detalle</span></button>
                                 </div>
-                          </div>
+                            </div>
                         </li>
                     <% }); %>
                 </ul>

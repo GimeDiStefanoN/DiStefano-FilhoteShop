@@ -18,6 +18,16 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      }, 
+      id_detalle_compra: { // Agregamos el nuevo campo id_detalle_compra
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Detalle_Compra', // Asegúrate de que sea el nombre correcto de la tabla detalle_compra en tu base de datos
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       id_producto: {
         type: Sequelize.INTEGER,

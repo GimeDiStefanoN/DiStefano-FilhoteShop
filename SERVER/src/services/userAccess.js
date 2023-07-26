@@ -1,13 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-// const usersFilePath = path.join(__dirname, '../data/users.json');
-
-// const getUsers = () =>{
-//     const users = fs.readFileSync(usersFilePath, 'utf-8');
-//     console.log("🚀 ~ file: userAccess.js:7 ~ getUsers ~ users:", users)
-//     const userObjetc = JSON.parse(users);
-//     return userObjetc.users;
-//}
 const {Usuario} = require('../../models');
 const bcrypt = require('bcrypt');
 
@@ -21,12 +13,6 @@ const getUsers = async () => {
     throw error;
   }
 };
-
-//agregar usuario
-// const writeUser = (users)=>{
-//     const userJson = JSON.stringify({users}, null, 2);
-//     fs.writeFileSync(path.join(__dirname, '../data/users.json'), userJson)
-// }
 
 const writeUser  = async (userData) => {
   try {
@@ -49,12 +35,6 @@ const writeUser  = async (userData) => {
     throw error;
   }
 };
-
-//editar usuario
-// const reWriteUser = (users) =>{
-//     const newDatabaseUsers = '{"users": ' + JSON.stringify(users, null, 2) + '}';
-//         fs.writeFileSync(path.join(__dirname, '../data/users.json'), newDatabaseUsers);
-// }
 
 const reWriteUser = async (users) => {
   try {

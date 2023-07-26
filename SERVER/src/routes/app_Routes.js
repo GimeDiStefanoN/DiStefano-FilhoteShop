@@ -1,14 +1,9 @@
 const controllers = require('../controladores/controllers');
-const {check} = require('express-validator');
+const { check } = require('express-validator');
+const { getUsers } = require('../services/userAccess');
 
-const fs = require('fs');
-const path = require('path');
-const usersFilePath = path.join(__dirname, '../data/users.json');
 
-function getUsers() {
-    const jsonData = fs.readFileSync(usersFilePath);
-    return JSON.parse(jsonData).users;
-  }
+
 
 module.exports = function(app){
     app.get('/', controllers.homeView);
@@ -62,8 +57,8 @@ module.exports = function(app){
                     .trim()
                     .isLength({min: 5})
                     .withMessage('El Usuario debe tener al menos 5 caracteres')
-                    .custom(value => {
-                        const users = getUsers();
+                    .custom(async (value) => {
+                        const users = await getUsers();
                         const existingUser = users.find(user => user.username.toLowerCase() === value.toLowerCase());
                         if (existingUser) {
                             throw new Error('El usuario ya está en uso');
@@ -92,8 +87,8 @@ module.exports = function(app){
                     .isEmail()
                     .normalizeEmail()
                     .withMessage('Debe ser un email válido')
-                    .custom(value => {
-                        const users = getUsers();
+                    .custom(async (value) => {
+                        const users = await getUsers();
                         const existingEmail = users.find(user => user.email === value);
                         if (existingEmail) {
                             throw new Error('El Email ya está registrado');

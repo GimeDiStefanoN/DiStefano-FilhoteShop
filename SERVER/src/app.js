@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const sessions = require('express-session');
-const quinceMinutos = 1000 * 60 * 15;
+const quinceMinutos = 15 * 60 * 1000;
 const { Sequelize } = require('sequelize');
 const config = require('../config/config.json');
 
@@ -40,7 +40,10 @@ app.use(bodyParser.urlencoded({extended: false})); //indico que  vamos a usar bo
 app.use(sessions({
   secret: '123456',
   saveUninitialized: true,
-  cookie: { maxAge: quinceMinutos },
+  cookie: {
+    maxAge: quinceMinutos,
+    domain: 'localhost'
+  },
   resave: false
 }));
 app.use(function(req, res, next) {
