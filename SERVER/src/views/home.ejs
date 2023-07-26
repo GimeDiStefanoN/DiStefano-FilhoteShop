@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('./partials/head') %>
+</head>
+<body>
+    <header>
+        <%-include('./partials/header') %>
+    </header>
+    <main>
+        <div class="contenido">
+            <div class="imgBanner">
+                <img src="/img/banner.jpeg" alt="">
+            </div>
+
+            <div class="opcionesBanner">
+                <ul>
+                    <li><a href=""><span class="material-symbols-outlined">
+                        local_shipping
+                        </span> <p>Envio a Domicilio</p> </a></li>
+                    <li><a href="#openModal1"><span class="material-symbols-outlined">
+                        credit_card
+                        </span><p>Medios de Pago</p> </a></li>
+                    <li><a href=""><span class="material-symbols-outlined">
+                        local_activity
+                        </span><p>Promociones</p></a></li>
+                </ul>
+            </div>
+            <div class="productosHome">
+                <ul class="catalogo">
+                    <% products.forEach(function(product) { %>
+                        <li>
+                            <div class="card" id="user-<%=product.id %>">
+                                <div class="container">
+                                    <i class="bi bi-chevron-left"></i>
+                                    <img src="<%= product.url_imagen_producto %>" alt="Imagen <%= product.nombre_producto %>" class="img_Cards">
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <% product.Categoria.forEach(categoria => { %>
+                                    <div class="text-grey">
+                                        <%= categoria.nombre_categoria %>
+                                    </div>
+                                <% }) %>
+                                
+                                <div class="text-black">
+                                    <%= product.nombre_producto %>
+                                </div>
+                                <div class="text-red">
+                                    PRECIO $ <%= product.precio_producto.toLocaleString('es-AR') %>
+                                </div>
+                                <div class="botones">
+                                    <form action="/addProduct/<%= product.id  %>" method="post">
+                                        <button class="btnAdmin">
+                                            <span class="material-symbols-outlined">shopping_cart</span>
+                                        </button>
+                                    </form>
+                                    <button onclick="location.href='/detail_Product/<%=product.id %>'"><span>Ver Detalle</span></button>
+                                </div>
+                            </div>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+            
+        </div>
+    </main>
+    <footer>
+        <%-include('./partials/footer') %>
+    </footer>
+</body>
+</html>

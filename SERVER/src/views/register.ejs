@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('./partials/head') %>
+</head>
+<body>
+    <header>
+        <%-include('./partials/header') %>
+    </header>
+    <main>
+        <h1>REGISTRATE</h1>
+        <div class="contenedor-main">
+            <div class="contenedorMainregister">
+
+                 <!-- DIV CON ALERTS DE ERRORES -->
+                 <% if(typeof validaciones != 'undefined') { %>
+                    <% validaciones.forEach( (validacion => { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><%= validacion.msg %></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                    <% })) %>
+                <% } %>
+
+                <!-- DIV MODAL REGISTRO EXITOSO -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          ¡Usuario registrado con Éxito!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-user" onclick="location.href='/login'">Iniciar Sesión</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                <% if (typeof showModal !== 'undefined' && showModal) { %>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                          $('#exampleModal').modal('show');
+                        });
+                      </script>
+                <% } %>
+                
+                <!-- FORMULARIO DE REGISTRO -->
+
+                <form class="formregister" action="addUser" method="post">
+                    <!-- TITULO DEL FORM -->
+                    <h2>Completá los datos</h2>
+                    <!-- DATOS -->
+                    <div class="datosregister">
+                        <div class="elemento">
+                            <label for="nombre_completo">Nombre Completo <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-person"></i>
+                                <input class="inputs_Forms" type="text" id="nombre_completo" name="nombre_completo" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.nombre_completo %> <% } %>">
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="username">Nombre de Usuario  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-person"></i>
+                                <input class="inputs_Forms" type="text" id="username" name="username"  value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.username %> <% } %>">
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="password">Contraseña  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-lock"></i>
+                                <input class="inputs_Forms" type="password" id="password" name="password" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.password %> <% } %>">
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="repeatPassword">Repetir Contraseña  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-lock"></i>
+                                <input class="inputs_Forms" type="password" id="repeatPassword" name="repeatPassword" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.repeatPassword %> <% } %>">
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="email">Correo Electrónico <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-envelope"></i>
+                                <input class="inputs_Forms" type="email" id="email" name="email" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.email %> <% } %>">
+                            </div>
+                        </div>
+                        
+                        <div class="elemento">
+                            <label for="direccion">Direccion  <span>*</span></label>
+                            <div class="inputs">
+                                <i class="bi bi-person"></i>
+                                <input class="inputs_Forms" type="text" id="direccion" name="direccion"  value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.direccion %> <% } %>">
+                            </div>
+                        </div>
+    
+                        <div class="elemento">
+                            <label for="provincia">Provincia</label>
+                            <div class="inputs">
+                                <select name="provincia" id="provincia">
+                                    <option disabled="true" selected="true" value="">Seleccionar tu provincia</option>
+                                    <option value="BUENOS AIRES">BUENOS AIRES</option>
+                                    <option value="CATAMARCA">CATAMARCA</option>
+                                    <option value="CHACO">CHACO</option>
+                                    <option value="CHUBUT">CHUBUT</option>
+                                    <option value="CABA">CIUDAD AUTONOMA DE Bs As</option>
+                                    <option value="CORDOBA">CORDOBA</option>
+                                    <option value="CORRIENTES">CORRIENTES</option>
+                                    <option value="ENTRE RIOS">ENTRE RIOS</option>
+                                    <option value="FORMOSA">FORMOSA</option>
+                                    <option value="JUJUY">JUJUY</option>
+                                    <option value="LA PAMPA">LA PAMPA</option>
+                                    <option value="LA RIOJA">LA RIOJA</option>
+                                    <option value="MENDOZA">MENDOZA</option>
+                                    <option value="MISIONES">MISIONES</option>
+                                    <option value="NEUQUEN">NEUQUEN</option>
+                                    <option value="RIO NEGRO">RIO NEGRO</option>
+                                    <option value="SALTA">SALTA</option>
+                                    <option value="SAN JUAN">SAN JUAN</option>
+                                    <option value="SAN LUIS">SAN LUIS</option>
+                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                    <option value="SANTA FE">SANTA FE</option>
+                                    <option value="SANTIAGO DEL ESTERO">SANTIAGO DEL ESTERO</option>
+                                    <option value="TIERRA DEL FUEGO">TIERRA DEL FUEGO</option>
+                                    <option value="TUCUMAN">TUCUMAN</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="elemento">
+                            <label for="pais">Pais</label>
+                            <div class="inputs">
+                                <select name="pais" id="pais">
+                                    <option disabled="true" selected="true" value="">Seleccionar un pais</option>
+                                    <option value="Argentina">Argentina</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- <fieldset>
+                            <legend>Genero</legend>
+                            <label>
+                                <input type="radio" name="genero" id="genero" value="femenino"> Femenino
+                            </label>
+                            <label>
+                                <input type="radio" name="genero" id="genero" value="masculino"> Masculino
+                            </label>
+                            <label>
+                                <input type="radio" name="genero" id="genero" value="otro"> Otro
+                            </label>
+                        </fieldset> -->
+        
+                        <div class="elemento">
+                            <label for="nacimiento">Fecha de Nacimiento  <span>*</span></label>
+                            <div class="inputs">
+                                <input class="inputs_Forms" type="date" name="nacimiento" id="nacimiento" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.nacimiento %> <% } %>">
+                            </div>
+                        </div>
+        
+                        <div class="contenedorPhone">
+                            <div class="elementoPhone">
+                                <label for="telefono">Número de Celular <span>*</span></label>
+                                <div class="inputs">
+                                    <i class="bi bi-telephone"></i>
+                                    <input class="inputs_Forms" type="tel" id="telefono" name="telefono" value="<% if(typeof valoresCapturados != 'undefined') { %> <%= valoresCapturados.telefono %> <% } %>">
+                                </div>
+                            </div>
+                            <small>Formato válido: 351 - 4545454</small>
+                        </div>
+                    </div>
+                    <!-- T&C -->
+                    <div class="checks" id="registerChecks">                
+                        <div class="elemento">
+                            <input
+                                class="inputs_Check"
+                                type="checkbox"
+                                id="aceptTerms"
+                                name="aceptTerms"
+                                
+                            />
+        
+                            <label for="aceptTerms">Acepto los <a href="#" target="_blank">Términos y Condiciones</a>  <span>*</span></label>
+                        </div>
+                    </div>
+                    <!-- BOTONES -->
+                    <div class="buttonsregister">
+                        <button class="resetear" type="reset" >Resetear</button>
+                        <button class="registrar" type="submit">Registrar</button>
+                    </div>
+                    <p class="textButton">Ya tengo Usuario, <a href="/login">Ingresar</a> </p>
+                </form>
+
+                
+                  
+
+                
+
+            </div>   
+        </div>
+    </main>
+    <footer>
+        <%-include('./partials/footer') %>
+    </footer>
+</body>
+</html>
