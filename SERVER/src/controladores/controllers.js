@@ -5,7 +5,7 @@ const { getProducts, writeProduct, getCart, delProd } = require('../services/pro
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const {Usuario} = require('../../models');
-const { Producto, Categoria } = require('../../models');
+const { Producto, Categoria, Carrito_Compra } = require('../../models');
 
 
 // VISTA HOME
@@ -104,26 +104,34 @@ const cartView = (req,res) =>{
 }
 
 // -EXTRA - AGREGAR PRODUCTO AL CARRITO
-const addProduct = async (req, res) => {
-    console.log('Session:', req.session);
 
-    try {
-      // Verificar si el userId está en la sesión
-      if (!req.session.userId) {
-        // Si el userId no está en la sesión, redirigir al inicio de sesión o mostrar un mensaje de error
-        return res.redirect('/login'); // O res.render('login') si tienes una vista de inicio de sesión
-      }
-  
-      const selectedProductId = parseInt(req.params.id);
-      await writeProduct(req.session.userId, selectedProductId);
-      res.redirect('/cart');
-      console.log('Producto agregado al carrito con éxito');
-    } catch (error) {
-      console.error('Error al agregar producto al carrito:', error);
-      res.status(500).send('Error al agregar producto al carrito');
+const addProduct = async (req, res) => {
+  try {
+    // Verificar si el userId está en la sesión
+    if (!req.session.userId) {
+      return res.redirect('/login');
     }
+
+    const selectedProductId = parseInt(req.params.id);
+
+    // Buscar el carrito del usuario en la base de datos
+    let cart = await Carrito_Compra.findOne({ where: { id_usuario: req.session.userId } });
+
+    if (!cart) {
+      // Si no existe un carrito para el usuario, crearlo y asignar el id_producto
+      cart = await Carrito_Compra.create({ id_usuario: req.session.userId, id_producto: selectedProductId });
+    }
+
+    // Llamar a la función del servicio para agregar el producto al carrito
+    await writeProduct(cart, selectedProductId);
+
+    res.redirect('/cart');
+    console.log('Producto agregado al carrito con éxito');
+  } catch (error) {
+    console.error('Error al agregar producto al carrito:', error);
+    res.status(500).send('Error al agregar producto al carrito');
+  }
 };
-  
   
 // const addProduct = (req,res) =>{
 //     const products = getProducts(); //traigo todos los productos

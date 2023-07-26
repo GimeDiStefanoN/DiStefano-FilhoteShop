@@ -19,27 +19,44 @@ const getProducts = async () => {
   };
   
   //agregar productos
-  const writeProduct = async (userId, productId) => {
-    try {
-      // Buscar el carrito del usuario en la base de datos
-      let cart = await Carrito_Compra.findOne({ where: { id_usuario: userId } });
+const writeProduct = async (cart, productId) => {
+  try {
+    // Buscar el producto en la base de datos
+    const product = await Producto.findByPk(productId);
+
+    // Agregar el producto al carrito utilizando la asociación entre Carrito_Compra y Producto
+    await cart.addProducto(product, { through: { cantidad: 1 } });
+  } catch (error) {
+    console.error('Error al agregar producto al carrito:', error);
+    throw error;
+  }
+};
+
+  //   try {
+  //     console.log(' !!!!!! LOG 3');
+  //     // Buscar el carrito del usuario en la base de datos
+  //     let cart = await Carrito_Compra.findOne({ where: { id_usuario: userId } });
+  //     console.log(' !!!!!! LOG 4');
+  //     if (!cart) {
+  //       // Si no existe un carrito para el usuario, crearlo
+  //       console.log(' !!!!!! LOG 5');
+  //       const newCart = await Carrito_Compra.create({ id_usuario: userId, id_prodcuto: productId});
+  //       console.log(' !!!!!! LOG 6');
+  //       cart = newCart;
+  //       console.log(' !!!!!! LOG 7');
+  //     }
   
-      if (!cart) {
-        // Si no existe un carrito para el usuario, crearlo
-        const newCart = await Carrito_Compra.create({ id_usuario: userId });
-        cart = newCart;
-      }
+  //     // Buscar el producto en la base de datos
+  //     const product = await Producto.findByPk(productId);
+  //     console.log(' !!!!!! LOG 8');
   
-      // Buscar el producto en la base de datos
-      const product = await Producto.findByPk(productId);
-  
-      // Agregar el producto al carrito utilizando la asociación entre Carrito_Compra y Producto
-      await cart.addProducto(product, { through: { cantidad: 1 } });
-    } catch (error) {
-      console.error('Error al agregar producto al carrito:', error);
-      throw error;
-    }
-  };
+  //     // Agregar el producto al carrito utilizando la asociación entre Carrito_Compra y Producto
+  //     await cart.addProducto(product, { through: { cantidad: 1 } });
+  //   } catch (error) {
+  //     console.error('Error al agregar producto al carrito:', error);
+  //     throw error;
+  //   }
+  // };
 
     // const writeProduct = (productsCart)=>{
     //     const cartJson = JSON.stringify({productsCart}, null, 2);
