@@ -1,0 +1,1 @@
+// vista en donde se editaran los productos por el admin

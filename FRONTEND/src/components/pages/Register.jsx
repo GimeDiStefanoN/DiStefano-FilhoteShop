@@ -1,0 +1,1 @@
+//vista del form de registro

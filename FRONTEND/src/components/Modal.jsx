@@ -1,0 +1,1 @@
+// diseño de modal, se repite 3 veces en el footer
