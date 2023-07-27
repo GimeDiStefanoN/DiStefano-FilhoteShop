@@ -1,0 +1,20 @@
+{"productsCart": [
+  {
+    "id": 1,
+    "idProduct": 2,
+    "nombre": "Alimento Balanceado para Gatos 7.5kg",
+    "precio": 12000,
+    "imagen": "/img/productos/balanceado_Gato.jpg",
+    "categoria": "GATOS",
+    "stock": 40
+  },
+  {
+    "id": 2,
+    "idProduct": 5,
+    "nombre": "Cucha Moises para Perros",
+    "precio": 10000,
+    "imagen": "/img/productos/moises_Perro.jpg",
+    "categoria": "PERROS",
+    "stock": 30
+  }
+]}

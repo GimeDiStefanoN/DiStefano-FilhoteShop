@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%-include('../partials/head') %>
+</head>
+<body>
+  <div class="adminView">
+    <h1>VISTA DEL ADMINISTRADOR</h1>
+    
+    <div class="containerdataTable">
+      <div class="container table-responsive py-5"> 
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th colspan="12">CONTROL DE USUARIOS</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            <tr>
+              <td>ID</td>
+              <td>NOMBRE</td>
+              <td>USUARIO</td>
+              <td>PASSWORD</td>
+              <td>EMAIL</td>
+              <td>PAIS</td>
+              <td>PROVINCIA</td>
+              <td>DIRECCION</td>
+              <td>NACIMIENTO</td>
+              <td>TELEFONO</td>
+              <td>ROL</td>
+              <td>BORRAR</td>
+              <td>EDITAR</td>
+            </tr>
+            <% users.forEach(function(user) { %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.nombre_completo %></td>
+              <td><%= user.username %></td>
+              <td><%= user.password %></td>
+              <td><%= user.email %></td>
+              <td><%= user.pais %></td>
+              <td><%= user.provincia %></td>
+              <td><%= user.direccion || '' %></td>
+              <td><%= user.nacimiento.toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' }) %></td>
+              <td><%= user.telefono %></td>
+              <td><%= user.rol %></td>
+              <td>
+                <form action="/deleteUser/<%= user.id  %>" method="post">
+                  <button class="btnAdmin"><i class="bi bi-trash3"></i></button>
+                </form>                
+              </td>
+              <td>
+                <form >
+                  <button class="btnAdmin" onclick="location.href='#openModal<%= user.id %>'"><i class="bi bi-pencil"></i></button>
+                </form>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+   <div class="modales">
+    <% users.forEach(function(user) { %>
+
+    <div id="openModal<%= user.id %>" class="modalDialog">
+      <div>
+          <a href="/adminUsers" title="Close" class="close">X</a>
+          <div>
+            <h5 class="modal-title" id="editModalLabel">Editar Usuario</h5>
+            <div class="modal-body">
+              <form action="/adminUsers/<%= user.id %>" method="post">
+                <div>
+                  <label for="nombre_completo">Nombre:</label>
+                  <input type="text" name="nombre_completo" value="<%= user.nombre_completo%>">
+                </div>
+                <div>
+                  <label for="nombre">Usuario:</label>
+                  <input type="text" name="username" value="<%= user.username%>">
+                </div>
+                <div>
+                  <label for="nombre">Contraseña:</label>
+                  <input type="password" name="password" value="<%= user.password%>">
+                </div>
+                <div>
+                  <label for="nombre">Email:</label>
+                  <input type="email" name="email" value="<%= user.email%>">
+                </div>
+                <div>
+                  <label for="direccion">Direccion:</label>
+                  <input type="text" name="direccion" value="<%= user.direccion%>">
+                </div>
+                <div>
+                  <label for="nombre">Provincia:</label>
+                  <input type="text" name="provincia" value="<%= user.provincia%>">
+                </div>
+                <div>
+                  <label for="nombre">Pais:</label>
+                  <input type="text" name="pais" value="<%= user.pais%>">
+                </div>
+                
+                <div>
+                  <label for="nacimiento">Fecha Nacimiento:</label>
+                  <input type="date" name="nacimiento" value="<%= user.nacimiento%>">
+                </div>
+                <div>
+                  <label for="nombre">Telefono:</label>
+                  <input type="tel" name="telefono" value="<%= user.telefono%>">
+                </div>
+                
+                  <button type="submit" class="btnAdmin"><i class="bi bi-save"></i></button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+
+   </div>
+   
+    <button onclick="location.href='/ %>'" class="btn_regresar">Volver a la Web</button>
+  </div>
+ 
+</body>
+</html>

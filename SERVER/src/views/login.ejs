@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('./partials/head') %>
+</head>
+<body>
+    <header>
+        <%-include('./partials/header') %>
+    </header>
+    <main>
+        <h1>INICIAR SESION</h1>
+        <div class="contenedor-main">
+            <div class="contenedorMainlogin">
+                
+
+                <!-- MODAL CON ERROR -->
+                <% if (showModal) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Usuario o contraseña incorrecto</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <% } %>
+                <!-- MENSAJES DE ERRORES VALORES MINIMOS -->
+                <% if(typeof validaciones != 'undefined') { %>
+                    <% validaciones.forEach( (validacion => { %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><%= validacion.msg %></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                    <% })) %>
+                <% } %>
+
+
+                <!-- FORMULARIO DE LOGIN -->
+                <form class="formlogin" action="loginUser" method="POST">
+                    <!-- TITULO DEL FORM -->
+                    <h2>Ingresá tus datos</h2>
+                    <!-- DATOS -->
+                    <div class="datoslogin">
+                        <div class="elemento">
+                            <label for="username">Nombre de Usuario</label>
+                            <div class="inputs">
+                                <i class="bi bi-person"></i>
+                                <input class="inputs_Forms" type="text" id="username" name="username" maxlength="10" value="<%= username !== '' ? username : '' %>"    required>
+                            </div>
+                        </div>
+        
+                        <div class="elemento">
+                            <label for="password">Contraseña</label>
+                            <div class="inputs">
+                                <i class="bi bi-lock"></i>
+                                <input class="inputs_Forms" type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+                        <a href="" id="recuperarPass">¿Olviste tu contraseña?</a>
+                    </div>
+                    <!-- T&C -->
+                    <div class="checks">                
+                        <div class="elemento">
+                            <label for="recordarUs">Recordar Usuario</label>
+                            <input
+                                class="inputs_Check"
+                                type="checkbox"
+                                id="recordarUs"
+                                name="recordarUs"
+                                value="recordarUs"
+                                <% if (rememberUser) { %>checked<% } %>
+                                />   
+                        </div>
+                        <div class="elemento">
+                            <label for="mantenerlogin">Mantenerse Logueado</label>
+                            <input
+                                class="inputs_Check"
+                                type="checkbox"
+                                id="mantenerlogin"
+                                name="mantenerlogin"
+                                value="mantenerlogin"/>   
+                        </div>
+                    </div>
+                    <!-- BOTONES -->
+                    <div class="buttonslogin">
+                        <button class="ingresar" type="submit">Ingresar</button>
+                    </div>
+                    <p class="textButton">No tengo Usuario, <a href="/register">Registrarme</a> </p>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%-include('./partials/footer') %>
+    </footer>
+</body>
+</html>
