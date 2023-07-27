@@ -1,0 +1,1 @@
+//vista de detalle del producto

@@ -1,0 +1,1 @@
+// vista del catalogo de productos con los filtros

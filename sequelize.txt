@@ -1,0 +1,175 @@
+            ENTREGABLE 9 (BASE DE DATOS)
+
+Creada con MySQL Workbench (en repositorio aparte: https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop-SQL)
+
+Aqui, creación de base de datos usando Sequelize
+
+1. Ingreso a la carpeta donde esta el proyecto backend e instale sequelize
+cd SERVER 
+
+2. en terminal creo la base de datos
+npx sequelize-cli db:create
+(si ingreso a MySQL workbench y actualizo aparece la bd)
+
+3. creo los modelos de tablas (se crea el archivo en models y migrations):
+
+sequelize model:generate --name Usuario --attributes nombre_completo:string,username:string,password:string,email:string,direccion:string,provincia:string,pais:string,nacimiento:date,telefono:string,rol:string
+
+sequelize model:generate --name Categoria --attributes nombre_categoria:string
+
+sequelize model:generate --name Producto --attributes nombre_producto:string,detalle_producto:string,precio_producto:decimal,stock_producto:integer,url_imagen_producto:string,id_categoria:integer
+
+sequelize model:generate --name Producto_Categoria --attributes id_producto:integer,id_categoria:integer
+
+sequelize model:generate --name Carrito_Compra --attributes id_usuario:integer,id_producto:integer,nombre_producto:string,precio_producto:decimal,url_imagen_producto:string,cantidad:integer
+
+sequelize model:generate --name Orden_Compra --attributes id_usuario:integer,numero_factura:integer,direccion_envio:string
+
+sequelize model:generate --name Detalle_Compra --attributes numero_factura:integer,id_producto:integer,nombre_producto:string,precio_producto:decimal,cantidad:integer
+
+4. Creo las relaciones entre las tablas (modificando los archivos de models y migrations):
+>> En productos.js 
+        static associate(models) {
+      Producto.belongsToMany(models.Categoria, { through: 'Producto_Categoria', foreignKey: 'id_producto' });
+      Producto.belongsToMany(models.Usuario, { through: models.CarritoCompra, foreignKey: 'id_producto' });
+    }
+>> En categorias.js
+        static associate(models) {
+      Categoria.belongsToMany(models.Producto, { through: 'Producto_Categoria', foreignKey: 'id_categoria' });
+    }
+>> En Producto_Categoria.js
+    static associate(models) {
+      Producto_Categoria.belongsTo(models.Producto, { foreignKey: 'id_producto' });
+      Producto_Categoria.belongsTo(models.Categoria, { foreignKey: 'id_categoria' });
+    }
+
+    y agregue (para mantener la integridad de los datos)
+     await queryInterface.addConstraint('Producto_Categoria', {
+      fields: ['id_producto'],
+      type: 'foreign key',
+      name: 'fk_producto_categoria_producto',
+      references: {
+        table: 'Productos',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    });
+
+    await queryInterface.addConstraint('Producto_Categoria', {
+      fields: ['id_categoria'],
+      type: 'foreign key',
+      name: 'fk_producto_categoria_categoria',
+      references: {
+        table: 'Categorias',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    });
+
+>> En Carrito_Compras.js
+    static associate(models) {
+      Carrito_Compras.belongsTo(models.Usuario, { foreignKey: 'id_usuario' }); /** 1 carrito solo tiene 1 usuario */
+      Carrito_Compras.belongsToMany(models.Producto, { through: 'Carrito_Producto', foreignKey: 'id_carrito' });   /** 1 carrito puede tener varios productos */
+     }
+
+     en el archivo migrate:
+      id_usuario: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Usuarios',
+          key: 'id_usuario'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      id_producto: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Productos',
+          key: 'id_producto'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+
+>> en Orden_Compra.js
+        static associate(models) {
+            Orden_Compra.belongsTo(models.Usuario, { foreignKey: 'id_usuario' }); /** 1 orden solo es de 1 usuario */
+            Orden_Compra.hasOne(models.Detalle_Compra, { foreignKey: 'numero_factura' }); /** 1 orden solo tiene 1 detalle */
+            }
+
+    en el migrate
+        id_usuario: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Usuarios',
+          key: 'id_usuario'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+
+>> En detalle_compra.js
+     static associate(models) {
+      Detalle_Compra.belongsTo(models.Orden_Compra, { foreignKey: 'numero_factura' }); /** 1 detalle tiene 1 num factura */
+      Detalle_Compra.belongsTo(models.Carrito_Compras, { foreignKey: 'id_carrito' }); /** 1 detalle tiene 1 carrito */
+    }
+
+    en el migrate:
+     numero_factura: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Orden_Compras', // Reemplaza 'Orden_Compras' con el nombre real de tu tabla de órdenes de compra
+          key: 'numero_factura'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      id_carrito: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Carrito_Compras', // Reemplaza 'Carrito_Compras' con el nombre real de tu tabla de carritos de compras
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+
+  Hasta aca, en la base de datos (mySQL Workbench) estan las tablas con las relaciones.
+
+  5. Creo archivos en seeders para insertar datos en las tablas:
+
+   CONSOLA:     sequelize-cli seed:generate --name categorias_seed (para insertar categorias)
+
+        y en el arhivo :
+
+        module.exports = {
+        up: async (queryInterface, Sequelize) => {
+          await queryInterface.bulkInsert('Categorias', [
+            { nombre_categoria: 'PERROS', createdAt: new Date(), updatedAt: new Date() },
+            { nombre_categoria: 'GATOS', createdAt: new Date(), updatedAt: new Date() },
+            { nombre_categoria: 'EXOTICOS', createdAt: new Date(), updatedAt: new Date() }
+          ], {});
+        },
+
+        down: async (queryInterface, Sequelize) => {
+          await queryInterface.bulkDelete('Categorias', null, {});
+        }
+      };
+    agrego mas codigo para que no se dupliquen datos
+    
+CONSOLA: sequelize-cli db:seed:all
+
+para borrar todos los registros ingresados en el seed usuario:
+sequelize-cli db:seed:undo --seed 20230719005049-usuarios_seed.js
+
+para reiniciar los id de usuarios (en mysql)
+ALTER TABLE usuarios AUTO_INCREMENT = 1;
+
+para agregar solo el seed usuario:
+sequelize-cli db:seed --seed 20230719005049-usuarios_seed.js

@@ -1,0 +1,1 @@
+//diseño exclusivo de 1 card (q desp se repite en products)
