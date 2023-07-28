@@ -1,3 +1,13 @@
+
+export const Loading = () => {
+  return (
+    <div>
+      <img src="/images/Loading.gif" alt="Loading..." />
+    </div>
+  );
+};
+
+
 // diseño de imagen que aparezca mientras carga la pagina
 //https://cdn.dribbble.com/users/908372/screenshots/4810806/media/e257b384c5429ca1a98bac0bf17cbcb4.gif
 

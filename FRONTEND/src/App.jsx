@@ -1,16 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { RouterProvider } from 'react-router-dom';
+import Router from './routes/Router';
+//import { Loading } from './components/Loading.jsx';
+import { Header } from  '../src/components/partials/Header';
+import { Footer } from '../src/components/partials/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <>
-      <h1>FUTURO PROYECTO REACT FILHOTE SHOP</h1>
+    <Header className="header"></Header>
+    <main>
+      <Router/>
+    </main>
+    <Footer className="footer"></Footer>
     </>
-  )
+  )  
+}
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => router.dispose());
 }
 
-export default App
