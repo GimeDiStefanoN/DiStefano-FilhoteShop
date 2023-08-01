@@ -1,20 +1,42 @@
+import React from 'react';
+import { useState, useEffect } from 'react'
 import './App.css'
-import { RouterProvider } from 'react-router-dom';
-import Router from './routes/Router';
-//import { Loading } from './components/Loading.jsx';
-import { Header } from  '../src/components/partials/Header';
+import { BrowserRouter } from 'react-router-dom';
+import RouterApp from './routes/Router';
+import { Loading } from './components/Loading.jsx';
+import { Header } from '../src/components/partials/Header';
 import { Footer } from '../src/components/partials/Footer';
+import DataProvider from './components/DataContext';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simular un tiempo de carga (por ejemplo, 2 segundos) antes de cambiar el estado para mostrar el contenido
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(loadingTimer);
+    };
+  }, []);
+
+
   return (
     <>
-    <Header className="header"></Header>
-    <main>
-      <Router/>
-    </main>
-    <Footer className="footer"></Footer>
+      <DataProvider>
+        <BrowserRouter>
+          <Header className="header"></Header>
+          <main>
+            {/* aca deberia ir lo que muestre el router */}
+            {isLoading ? <Loading /> : <RouterApp />}
+          </main>
+          <Footer className="footer"></Footer>
+        </BrowserRouter>
+      </DataProvider>
     </>
-  )  
+  )
 }
 if (import.meta.hot) {
   import.meta.hot.dispose(() => router.dispose());

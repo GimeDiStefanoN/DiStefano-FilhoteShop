@@ -25,6 +25,18 @@ img{
     width: 100%;
     height: 100%;
 }
+
+.contenedorLoading{
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+}
+.imgLoading{
+    width: 60%;
+    height: 60%;
+    object-fit: scale-down;
+}
 /*HEADER*/
 
 header{
@@ -35,28 +47,23 @@ header{
     flex-direction: row;
     justify-content: center;
 }
-
+.contenedorHeader{
+    height: 100%;
+}
 .contenedor-logo{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 50%;
-    height: 100%;
+    height: 90%;
 }
 
 .contenedor-logo img{
-    /* width: 9.4rem;
-    height: 95%; */
+    width: 9.4rem;
+    height: 95%;
     object-fit: scale-down;
-    height: 100px;
-    width: 100px;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    border-radius: 50%;
-    background-size: 100% auto;
 }
-
 
 /* menu responsive */
 .main-nav{
@@ -214,6 +221,47 @@ h1{
     font-size: 3rem;
 
 }
+
+/* Carousel Container */
+.carousel {
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    
+  }
+  
+  /* Slides Container */
+  .slides {
+    display: flex;
+    width: 300%; /* Ancho total del carrusel (3 slides x 100%) */
+    animation: slide 20s infinite; /* Duración de la animación y repetición infinita */
+    background-color: antiquewhite;
+  }
+  
+  /* Slides */
+  .slide {
+    flex: 1 0 100%; /* Ajusta el ancho de cada slide para ocupar todo el espacio disponible */
+  }
+  .slide img{
+    width: auto;
+    height: 300px;
+  }
+  /* Animación del Carrusel */
+  @keyframes slide {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    33.33% {
+      transform: translateX(-100%);
+    }
+    66.66% {
+      transform: translateX(-200%);
+    }
+  }
+
+
 /*CARDS INDEX*/
 .productosHome{
     padding: 1rem;
@@ -290,6 +338,33 @@ h1{
   button:hover{
     background: #1565C0;
     color: #ffffff;
+  }
+
+  .filtros{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width:90%;
+    gap:1rem;
+    padding:1rem
+  }
+  .filtros-parte1{
+    width:100%
+  }
+  .filtros-parte1 input{
+    width:100%
+  }
+  .filtros-parte2{
+    display:flex;
+    flex-direction:row;
+    align-items:baseline;
+    justify-content:center;
+    width:100%;
+    gap: 1rem
+  }
+  .filtros-parte2 input{
+    width:80%
   }
 .catalogo{
     display: flex;
@@ -1572,7 +1647,6 @@ nav.pasosCompra span.rayaConectora {
      }
      
      .copy p{
-        padding-top: 0.5rem;
         font-size: 0.8rem;
         }
 
@@ -1619,6 +1693,7 @@ nav.pasosCompra span.rayaConectora {
         display: none;
     }
     .main-menu{
+        display: flex;
         flex-direction: row;
         width: 75%;
         justify-content: flex-end;
@@ -1690,7 +1765,7 @@ nav.pasosCompra span.rayaConectora {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        height: 55%;
+        height: 50%;
     }
     footer .contenedor-logo > img{
         padding-top: 0.5rem;

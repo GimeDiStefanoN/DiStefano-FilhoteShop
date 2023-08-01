@@ -1,7 +1,7 @@
 
+import React from 'react';
 import { Logo } from '../Logo';
-import { Link } from 'react-router-dom';
-
+import Navbar from '../Navbar';
 export const Header = () => {
 
   return (
@@ -18,34 +18,8 @@ export const Header = () => {
             
             <input type="checkbox" name="" id="toggle-menu-checkbox" className="toggle-menu__checkbox"></input>
 
-            <ul className="main-menu" id="main-menu">
-                <li className="main-menu-item">
-                 
-                </li>
-                <li className="main-menu-item">
-                  
-                </li>
-                <li  className="main-menu-item" id="segundomenu">
-                
-                    <ul className="main-menu-item" id="menu-productos">
-                        <li className="main-menu-item">
-                        
-                        </li>
-                        <li className="main-menu-item">
-                       
-                        </li>
-                        <li className="main-menu-item">
-                       
-                        </li>
-                    </ul>
-                </li>
-                <li className="main-menu-item">
-                
-                </li>
-                <li className="main-menu-item">
-               
-                </li>
-            </ul>
+            <Navbar></Navbar>
+          
           </nav>
         </div>
 

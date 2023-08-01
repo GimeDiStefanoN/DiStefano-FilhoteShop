@@ -1,8 +1,8 @@
 
 export const Loading = () => {
   return (
-    <div>
-      <img src="/images/Loading.gif" alt="Loading..." />
+    <div className="contenedorLoading">
+      <img src="/images/Loading.gif" className="imgLoading" alt="Loading..." />
     </div>
   );
 };

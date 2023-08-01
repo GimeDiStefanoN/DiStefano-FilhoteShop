@@ -51,6 +51,25 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(cookieParser());
+
+// Middleware para configurar las cabeceras CORS
+app.use((req, res, next) => {
+  // Permitir solicitudes desde el origen de tu aplicación React
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+
+  // Especificar los métodos HTTP permitidos
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+
+  // Especificar las cabeceras personalizadas permitidas
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // Permitir el uso de cookies en las solicitudes (si es necesario)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Continuar con el siguiente middleware
+  next();
+});
+
 //creo rutas
 routes(app);
 
