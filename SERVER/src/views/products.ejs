@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <%-include('. /partials/head') %>
+    <%-include('./partials/head') %>
 </head>
 
 <body>
     <header>
-        <%-include('. /partials/header') %>
+        <%-include('./partials/header') %>
     </header>
     <main>
         <h1>CATALOGO PRODUCTOS</h1>
@@ -36,6 +36,7 @@
                 <button>Buscar</button>
             </div>
         </div>
+
         <ul class="catalogo">
             <% products.forEach(function(product) { %>
                 <li>
@@ -71,8 +72,8 @@
         </ul>
     </main>
     <footer>
-        <%-include('. /partials/footer') %>
+        <%-include('./partials/footer') %>
     </footer>
 </body>
 
-</html>a
+</html>

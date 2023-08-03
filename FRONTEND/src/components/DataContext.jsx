@@ -7,21 +7,24 @@ export const dataContext = createContext();
 
 const DataProvider = ({children}) =>{
   const [products, setProducts]= useState([]);
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga
 
+  const url= "http://localhost:3000/products";
   useEffect(()=>{
-    fetch('http://localhost:3000/')
-    .then((response) => {
-      console.log("🚀 ~ file: DataContext.jsx:14 ~ useEffect ~ response:", response)
-      return response.json()
+    fetch(url)
+    .then((response) => {return response.json()
     })
     .then((products) => {
-      console.log("🚀 ~ file: DataContext.jsx:16 ~ .then ~ products:", products)
-      return setProducts(products)
-    })
+      return setProducts(products),
+      setLoading(false);
+    }).catch((error) => {
+      console.error(error);
+      setLoading(false); // Actualizar el estado a "false" en caso de error
+    });
   },[])
 
   return(
-    <dataContext.Provider value={{products}}>
+    <dataContext.Provider value={{products, loading}}>
       {children}
     </dataContext.Provider>
   )

@@ -24,38 +24,30 @@ const homeView = async (req,res) =>{
       }
 }
 // VISTA CATALOGO : PRODUCTOS
-const productsView = async (req,res) =>{
-    try {
+const productsView = async (req, res) => {
+  try {
 
-        const products = await getProducts();
-        let filteredProducts = products;
-        if(req.params.category){ //si existe la categoria, me muestra los productos filtrados por categoria
-            filteredProducts = products.filter(product => {
-                return Array.isArray(product.categoria)?
-                product.categoria.includes(req.params.category):
-                product.categoria == req.params.category;
-            });
-        }
-        res.render(path.join(__dirname, '../views/products.ejs'), 
-        {
-            title: 'All Products FILHOTE SHOP',
-            products: filteredProducts
-        });
-    }catch (error) {
-        console.error('Error al obtener productos:', error);
-        res.status(500).send('Error al obtener productos');
-      }
-}
+    const products = await getProducts();
+    res.json(products);
+    res.render(path.join(__dirname, '../views/products.ejs'), {
+      title: 'All Products FILHOTE SHOP',
+      products
+    });
+  } catch (error) {
+    console.error('Error al obtener productos:', error);
+    res.status(500).send('Error al obtener productos');
+  }
+};
+
 
 //! VISTA DETAIL PRODUCT: CADA PRODUCTO
 const productView = async (req,res) =>{ 
     try {
             // res.send('Estoy en Detail Product');
-        const products = await getProducts(); //traigo todos los productos
+    const products = await getProducts(); //traigo todos los productos
     const product = products.find(product => {
         return product.id == req.params.id //busco el q tiene ese id
     })
-     console.log("🚀 ~ file: controllers.js:59 ~ product ~ product:", product)
      // Si el ID no existe > muestro web de error
         if (!product) {
         res.status(404).render('error', {
@@ -66,12 +58,13 @@ const productView = async (req,res) =>{
         return; // Terminar la ejecución del controlador
         }
      // Si el ID si existe > muestro el detalle
+        res.json(product),
         res.render(path.join(__dirname,'../views/Detail_Product.ejs'),
             {
                 title: product.nombre_producto,
                 product
-            }
-            )
+              }
+              )
     }catch (error) {
         console.error('Error al obtener productos:', error);
         res.status(500).send('Error al obtener productos');

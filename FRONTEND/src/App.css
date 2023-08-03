@@ -15,6 +15,19 @@
   --primary: #0B4D24;
   --secondary: #628C72;
 }
+
+/*OTROS COLORES
+
+#BF2F2F > orange golden
+#FACE54 > maize
+#828C84 > grey
+#D3FCD5 > tea green
+#FCFCFC > white
+#85938A > verde agrisado
+#E4EFE8 > mint cream
+*/
+
+
 body{
   background-color: antiquewhite;
   display: flex;
@@ -47,30 +60,35 @@ header{
     flex-direction: row;
     justify-content: center;
 }
-.contenedorHeader{
-    height: 100%;
-}
+
 .contenedor-logo{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 90%;
+    width: 45%;
+    height: 100%;
 }
 
 .contenedor-logo img{
-    width: 9.4rem;
-    height: 95%;
+    /* width: 9.4rem;
+    height: 95%; */
     object-fit: scale-down;
+    height: 100px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
 }
+
 
 /* menu responsive */
 .main-nav{
     display: flex;
 }
 .toggle-menu{
-    width: 50%;
+    width: 40%;
     height: 15vh;
     position: absolute;
     top: 0;
@@ -85,7 +103,6 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
     height: 100%;
 }
 .toggle-menu label i{
@@ -161,8 +178,7 @@ header{
 
 
 main{
-    height: 75vh;
-    overflow: auto;
+    height: 900%;
 }
 h1{
     font-family: Overlock;
@@ -345,7 +361,7 @@ h1{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width:90%;
+    width:100%;
     gap:1rem;
     padding:1rem
   }
@@ -421,7 +437,6 @@ h1{
 .grupoDetail1{
     display: flex;
     flex-direction: column;
-    height: 80%;
 }
 .grupoDetail1 .container i{
     width: 10%;
@@ -447,6 +462,9 @@ h1{
     align-items: center;
     
 }
+.botonesDetail{
+    gap:0.2rem
+}
 .description .text-black, .description .text-red{
     padding: 1rem 0;
     text-align: center;
@@ -455,6 +473,7 @@ h1{
 
 .botonesDetail{
     width: 100%;
+    height:20%
 }
 .cantidad, .comprar{
     width: 90%;
@@ -719,7 +738,11 @@ hr {
     font-size: 1.2rem;
     font-weight: bold;
 }
-
+.stock{
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+}
 .btnSeguir button, .btnFinalizarCompra button{
     background-color: #D3FCD5;
     border-radius: 5px;
@@ -918,7 +941,7 @@ hr {
     justify-content: center;
     align-items: center;
     width: 150px;
-    height: 100%;
+    height: 40px;
     background-color: #D3FCD5;
     border-radius: 5px;
     border-color: #D3FCD5;
@@ -1137,7 +1160,7 @@ fieldset{
 footer{
 height: 10vh;
 background-color: #0B4D24 ;
-position: fixed;
+position: absolute;
 width: 100%;
 }
 
@@ -1673,7 +1696,7 @@ nav.pasosCompra span.rayaConectora {
 }
 
 /* ESCRITORIO */
-@media (min-width: 1199px) {
+@media (min-width: 1000px) {
    
     /* header */
    
@@ -1682,6 +1705,12 @@ nav.pasosCompra span.rayaConectora {
         flex-direction: row;
         gap: 1rem;
         
+    }
+    .contenedorHeader{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
     }
     .contenedor-logo{
         width: 20%;
@@ -1693,13 +1722,12 @@ nav.pasosCompra span.rayaConectora {
         display: none;
     }
     .main-menu{
-        display: flex;
         flex-direction: row;
         width: 75%;
+        height: 7rem;
         justify-content: flex-end;
         gap: 5rem;
-        align-items: baseline;
-        margin-top: 4rem;
+        align-items: center;
         transform: translateX(0);
         background-color: transparent;
 
@@ -1752,8 +1780,15 @@ nav.pasosCompra span.rayaConectora {
     width: 50%;
     height: 100%;
 }
-.grupoDetail1 .description{
+.grupoDetail1{
     justify-content: space-between;
+}
+.description{
+    justify-content: center;
+    gap:2rem
+}
+.botonesDetail{
+    gap:0.8rem
 }
 .grupoDetail2{
     height: 40%;

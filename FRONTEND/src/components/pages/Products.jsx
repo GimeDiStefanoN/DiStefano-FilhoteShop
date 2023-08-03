@@ -1,5 +1,5 @@
 // import React from 'react';
-import Card from '../Card'; 
+ 
 import { useContext } from 'react';
 import { dataContext } from '../DataContext';
 import Busqueda from '../Busqueda';
@@ -12,10 +12,9 @@ import { useState, useEffect } from 'react'
 
 
 const Products = () => {
-   //const { products } = useContext(dataContext);
-   const [products, setProducts] = useState([]);
-
-   const [loading, setLoading] = useState(true);
+  const { products } = useContext(dataContext); // Obtener los datos del contexto
+  const [stateProducts, setStateProducts] = useState(products); 
+  const [loading, setLoading] = useState(true);
   const [buscadorNombre, setBuscadorNombre] = useState("");
   const [filteredProds, setFilteredProds] = useState([]);
   const [hasFilter, sethasFilter] = useState(false)
@@ -42,62 +41,27 @@ const Products = () => {
     const ordenIngresado = e.target.checked
     setBuscadorOrden(ordenIngresado)
   }
+
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-        setFilteredProds(data);
-        setLoading(false);       
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, []);
-  useEffect(() =>{
+    setStateProducts(products);
+    setLoading(false);
+  }, [products]);
 
-    const newProducts = products.filter(product => product.title.toLowerCase().includes(buscadorNombre.toLowerCase()));
-    setFilteredProds([...newProducts]);
-    sethasFilter(buscadorNombre.length > 0);
-  }, [buscadorNombre, products]);
-
-  useEffect(()=>{
-    const newProducts = products.filter(product => product.price >= buscadorPrecio);
-    setFilteredProds([...newProducts]);
-    sethasFilter(buscadorPrecio.length > 0);
-  }, [buscadorPrecio, products])
-
-  useEffect(()=>{
-    const newProducts = products.filter(product => product.category === buscadorCategoria);
-    setFilteredProds([...newProducts]);
-    sethasFilter(buscadorCategoria.length > 0);
-  }, [buscadorCategoria, products])
-
-  useEffect(()=>{
-    if (buscadorOrden) {
-      const newProducts = [...products].sort((a, b) => a.price - b.price);
-      setFilteredProds(newProducts);
-      sethasFilter(true);
-    } else {
-      setFilteredProds([]);
-      sethasFilter(false);
-    }
-  }, [buscadorOrden, products])
-
-  //para que funcionen todos juntos
-
-  const filtrosJuntos = () => {
-    const productosFiltrados = products.filter((product) =>
-      product.title.toLowerCase().includes(buscadorNombre.toLowerCase()) &&
-      product.price >= buscadorPrecio &&
-      (buscadorCategoria.length === 0 || product.category === buscadorCategoria)
+  /////////
+  useEffect(() => {
+    // Filtro general que se aplica cuando cambian los valores de búsqueda
+    const productosFiltrados = stateProducts.filter((product) =>
+      product.nombre_producto.toLowerCase().includes(buscadorNombre.toLowerCase()) &&
+      (buscadorPrecio === "" || product.precio_producto >= parseFloat(buscadorPrecio)) &&
+      (buscadorCategoria === "" || product.Categoria.some((categoria) => categoria.nombre_categoria === buscadorCategoria))
     );
-  
+
+    // Aplicar ordenamiento si está activo
     if (buscadorOrden) {
-      productosFiltrados.sort((a, b) => a.price - b.price);
+      productosFiltrados.sort((a, b) => a.precio_producto - b.precio_producto);
     }
-  
+
+    // Actualizar los productos filtrados y el estado de filtros
     setFilteredProds(productosFiltrados);
     sethasFilter(
       buscadorNombre.length > 0 ||
@@ -105,11 +69,9 @@ const Products = () => {
       buscadorCategoria.length > 0 ||
       buscadorOrden
     );
-  };
-  
-  useEffect(() => {
-    filtrosJuntos();
-  }, [buscadorNombre, buscadorPrecio, buscadorCategoria, buscadorOrden, products]);
+
+    setLoading(false);
+  }, [buscadorNombre, buscadorPrecio, buscadorCategoria, buscadorOrden, stateProducts]);
 
   const resetFiltros = () => {
     setBuscadorNombre("");
@@ -119,7 +81,7 @@ const Products = () => {
   };
 
   return (
-    <main>
+    <div>
       <h1>CATALOGO PRODUCTOS</h1>
 
         {/* Aca deberia ir el span que diga "¡Hola! y el username" */}
@@ -136,20 +98,17 @@ const Products = () => {
 
         <Busqueda
           placeholder='Ingresá un precio mínimo'
-          value ={buscadorPrecio}
           onChange={precioFilter}
         ></Busqueda>
 
         <Desplegable
           placeholder='Elegí una categoria'
-          value ={buscadorCategoria}
-          onChange={categoriaFilter}>
-            
-        </Desplegable>
+          onChange={categoriaFilter}
+          value={buscadorCategoria}
+        ></Desplegable>
 
         <Check
           labelCheck = 'Ordenar por Menor Precio:'
-          value ={buscadorOrden}
           onChange={ordenFilter}
         ></Check>
       </div>
@@ -170,12 +129,12 @@ const Products = () => {
                 <Catalogo products={filteredProds}/>
                 : <p className='msjErrorBusqueda'>No se encontraron elementos filtrados.</p>
               
-              : products.length > 0 ? 
-                  <Catalogo products={products}/>
+              : stateProducts.length > 0 ? 
+                  <Catalogo products={stateProducts}/>
                 : <p className='msjErrorBusqueda'>Inconvenientes al traer datos de API</p>      
           }
         
-    </main>
+    </div>
   );
 };
 

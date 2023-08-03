@@ -1,9 +1,17 @@
-// diseño de modal, se repite 3 veces en el footer
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
 
-export const Modal = () => {
+const Modal = ({ title, content }) => {
   return (
-    <h1>Este es el MODAL</h1>
+    <div className="modales">
+      <div className="modalDialog">
+        <div>
+          <a href="#close" title="Close" className="close">X</a>
+          <h3>{title}</h3>
+          <p>{content}</p>
+        </div>
+      </div>
+    </div>
   );
 };
+
+export default Modal;

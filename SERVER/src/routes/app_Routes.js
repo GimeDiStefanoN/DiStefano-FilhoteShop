@@ -10,7 +10,7 @@ module.exports = function(app){
 
     app.get('/about', controllers.aboutView);
 
-    app.get('/products', controllers.productsView); //la categoria es opcional
+    app.get('/products', controllers.productsView);
 
     app.get('/detail_Product/:id', controllers.productView);
 

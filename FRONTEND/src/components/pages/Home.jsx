@@ -1,12 +1,12 @@
-//vista del home
-// aca traigo del products y banner
-import React from 'react';
+
+//import React from 'react';
 import Card from '../Card';
 import Banner from '../Banner'; 
 import { useContext } from 'react';
 import { dataContext } from '../DataContext';
 
 export const Home = () => {
+  
   const { products } = useContext(dataContext);
   return (
     <>
@@ -39,6 +39,7 @@ export const Home = () => {
               </li>
             </ul>
           </div>
+
           <div className="productosHome">
             <ul className="catalogo">
               {products.map((product) => (

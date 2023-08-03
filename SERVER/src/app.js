@@ -11,7 +11,7 @@ const sessions = require('express-session');
 const quinceMinutos = 15 * 60 * 1000;
 const { Sequelize } = require('sequelize');
 const config = require('../config/config.json');
-
+const cors = require('cors')
 const sequelize = new Sequelize(config.development);
 
 process.env.TZ='America/Argentina/Buenos_Aires'
@@ -51,28 +51,20 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(cookieParser());
+app.use(cors())
 
-// Middleware para configurar las cabeceras CORS
-app.use((req, res, next) => {
-  // Permitir solicitudes desde el origen de tu aplicación React
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
 
-  // Especificar los métodos HTTP permitidos
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 
-  // Especificar las cabeceras personalizadas permitidas
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // Permitir el uso de cookies en las solicitudes (si es necesario)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Continuar con el siguiente middleware
-  next();
-});
-
+//autentico sequelize
+sequelize.authenticate()
+.then(()=>{
+  console.log('CONEXION A BASE DE DATOS OK');
+})
+.catch(error =>{
+  console.log('EL ERROR DE CONEXION A LA BD ES '+error);
+})
 //creo rutas
 routes(app);
-
 // Middleware  de ruta no encontrada (404)
 app.use((err, req, res, next) => {
     res.status(404).render('error', {
@@ -81,14 +73,6 @@ app.use((err, req, res, next) => {
       errorNumber: '404'
     });
   });
-//autentico sequelize
-sequelize.authenticate()
-  .then(()=>{
-    console.log('CONEXION A BASE DE DATOS OK');
-  })
-  .catch(error =>{
-    console.log('EL ERROR DE CONEXION A LA BD ES '+error);
-  })
 //inicio servidor
 
 app.listen(PORT, ()=> console.log(`Port runing in http://localhost:${PORT}`));

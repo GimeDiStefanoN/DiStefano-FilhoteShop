@@ -6,11 +6,11 @@ const { Producto, Categoria, Carrito_Compra } = require('../../models');
 
 
 const getProducts = async () => {
+
     try {
       const products = await Producto.findAll({
         include: Categoria,
       });
-      console.log(' productos services');
       return products;
     } catch (error) {
       console.error('Error al obtener productos:', error);
