@@ -1,12 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  BrowserRouter,
-  Routes
-} from "react-router-dom";
-import { Loading } from '../components/Loading';
+import {  Route, Routes } from "react-router-dom";
 import { Home } from '../components/pages/Home';
 import { About } from '../components/pages/About';
 import  Products  from '../components/pages/Products';
@@ -15,6 +7,7 @@ import { Contact } from '../components/pages/Contact';
 import { Login } from '../components/pages/Login';
 import { Register } from '../components/pages/Register';
 import { Cart } from '../components/pages/Cart';
+import { OrdenCompra } from '../components/pages/OrdenCompra';
 import { Error } from '../components/pages/Error';
 import { AdminUsers } from '../components/admin/AdminUsers';
 import { AdminProducts } from '../components/admin/AdminProducts';
@@ -62,17 +55,22 @@ export const routesConfig = [
     name: 'MI CARRITO'
   },
   {
+    path: '/ordenCompra',
+    component: OrdenCompra,
+    name: 'TU COMPRA'
+  },
+  {
     path: '*',
     component: Error,
     name: 'ERROR'
   },
   {
-    path: '/adminusers',
+    path: '/adminUsers',
     component: AdminUsers,
     name: 'LISTA USUARIOS'
   },
   {
-    path: '/adminproducts',
+    path: '/adminProducts',
     component: AdminProducts,
     name: 'EDICION PRODUCTOS'
   }

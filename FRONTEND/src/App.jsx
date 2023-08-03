@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter } from 'react-router-dom';
@@ -7,6 +6,7 @@ import { Loading } from './components/Loading.jsx';
 import { Header } from '../src/components/partials/Header';
 import { Footer } from '../src/components/partials/Footer';
 import DataProvider from './components/DataContext';
+import UserProvider from './components/UserContext';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,16 +25,18 @@ export default function App() {
 
   return (
     <>
-      <DataProvider>
-        <BrowserRouter>
-          <Header className="header"></Header>
-          <main>
-            {/* aca deberia ir lo que muestre el router */}
-            {isLoading ? <Loading /> : <RouterApp />}
-          </main>
-          <Footer className="footer"></Footer>
-        </BrowserRouter>
-      </DataProvider>
+      <UserProvider>
+        <DataProvider>
+          <BrowserRouter>
+            <Header className="header"/>
+            <main>
+              {isLoading ? <Loading /> : <RouterApp />}
+            </main>
+            <Footer className="footer"/>
+          </BrowserRouter>
+        </DataProvider>
+      </UserProvider>
+
     </>
   )
 }

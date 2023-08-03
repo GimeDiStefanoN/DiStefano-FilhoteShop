@@ -28,7 +28,7 @@ export const Register = () => {
 
   return (
     <>
-      <h1>REGISTRATE</h1>
+      <h1 className="title-page">REGISTRATE</h1>
       <div className="contenedor-main">
         <div className="contenedorMainregister">
           {/* DIV CON ALERTS DE ERRORES */}

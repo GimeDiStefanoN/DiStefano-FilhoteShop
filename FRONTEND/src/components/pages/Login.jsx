@@ -17,7 +17,7 @@ export const Login = () => {
 
   return (
     <div>
-      <h1>INICIAR SESION</h1>
+      <h1 className="title-page">INICIAR SESION</h1>
       <div className="contenedor-main">
         <div className="contenedorMainlogin">
           {/* MODAL CON ERROR */}

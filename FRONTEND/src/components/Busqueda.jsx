@@ -1,4 +1,3 @@
-
 const Busqueda = (props) => {
    
     return (

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { dataContext } from '../DataContext';
 import { useParams } from 'react-router-dom';
 
@@ -8,30 +8,30 @@ export const DetailProduct = () => {
   const { id } = useParams();
 
   const { products } = useContext(dataContext);
-// Busca el producto con el id correspondiente
-const product = products.find((product) => product.id === parseInt(id));  
+  // Busca el producto con el id correspondiente
+  const product = products.find((product) => product.id === parseInt(id));
   if (!product) {
     return <div>Cargando...</div>;
   }
   return (
     <>
-      <h1>DETALLE</h1>
+      <h1 className="title-page">DETALLE</h1>
 
       <div className="main_Detail">
-      
-        {/* <div className="ruta_Product">
-          <Link to="/products">INICIO</Link>
-          <span>/</span>
-          {product.Categoria.map((categoria) => (
-            <React.Fragment key={categoria.id}>
-              {categoria.nombre_categoria}
-              <span>/</span>
-            </React.Fragment>
-          ))}
-          <span>{product.nombre_producto}</span>
-        </div> */}
 
-        <Link to="/products" className="btn_regresar">
+        <div className="ruta_Product">
+          <Link to="/products"> INICIO </Link>
+          <span> <i className="bi bi-chevron-double-right"></i> </span>
+          {product.Categoria.map((categoria, index) => (
+            <div key={index} className="text-grey">
+              {categoria.nombre_categoria}
+            </div>
+          ))}
+          <span> <i className="bi bi-chevron-double-right"></i> </span>
+          <span>{product.nombre_producto}</span>
+        </div>
+
+        <Link to="/products" className="btn_regresar btn_cart text-btn">
           Volver al Catálogo
         </Link>
 
@@ -39,17 +39,17 @@ const product = products.find((product) => product.id === parseInt(id));
           <div className="card_detail">
             <div className="grupoDetail1">
               <div className="container">
-                <i className="bi bi-chevron-left"></i>
+                <i className="bi bi-chevron-left text-white"></i>
                 <img src={product.url_imagen_producto} alt="Image 1" className="img_Cards" />
-                <i className="bi bi-chevron-right"></i>
+                <i className="bi bi-chevron-right text-white"></i>
               </div>
 
-              <div className="description">
-                {/* {product.Categoria.map((categoria, index) => (
+              <div className="description categoriaDetail">
+                {product.Categoria.map((categoria, index) => (
                   <div key={index} className="text-grey">
                     {categoria.nombre_categoria}
                   </div>
-                ))} */}
+                ))}
 
                 <div className="text-black">{product.nombre_producto}</div>
 
@@ -60,8 +60,8 @@ const product = products.find((product) => product.id === parseInt(id));
                 <div className="botonesDetail">
                   <div className="cantidad">
                     <div className='stock'>
-                    <span>CANTIDAD</span>
-                    <span>Quedan {product.stock_producto} unid.</span>
+                      <span>CANTIDAD</span>
+                      <span>Quedan {product.stock_producto} unid.</span>
                     </div>
 
                     <div className="contadorCantidad">
@@ -75,7 +75,7 @@ const product = products.find((product) => product.id === parseInt(id));
 
                   <div className="comprar">
                     <form action={`/addProduct/${product.id}`} method="post">
-                      <Link className="btn_cart btnAdmin" to=''>
+                      <Link className="btn_cart btnAdmin text-btn" to=''>
                         <span className="material-symbols-outlined">shopping_cart</span>
                       </Link>
                     </form>

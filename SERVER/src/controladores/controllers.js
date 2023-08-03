@@ -385,7 +385,7 @@ const adminView = async (req,res) =>{
     try{
         const users = await getUsers();
         //res.send(users)
-    
+        res.json(users)
         res.render(path.join(__dirname, '../views/admin/all_Users.ejs'),
         {
             title: 'Lista Usuarios',

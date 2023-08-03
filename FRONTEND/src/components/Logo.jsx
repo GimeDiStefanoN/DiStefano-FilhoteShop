@@ -1,4 +1,3 @@
-//se repite 2 veces (header y footer)
 
 export const Logo = () => {
   return (

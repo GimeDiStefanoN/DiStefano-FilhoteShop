@@ -1,7 +1,5 @@
-//import React from 'react';
 //import { Link, useLoaderData } from 'react-router-dom';
 import { Logo } from '../Logo';
-//import { NavBar } from '../Navbar';
 
 export const Footer = () => {
   return (

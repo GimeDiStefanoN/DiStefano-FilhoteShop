@@ -1,11 +1,9 @@
 //vista del form de contacto
-import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
 
 export const Contact = () => {
   return (
     <>
-      <h1>CONTACTO</h1>
+      <h1 className="title-page">CONTACTO</h1>
       <div className="contenedor-main">
         <div className="contenedorMaincontacto">
           <form className="formcontacto" action="">

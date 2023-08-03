@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { dataContext } from './DataContext';
 
-// Función para obtener todas las categorías únicas de los productos
+//obtengo las categorias unicas
 const getCategoriasUnicas = (products) => {
   const categoriasUnicas = new Set();
   products.forEach((product) => {

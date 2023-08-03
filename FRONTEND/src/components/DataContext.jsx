@@ -1,5 +1,3 @@
-// aca llamo al fetch
-//https://www.youtube.com/watch?v=uPYfPcMtOvI&ab_channel=onthecode
 
 import { createContext,useState, useEffect } from 'react';
 
@@ -7,7 +5,7 @@ export const dataContext = createContext();
 
 const DataProvider = ({children}) =>{
   const [products, setProducts]= useState([]);
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const [loading, setLoading] = useState(true);
 
   const url= "http://localhost:3000/products";
   useEffect(()=>{
@@ -19,7 +17,7 @@ const DataProvider = ({children}) =>{
       setLoading(false);
     }).catch((error) => {
       console.error(error);
-      setLoading(false); // Actualizar el estado a "false" en caso de error
+      setLoading(false);
     });
   },[])
 

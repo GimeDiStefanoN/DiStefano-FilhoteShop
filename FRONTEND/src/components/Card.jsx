@@ -1,16 +1,13 @@
-//import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Card = ({ product }) => {
   return (
-    
-
     // DATOS PETSHOP
     <div className="card" id={`user-${product.id}`}>
       <div className="container">
-        <i className="bi bi-chevron-left"></i>
+        <i className="bi bi-chevron-left text-white"></i>
         <img src={product.url_imagen_producto} alt="Image 1" className="img_Cards" />
-        <i className="bi bi-chevron-right"></i>
+        <i className="bi bi-chevron-right text-white"></i>
       </div>
       {product.Categoria.map((categoria) => (
         <div className="text-grey" key={categoria.id}>
@@ -20,13 +17,14 @@ const Card = ({ product }) => {
       <div className="text-black">{product.nombre_producto}</div>
       <div className="text-red">PRECIO $ {product.precio_producto.toLocaleString('es-AR')}</div>
       <div className="botones">
-        <form action={`/addProduct/${product.id}`} method="post">
-          <button className="btnAdmin">
-            <span className="material-symbols-outlined">shopping_cart</span>
-          </button>
-        </form>
-        <Link className="btn_cart btnAdmin" to={`/detail_Product/${product.id}`}>
-          <span >Ver Detalle</span>
+        <Link to={`/addProduct/${product.id}`} className="btn_cart btnAdmin text-btn">
+        <span className="material-symbols-outlined">shopping_cart</span>
+        </Link>
+        <Link to="/cart" className="btnAdmin">
+          <span className="btn_cart btnAdmin text-btn">Carrito</span>
+        </Link>
+        <Link className="btn_cart btnAdmin text-btn" to={`/detail_Product/${product.id}`}>
+          <span>Ver Detalle</span>
         </Link>
       </div>
     </div>

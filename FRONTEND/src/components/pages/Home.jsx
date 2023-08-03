@@ -1,5 +1,4 @@
 
-//import React from 'react';
 import Card from '../Card';
 import Banner from '../Banner'; 
 import { useContext } from 'react';
@@ -54,4 +53,3 @@ export const Home = () => {
     </>
   );
 };
-
