@@ -11,7 +11,7 @@ import { OrdenCompra } from '../components/pages/OrdenCompra';
 import { Error } from '../components/pages/Error';
 import { AdminUsers } from '../components/admin/AdminUsers';
 import { AdminProducts } from '../components/admin/AdminProducts';
- 
+import { InicioAdmin } from '../components/admin/InicioAdmin';
 
 export const routesConfig = [
   {
@@ -50,12 +50,12 @@ export const routesConfig = [
     name: 'REGISTRO'
   },
   {
-    path: '/cart',
+    path: '/cart/:id?',
     component: Cart,
     name: 'MI CARRITO'
   },
   {
-    path: '/ordenCompra',
+    path: '/ordenCompra/:id?',
     component: OrdenCompra,
     name: 'TU COMPRA'
   },
@@ -65,14 +65,19 @@ export const routesConfig = [
     name: 'ERROR'
   },
   {
-    path: '/adminUsers',
+    path: '/adminUsers/:id?',
     component: AdminUsers,
     name: 'LISTA USUARIOS'
   },
   {
-    path: '/adminProducts',
+    path: '/adminProducts/:id?',
     component: AdminProducts,
     name: 'EDICION PRODUCTOS'
+  },
+  {
+    path: '/inicioAdmin',
+    component: InicioAdmin,
+    name: 'PORTAL ADMIN'
   }
 ];
 

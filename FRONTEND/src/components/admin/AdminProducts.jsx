@@ -1,18 +1,23 @@
 import { useContext } from 'react';
 import { dataContext } from '../DataContext';
+import { Link } from 'react-router-dom';
 
 export const AdminProducts = () => {
   const { products } = useContext(dataContext);
 
   return (
     <>
-    <h1 className="title-page">ADMINISTRADOR DE PRODUCTOS</h1>
+    
+    <h1 className="title-page">EDICION PRODUCTOS</h1>
 
     <div className="main_Admin main_Admin_prod">
       <div className="containerdataTable">
         <div className="table-responsive">
           <table className="table table-bordered table-hover">
             <thead className="thead-dark">
+              <tr>
+                <th colSpan="12" className='contenedorAddProd'><button><i className="bi bi-plus-circle"></i> Agregar Producto</button></th>
+              </tr>
               <tr>
                 <th colSpan="12">CONTROL DE PRODUCTOS</th>
               </tr>
@@ -65,8 +70,10 @@ export const AdminProducts = () => {
      
 
       <div className="contenedorButtonAdmin">
-          <button onClick={() => location.href = '/'} className="btn_regresar">Volver a la Web</button>
-      </div>
+          <Link to="/inicioAdmin" className="btn_regresar btn_cart text-btn">
+            Volver al Panel Admin
+          </Link>
+        </div>
     </div>
     </>
   );

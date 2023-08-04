@@ -50,3 +50,68 @@ El bocetado de cada wireframe fue realizado utilizando Figma, y se puede ver en 
 ## :point_right: Previsualización
 
 ![proyecto web_FILHOTE SHOP_GDN DEV](https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop/assets/97200944/04b7f6ab-7e0c-4e96-848c-b43856c0ef9e)
+
+## :point_right:  🛠️ Pasos a Seguir
+
+1. Clona el repositorio
+```bash
+git clone https://github.com/GimeDiStefanoN/DiStefano-FilhoteShop
+```
+2. Entrar a la carpeta del proyecto
+```bash
+cd DiStefano-FilhoteShop
+```
+3. Abrir VSC
+```bash
+code .
+```
+4. PARA EL PROYECTO DE NODE.JS y EXPRESS
+   4.1 Abrir otra consola
+      ```bash
+      Control+J
+      ```
+   4.2 Entrar a la carpeta SERVER
+   ```bash
+   cd SERVER
+   ```
+   4.3 Instala dependencias
+   ```bash
+   npm install
+   ```
+   4.4 Configura las migraciones
+   ```bash
+   En la carpeta Config, modificar el password de MYSQL.
+   ```
+   4.5 Ejecuta seeders > Creo base de datos
+   ```bash
+   npx sequelize-cli db:create
+   ```
+   4.6 Ejecuta seeders > Cargo datos en la BD
+   ```bash
+   npx sequelize-cli db:seed:all
+   ```
+   4.7 Ejecuta el proyecto
+   ```bash
+   nodemon src/app.js
+   ```
+   4.8 Abre el link que te proporciona la consola en el Navegador
+   ```bash
+   ejemplo:  http://localhost:3000/
+   ```
+5. PARA EL PROYECTO DE REACT
+   5.1 Entrar a la carpeta Frontend
+   ```bash
+   cd FRONTEND
+   ```
+   5.2 Instala dependencias
+   ```bash
+   npm install
+   ```
+   5.3 Ejecuta el proyecto
+   ```bash
+   npm run dev
+   ```
+   5.4 Abre el link que te proporciona la consola en el Navegador
+   ```bash
+   ejemplo:  http://localhost:5173/
+   ```
