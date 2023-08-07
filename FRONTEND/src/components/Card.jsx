@@ -17,13 +17,11 @@ const Card = ({ product }) => {
       <div className="text-black">{product.nombre_producto}</div>
       <div className="text-red">PRECIO $ {product.precio_producto.toLocaleString('es-AR')}</div>
       <div className="botones">
-        <Link to={`/addProduct/${product.id}`} className="btn_cart btnAdmin text-btn">
+        <Link to={`/addProduct/${product.id}`} className="btn_cart  text-btn">
         <span className="material-symbols-outlined">shopping_cart</span>
         </Link>
-        <Link to="/cart" className="btnAdmin">
-          <span className="btn_cart btnAdmin text-btn">Carrito</span>
-        </Link>
-        <Link className="btn_cart btnAdmin text-btn" to={`/detail_Product/${product.id}`}>
+        
+        <Link className="btn_cart  text-btn" to={`/detail_Product/${product.id}`}>
           <span>Ver Detalle</span>
         </Link>
       </div>

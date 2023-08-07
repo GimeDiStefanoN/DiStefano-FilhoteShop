@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { dataContext } from '../DataContext';
+import { dataContext } from '../../contexts/DataContext';
 import { useParams } from 'react-router-dom';
 
 
@@ -64,13 +64,13 @@ export const DetailProduct = () => {
                       <span>Quedan {product.stock_producto} unid.</span>
                     </div>
 
-                    <div className="contadorCantidad">
+                    {/* <div className="contadorCantidad">
                       <button id="menos" type="button">-</button>
 
                       <input type="text" id="contador" className="form-control" value="1" min="1" />
 
                       <button id="mas" type="button">+</button>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="comprar">

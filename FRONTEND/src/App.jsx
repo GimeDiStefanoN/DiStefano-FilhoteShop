@@ -5,8 +5,8 @@ import RouterApp from './routes/Router';
 import { Loading } from './components/Loading.jsx';
 import { Header } from '../src/components/partials/Header';
 import { Footer } from '../src/components/partials/Footer';
-import DataProvider from './components/DataContext';
-import UserProvider from './components/UserContext';
+import DataProvider from './contexts/DataContext';
+import UserProvider from './contexts/UserContext';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);

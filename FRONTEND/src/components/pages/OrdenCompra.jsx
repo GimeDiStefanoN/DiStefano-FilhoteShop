@@ -1,3 +1,8 @@
+import {DocuPDF} from '../DocuPDF/DocuPDF';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { Link } from 'react-router-dom';
+
+
 export const OrdenCompra = () => {
     // Ejemplo de datos de productos
     const productos = [
@@ -8,6 +13,11 @@ export const OrdenCompra = () => {
     return (
         <>
             <h1 className="title-page">ORDEN DE COMPRA</h1>
+            <div className="btnSeguir">
+              <Link to="/cart">
+                <button>Volver al Carrito</button>
+              </Link>
+            </div>
             <div className="mainOrden">
                 <div className="datosUser">
                     <h5>Datos del Comprador</h5>
@@ -27,6 +37,15 @@ export const OrdenCompra = () => {
                             </tr>         
                         </tbody>
                     </table>
+                </div>
+                <div className="datosEnvio">
+                    <h5>Direccion de Envio</h5>
+                    <div className="contenedorInputs">
+                        <p>direccion</p>
+                        <p>Provincia</p>
+                        <p>Pais</p>
+                    </div>
+                    <p>* El envio solo se realiza a la dirección registrada en tu cuenta <b> ¿Quieres otra dirección?</b> Envianos un mensaje antes de comprar para modificarla</p>
                 </div>
                 <div className="datosCompra">
                     <h5>Datos del Pedido</h5>
@@ -48,6 +67,10 @@ export const OrdenCompra = () => {
                                             <td>$ {producto.precioUnitario}</td>
                                         </tr>
                                     ))}
+                                    <tr>
+                                        <td colSpan="2">Envio</td>
+                                        <td>$ 0</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -57,15 +80,7 @@ export const OrdenCompra = () => {
                         </div>
                     </div>
                 </div>
-                <div className="datosEnvio">
-                    <h5>Direccion de Envio</h5>
-                    <div className="contenedorInputs">
-                        <input type="text" value="direccion" readOnly />
-                        <input type="text" value="Provincia" readOnly />
-                        <input type="text" value="Pais" readOnly />
-                    </div>
-                    <p>* El envio solo se realiza a la dirección registrada en tu cuenta <b> ¿Quieres otra dirección?</b> Envianos un mensaje antes de comprar para modificarla</p>
-                </div>
+               
                 <div className="DatosFilhote">
                     <h5>Datos del Vendedor</h5>
                     <div className="contenidoFilhote">
@@ -79,9 +94,14 @@ export const OrdenCompra = () => {
                         </div>
                     </div>
                 </div>
-                <div className='contenedorBtn'>
-                    <button className="btn_cart btnAdmin">Confirmar Compra</button>
-                </div>
+                {/* <div className='contenedorBtn'>
+                    <button className="btn_cart btnAdmin"></button>
+                </div> */}
+                <div className="contenedorBtn">
+                    <PDFDownloadLink document={<DocuPDF/>} fileName='Compra Filhote Shop' className="btnSeguir">
+                        <button>Confirmar Compra</button>
+                    </PDFDownloadLink>
+            </div>
             </div>
         </>
     )

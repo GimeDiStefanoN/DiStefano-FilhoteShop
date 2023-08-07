@@ -12,6 +12,7 @@ import { Error } from '../components/pages/Error';
 import { AdminUsers } from '../components/admin/AdminUsers';
 import { AdminProducts } from '../components/admin/AdminProducts';
 import { InicioAdmin } from '../components/admin/InicioAdmin';
+import Logout from "../components/Logout";
 
 export const routesConfig = [
   {
@@ -78,6 +79,11 @@ export const routesConfig = [
     path: '/inicioAdmin',
     component: InicioAdmin,
     name: 'PORTAL ADMIN'
+  },
+  {
+    path: '/logout',
+    component: Logout,
+    
   }
 ];
 

@@ -4,22 +4,23 @@ const express = require('express');
 const path = require('path');
 const routes = require('./routes/app_Routes');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
-const sessions = require('express-session');
+const session = require('express-session');
 const quinceMinutos = 15 * 60 * 1000;
 const { Sequelize } = require('sequelize');
 const config = require('../config/config.json');
-const cors = require('cors')
+const morgan = require('morgan');
 const sequelize = new Sequelize(config.development);
-
-process.env.TZ='America/Argentina/Buenos_Aires'
+const cors = require('cors')
 
 
 //inicializar express
 
 const app = express();
+
+app.use(express.json());
+app.use(cors())
+app.use(cookieParser());
 
 //configuro archivos estaticos
 
@@ -34,10 +35,11 @@ app.set('views', viewsPath);
 
 //defino rutas
 app.use(morgan('dev'));
-app.use(methodOverride());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(publicPath)); //indico que todo lo estatico va estar en la direccion "public" (inicializamos valores y los paso al app)
-app.use(bodyParser.urlencoded({extended: false})); //indico que  vamos a usar bodyparser (inicializamos valores y los paso al app)
-app.use(sessions({
+
+
+app.use(session({
   secret: '123456',
   saveUninitialized: true,
   cookie: {
@@ -50,10 +52,6 @@ app.use(function(req, res, next) {
   res.locals.session = req.session;
   next();
 });
-app.use(cookieParser());
-app.use(cors())
-
-
 
 //autentico sequelize
 sequelize.authenticate()

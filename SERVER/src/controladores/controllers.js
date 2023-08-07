@@ -28,7 +28,7 @@ const productsView = async (req, res) => {
   try {
 
     const products = await getProducts();
-    res.json(products);
+    res.send(products);
     res.render(path.join(__dirname, '../views/products.ejs'), {
       title: 'All Products FILHOTE SHOP',
       products
@@ -81,8 +81,6 @@ const aboutView = (req,res) => {
 
  // VISTA CART
 const cartView = (req,res) =>{ 
-    //res.send('Estoy en el Carrito');
-    // res.render('cart', {title: 'My cart'})
     const cart = getCart()
     const totalPrice = cart.productsCart.reduce((total, product) => total + parseFloat(product.precio), 0);
 
@@ -189,7 +187,6 @@ const contactView = (req,res) =>{
  // VISTA LOGIN
 
 const loginView = (req,res) =>{ 
-    //res.send('Estoy en Login');
     const rememberUser = req.body.recordarUs === 'recordarUs'; //determino si esta marcada la casilla
 
     res.render('login', {
@@ -204,25 +201,21 @@ const loginView = (req,res) =>{
 
 const loginUser = async (req, res) =>{
     const {username, password} = req.body;
-
+    console.log("🚀 ~ file: controllers.js:207 ~ loginUser ~ password:", password)
+    console.log("🚀 ~ file: controllers.js:207 ~ loginUser ~ username:", username)
+  
     try{// Validar valores mínimos y mostrar mensajes:
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           const validaciones = errors.array();
-          return res.render('login', {
-            title: 'Login FILHOTE SHOP',
-            showModal: true,
-            username: req.body.recordarUs === 'recordarUs' ? username : '',
-            rememberUser: req.body.recordarUs === 'recordarUs',
-            validaciones, // Pasar los mensajes de error a la vista
-          });
+          return res.status(422).json({ validaciones });
         }
     
         // Buscar el usuario en la base de datos usando Sequelize
         const user = await Usuario.findOne({ where: { username: username.toLowerCase() } });
     
         // Si el usuario existe y la contraseña es correcta, lo redirecciono al catálogo
-        if (user && bcrypt.compareSync(password, user.password)) {
+        if (user && await bcrypt.compare(password, user.password)) {
             res.cookie('username', username, {
                 maxAge: 15 * 60 * 1000, // Caduca después de 15 minutos
                 httpOnly: true, // La cookie solo se puede leer desde el servidor
@@ -230,30 +223,23 @@ const loginUser = async (req, res) =>{
         req.session.userId = user.id; // Almacena el ID del usuario en la sesión
           req.session.username = username;
           req.session.showGreeting = true;
-          res.redirect('/products');
-          console.log('Login OK');
+          return res.status(200).json(user);
         } else {
           // Si el usuario o la contraseña son incorrectos, muestro modal de datos incorrectos
           req.session.showGreeting = false;
           const rememberUser = req.body.recordarUs === 'recordarUs'; // Determino si está marcada la casilla
-          res.render('login', {
-            title: 'Login FILHOTE SHOP',
-            showModal: true,
-            username: rememberUser ? username : '',
-            rememberUser: rememberUser || req.body.recordarUs === 'recordarUs',
-          });
-          console.log('Login FALLO');
+          return res.status(422).json({ validaciones: [{ msg: 'Usuario o contraseña incorrectos' }] });
         }
-
     }catch (error) {
     console.error('Error al iniciar sesión:', error);
-    res.status(500).send('Error al iniciar sesión');
+    return res.status(500).json({ error: 'Error al iniciar sesión' });
   }
 }
 
 // CIERRO SESION
 const logOut = (req,res) =>{
     req.session.destroy(); // Destruye la sesión
+    res.clearCookie('nuevo');
     res.redirect('/login'); // va al login
 }
 
@@ -271,11 +257,12 @@ const addUser = async (req, res, next) => {
     if (!errors.isEmpty()) {
         const validaciones = errors.array()
         const valoresCapturados = req.body
-        return res.render('register', {
-            title: 'Register FILHOTE SHOP',
-            validaciones,
-            valoresCapturados
-        });
+        return res.status(422).json({
+          error: true,
+          message: 'Error de validación',
+          validaciones,
+          valoresCapturados,
+      });
     } else {
         try {
             const lastUser = await Usuario.findOne({
@@ -299,16 +286,19 @@ const addUser = async (req, res, next) => {
 
             await writeUser(userData);
 
-            res.render('register', {
-                title: 'Register FILHOTE SHOP',
-                showModal: true
-            });
-
-            console.log('usuario registrado ok');
+            res.status(201).json({
+              error: false,
+              message: 'Usuario registrado exitosamente',
+              userData,
+          });
         } catch (error) {
             console.error('Error al agregar usuario:', error);
             // Manejar el error de forma apropiada, por ejemplo, renderizar una página de error o devolver una respuesta de error.
-            res.status(500).send('Error al agregar usuario'+ error.message);
+            res.status(500).json({
+              error: true,
+              message: 'Error al agregar usuario',
+              errorMessage: error.message,
+          });
         }
     }
 };
@@ -375,9 +365,6 @@ const editUser = async (req, res) => {
           res.status(500).send('Error al eliminar usuario');
         }
     };
-
- 
-
 
 
 //vistas para el ADMIN (TODOS LOS USUARIOS)

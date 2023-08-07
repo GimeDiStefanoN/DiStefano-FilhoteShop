@@ -64,8 +64,8 @@ const writeProduct = async (cart, productId) => {
     // }
 
 
-//traer productos del carrito
 
+//mostrar carrito
 const getCart = async (userId) => {
   try {
     const cart = await Carrito_Compra.findOne({
@@ -83,6 +83,7 @@ const getCart = async (userId) => {
 //     const cart = fs.readFileSync(cartFilePath, 'utf-8');
 //     return JSON.parse(cart);
 //   };
+
 //eliminar productos
 const delProd = (deleted) => {
 

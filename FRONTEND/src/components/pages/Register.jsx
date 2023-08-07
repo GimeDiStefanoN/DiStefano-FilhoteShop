@@ -1,6 +1,5 @@
-//vista del form de registro
-import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 export const Register = () => {
@@ -20,10 +19,27 @@ export const Register = () => {
     aceptTerms: false,
   });
 
-  const handleRegisterSubmit = (event) => {
+  const handleRegisterSubmit = async (event) => {
     event.preventDefault();
-    // Aquí puedes manejar la lógica de registro, enviar los datos al servidor, etc.
-    // Por ejemplo, puedes hacer una solicitud POST a tu API con los datos del formulario.
+    try {
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(valoresCapturados),
+      });
+
+      const data = await response.json();
+      if (data.error) {
+        setValidaciones(data.validaciones);
+      } else {
+        setShowModal(true);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (

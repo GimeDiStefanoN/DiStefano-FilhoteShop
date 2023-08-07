@@ -2,7 +2,7 @@
 import Card from '../Card';
 import Banner from '../Banner'; 
 import { useContext } from 'react';
-import { dataContext } from '../DataContext';
+import { dataContext } from '../../contexts/DataContext';
 
 export const Home = () => {
   

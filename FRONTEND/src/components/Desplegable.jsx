@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { dataContext } from './DataContext';
+import { dataContext } from '../contexts/DataContext';
 
 //obtengo las categorias unicas
 const getCategoriasUnicas = (products) => {

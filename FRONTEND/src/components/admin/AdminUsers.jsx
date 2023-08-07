@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';

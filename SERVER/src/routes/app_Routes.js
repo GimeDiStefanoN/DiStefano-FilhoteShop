@@ -2,9 +2,6 @@ const controllers = require('../controladores/controllers');
 const { check } = require('express-validator');
 const { getUsers } = require('../services/userAccess');
 
-
-
-
 module.exports = function(app){
     app.get('/', controllers.homeView);
 
@@ -32,12 +29,7 @@ module.exports = function(app){
                 .exists()
                 .trim()
                 .isLength({min: 5})
-                .withMessage('El Usuario debe tener al menos 5 caracteres'),
-            check('password')
-                .exists()
-                .trim()
-                .isLength({min: 5})
-                .withMessage('La contraseña debe tener al menos 5 caracteres')
+                .withMessage('El Usuario debe tener al menos 5 caracteres')
             ], controllers.loginUser)
 
     app.post('/logOut', controllers.logOut)
@@ -125,11 +117,11 @@ module.exports = function(app){
             controllers.addUser)
     
     // EXTRA
-    app.post('/deleteUser/:id', controllers.deleteUser)
     app.get('/adminUsers', controllers.adminView);
     app.get('/adminUsers/:id', controllers.editUser);
     app.post('/adminUsers/:id', controllers.editUser);
     app.post('/adminUsers/:id', controllers.updateUser)
+    app.post('/deleteUser/:id', controllers.deleteUser)
     //
 
     app.get('/error', controllers.errorView);

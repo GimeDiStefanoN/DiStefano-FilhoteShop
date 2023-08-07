@@ -22,7 +22,7 @@ const DataProvider = ({children}) =>{
   },[])
 
   return(
-    <dataContext.Provider value={{products, loading}}>
+    <dataContext.Provider value={{products, loading, setProducts }}>
       {children}
     </dataContext.Provider>
   )

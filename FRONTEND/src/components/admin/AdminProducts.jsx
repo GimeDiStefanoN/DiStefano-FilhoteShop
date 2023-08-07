@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { dataContext } from '../DataContext';
+import { dataContext } from '../../contexts/DataContext';
 import { Link } from 'react-router-dom';
 
 export const AdminProducts = () => {

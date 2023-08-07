@@ -453,6 +453,25 @@ main{
 .catalogo li{
     list-style: none;
 }
+
+.encabezadoLogueado{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:end;
+    width:50%;
+    margin: auto
+}
+.encabezadoLogueado h2{
+    text-align:center
+}
+
+.encabezadoLogueado .btn_cart{
+    width: 120px;
+    height: auto;
+    padding: 0.8rem;
+    margin: 0 1rem;
+}
 /* SECCION DETAIL*/
 .main_Detail{
     background-color: #FACE54;
@@ -556,12 +575,12 @@ main{
     height: 50px;
 }
 .contadorCantidad input{
-    width: 50px;
-    height: 100%;
+    width: 40px;
+    height: 25px;
     
 }
 .contadorCantidad button{
-    width: 30px;
+    width: 25px;
 }
 .contadorCantidad #menos{
     border-radius: 20px 0 0 20px;
@@ -598,143 +617,41 @@ main{
 
 /*SECCION MI CARRITO*/
 /* MAPA DE COMPRA */
-.ruta{
-    padding: 0.5rem 0;
+ .ruta2{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    gap: 2rem;
+ }
+ .ruta2 div{
+    height:80px;
+    width:80px;
+    border: 2px solid #BF2F2F;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
     background-color: #f5cf67;
-}
-.pasosCompra {
-    clear: left;
-    display: block;
-    margin: 0 auto 70px;
-    width: 300px;
-    height: 80px;
-    position: relative;
-    z-index: 0;
-}
-nav.pasosCompra ul {
-    width: 300px;
-    height: 95px;
-    margin: 0 auto;
-}
-ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-li {
-    list-style: none;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-nav.pasosCompra span.rayaConectora {
-    border-top: 2px solid #eee;
-    width: 300px;
-    height: 5px;
-    display: inline-block;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-}
-nav.pasosCompra ul li.activo {
-    background: rgb(129, 128, 128);
-    border: 2px solid white;
-}
 
-nav.pasosCompra ul li {
-    background: rgb(192, 192, 192);
-    width: 40px;
-    height: 40px;
-    position: relative;
-    float: left;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
+ }
+ .ruta2 p{
+    font-size:0.8rem;
 }
-nav.pasosCompra ul li.pasoCuatro {
-    margin-right: 0;
-}
-
-nav.pasosCompra ul li>i {
-    height: 20px;
-    display: block;
-    width: 30px;
-
-}
-
-nav.pasosCompra ul li.pasoUno>i {
-    background-position: -50px -16px;
-}
-
-nav.pasosCompra ul li>p {
-    text-align: center;
-    width: 160px;
-    position: absolute;
-    top: 50px;
-    left: -50px;
-    padding: 0 2rem;
-    letter-spacing: .03em;
-}
-p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-   
-}
-
-nav.pasosCompra ul li.pasoDos>i {
-    background-position: -111px -46px;
-}
-
-nav.pasosCompra ul li>i {
-    height: 26px;
-    display: block;
-    margin: 10px auto 0;
-    text-align: center;
-    line-height: 0.5px;
-    font-size: 1.5rem;
-    color:#ac8c34;
-}
-nav.pasosCompra hr {
-    width: 500px;
-    margin: 20px auto 0;
-    display: block;
-    clear: both;
-    border-top: 1px dashed #ccc;
-}
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
+.ruta2 i{
+    font-size:1.5rem;
+    z-index:2;
+    height:50%;
+ }
 /* FIN MAPA DE COMPRA */
 
 .tablaCarrito{
-    background-color: whitesmoke;
     display: flex;
     flex-direction: column;
 }
 .detalleProductos{
-    background-color: whitesmoke;
     padding: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
 
 }
@@ -850,7 +767,7 @@ hr {
     height: 100%;
     object-fit: scale-down;
 }
-.precios{
+/* .precios{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -884,13 +801,14 @@ hr {
 
 .textEnvio, .textEnvio2{
     visibility: collapse;
-}
+} */
   /*SECCION ORDEN COMPRA*/
   .mainOrden{
     display:flex;
     flex-direction:column;
     gap:1.2rem;
-    padding:1rem
+    padding:1rem;
+    background-color:whitesmoke
   }
   .mainOrden h5{
     text-align:center;
@@ -900,13 +818,20 @@ hr {
   .contenedorInputs{
     display:flex;
     flex-direction:column;
+    align-items:center;
     gap:1rem;
     padding:1rem
   }
   .contenedorInputs input{
       background-color: #ebd496;
   }
-
+  .contenedorInputs p{
+    background-color: #f6e6bc;
+    color: black;
+    font-size: 1.5rem;
+    width:100%;
+    height:35px
+  }
   .datosUser, .datosCompra, .datosEnvio,.DatosFilhote{
     width:100%;
     border: 1px solid grey;
@@ -949,7 +874,10 @@ hr {
 .precioFinal P:first-child{
     font-weight: bold;
 }
-
+.contenidoCompra .detalle{
+    display:grid;
+    place-items:center
+}
 .tablaProductos {
   border-collapse: collapse; 
   width: 100%;
@@ -984,10 +912,86 @@ hr {
 .tablaUser tbody tr td:first-child{
     font-weight: bold;
 }
-
+.contenedorBtn .btnSeguir{
+    width: 100%;
+    display: grid;
+    place-items: center
+}
 .contenedorBtn button{
     background-color: #D3FCD5;
 }
+.tableCart1 {
+  width: 320px;
+  font-size: 12px;
+  overflow: scroll;
+}
+.tableCart1 img{
+    height: 50px !important;
+    width: 50px !important;
+}
+.tableCart1 th, .tableCart1 td{
+    width: 100px; /* Cambia el valor a tu ancho deseado */
+    max-width: 100px; /* Establece el ancho máximo */
+    word-wrap: break-word; /* Permite que el texto se ajuste al ancho y se desplace hacia abajo automáticamente */
+
+}
+.tableCart1 .eliminar{
+    display: table-cell;
+    height:100%
+}
+/* Estilos generales de la tabla */
+.tabla-vertical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .tabla-vertical table {
+    border-collapse: collapse;
+    width: 300px; /* Ajusta el ancho de la tabla según tus necesidades */
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabla-vertical thead tr{
+    background-color: yellow;
+    text-align: center;
+  }
+  
+  /* Estilos para el desplegable */
+  select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilos para los párrafos del costo del envío */
+  .textEnvio,
+  .textEnvio2,
+  .textEnvio3 {
+    margin: 0;
+    color: green;
+  }
+  
+  /* Estilos para el fondo de la tabla */
+  th,
+  td {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos para la última fila (TOTAL DE LA COMPRA) */
+  tbody tr:last-child {
+    font-weight: bold;
+  }
+  
+
+
   /*SECCION CATALOGO CARDS*/
   .card {
     position: relative;
@@ -1599,9 +1603,16 @@ font-size: 0.4rem;
   }
  
   .btnAdmin{
-    width: 100%;
+    width: 120px;
+    border:0.5px solid grey;
+    border-radius:10px;
+    background-color: #FACE54;
+    margin: 0 1rem;
   }
-
+  .btnAdmin p{
+    text-align:center;
+    padding-top: 0.8rem
+  }
   
   .table-bordered td,
   .table-bordered th {
@@ -1743,7 +1754,10 @@ nav.pasosCompra span.rayaConectora {
     }
 
     /*SECCION CARRITO*/
-
+    .mainCarrito{
+        height: 100vh;
+        background-color: whitesmoke;
+    }
     #titlecantidad, #titlesubtotal{
         visibility: visible;
     }
@@ -2016,6 +2030,15 @@ nav.pasosCompra span.rayaConectora {
      }
 
      /* SECCION MI CARRITO */
+     .tableCart1 {
+  width: 550px;
+  font-size: 12px;
+  overflow: scroll;
+}
+.tableCart1 img{
+    height: 60px !important;
+    width: 60px !important;
+}
     #titlecantidad, #titlesubtotal{
         visibility: visible;
     }

@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import { dataContext } from '../DataContext';
+import { dataContext } from '../../contexts/DataContext';
 import Busqueda from '../Busqueda';
 import Desplegable from '../Desplegable';
 import Check from '../Check';
@@ -8,6 +8,9 @@ import Button from '../Button';
 import Catalogo from '../Catalogo';
 import { Loading } from '../Loading';
 import { useState, useEffect } from 'react'
+import { Link, useNavigate} from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
+import { userStore } from '../../stores/store';
 
 const Products = () => {
   const { products } = useContext(dataContext); // Obtener los datos del contexto
@@ -21,6 +24,8 @@ const Products = () => {
   const [buscadorOrden, setBuscadorOrden] = useState(false);
   const [buscadorPrecioMaximo, setBuscadorPrecioMaximo] = useState("");
   const [buscadorOrdenMayor, setBuscadorOrdenMayor] = useState(false);
+  const user = userStore((state) => state.user);
+  const navigate = useNavigate();
 
   const nameFilter = (e) => {
     const valorIngresado = e.target.value
@@ -108,6 +113,22 @@ const Products = () => {
       <h1 className="title-page">CATALOGO PRODUCTOS</h1>
 
       {/* Aca deberia ir el span que diga "¡Hola! y el username" */}
+      <div className="encabezadoLogueado">
+        {user ? (
+              <>
+                  <h2>¡Hola <b>{user.username}</b>!</h2>
+                  <Link to="/cart" className="btn_cart text-btn">
+                      <span >Carrito</span>
+                  </Link>
+                  <Link to="/logout" className="btnAdmin text-btn">
+                      <p>Cerrar Sesión</p>
+                  </Link>
+              </>
+          ) : (
+              <>
+              </>
+          )}
+      </div>
 
       <div className="filtros">
         <div className="filtros-parte1">
