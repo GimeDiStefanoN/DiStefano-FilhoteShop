@@ -75,7 +75,7 @@ export const DetailProduct = () => {
 
                   <div className="comprar">
                     <form action={`/addProduct/${product.id}`} method="post">
-                      <Link className="btn_cart btnAdmin text-btn" to=''>
+                      <Link className="btn_cart text-btn" to=''>
                         <span className="material-symbols-outlined">shopping_cart</span>
                       </Link>
                     </form>

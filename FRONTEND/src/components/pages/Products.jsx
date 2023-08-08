@@ -8,8 +8,8 @@ import Button from '../Button';
 import Catalogo from '../Catalogo';
 import { Loading } from '../Loading';
 import { useState, useEffect } from 'react'
-import { Link, useNavigate} from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
+import { Link} from 'react-router-dom';
+// import { UserContext } from '../../contexts/UserContext';
 import { userStore } from '../../stores/store';
 
 const Products = () => {
@@ -25,7 +25,7 @@ const Products = () => {
   const [buscadorPrecioMaximo, setBuscadorPrecioMaximo] = useState("");
   const [buscadorOrdenMayor, setBuscadorOrdenMayor] = useState(false);
   const user = userStore((state) => state.user);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const nameFilter = (e) => {
     const valorIngresado = e.target.value

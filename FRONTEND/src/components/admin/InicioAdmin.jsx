@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { userStore } from '../../stores/store';
 export const InicioAdmin = () => {
+  const navigate = useNavigate();
+  const user = userStore((state) => state.user);
+
     const acciones = [
         {
             icono: <i className="bi bi-person-bounding-box"></i>,
@@ -19,6 +22,9 @@ export const InicioAdmin = () => {
         //  }
     ]
   return (
+    <>
+    {user ? (
+    
     <div className="body_Error mainPanel">
         <h1 style={{ textAlign: "center" }}>Bienvenido Administrador</h1>
         <div className="contenedorAcciones">
@@ -36,8 +42,14 @@ export const InicioAdmin = () => {
         ))}
         </div>
         <div className="contenedorButton">
-            <button>Cerrar Sesion</button>
+          <Link to="/logout" className="btnAdmin text-btn">
+            <p>Cerrar Sesión</p>
+          </Link>
         </div>
     </div>
+     ) : (
+        <></>
+     )}
+    </>
   )
 }

@@ -16,7 +16,6 @@ module.exports = function(app){
     // EXTRA
     app.post('/addProduct/:id', controllers.addProduct);
     app.post('/deleteProduct/:id', controllers.deleteProduct);
-
     //
 
     app.get('/contact', controllers.contactView);
@@ -117,11 +116,14 @@ module.exports = function(app){
             controllers.addUser)
     
     // EXTRA
-    app.get('/adminUsers', controllers.adminView);
-    app.get('/adminUsers/:id', controllers.editUser);
-    app.post('/adminUsers/:id', controllers.editUser);
-    app.post('/adminUsers/:id', controllers.updateUser)
-    app.post('/deleteUser/:id', controllers.deleteUser)
+    app.get('/adminUsers', controllers.adminView); //Ver usuarios
+    app.get('/adminUsers/:id', controllers.editUser); //Ver edicion de usuarios
+    app.post('/adminUsers/:id', controllers.updateUser) //Editar usuarios
+    app.post('/deleteUser/:id', controllers.deleteUser) //Eliminar usuarios
+
+    app.post('/deleteProductAdmin/:id', controllers.deleteProductAdmin) //Eliminar productos del panel admin
+    app.post('/adminProduct/:id', controllers.updateProductAdmin) //Editar productos del panel admin
+    app.post('/addProductAdmin/:id', controllers.addProductAdmin) //Agregar productos del panel admin
     //
 
     app.get('/error', controllers.errorView);

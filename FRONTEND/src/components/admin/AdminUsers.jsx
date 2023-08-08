@@ -3,25 +3,20 @@ import { UserContext } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { userStore } from '../../stores/store';
 
 export const AdminUsers = () => {
   const { users, setUsers  } = useContext(UserContext);
   const [editingUser, setEditingUser] = useState(null);
-  const [userEdit, setUserToEdit] = useState(null); // Agrega el estado userToEdit y su setter
-
+  const [userEdit, setUserEdit] = useState(null); 
+  const { id } = useParams();
   const [show, setShow] = useState(false);
-
-  const handleClose = () => {
-    setShow(false);
-    setEditingUser(null);
-  };
-  const handleShow = (userId) => {
-    setShow(true);
-    setEditingUser(userId);
-  }
+  const user = userStore((state) => state.user);
+ 
+  
   const userToEdit = users.find(user => user.id === editingUser);
-
+  
   const formatDateForInput = (dateString) => {
     const dateObject = new Date(dateString);
     if (isNaN(dateObject.getTime())) return ''; // Si la fecha es inválida, devuelve una cadena vacía
@@ -33,49 +28,17 @@ export const AdminUsers = () => {
 
   // EDITAR
   const [formData, setFormData] = useState({
-    nombre_completo: '',
-    username: '',
-    password: '',
-    email: '',
-    direccion: '',
-    provincia: '',
-    pais: '',
-    nacimiento: '',
-    telefono: '',
-    rol: '',
+    nombre_completo: userEdit?.nombre_completo || '',
+    username: userEdit?.username || '',
+    password: userEdit?.password || '',
+    email: userEdit?.email || '',
+    direccion: userEdit?.direccion || '',
+    provincia: userEdit?.provincia || '',
+    pais: userEdit?.pais || '',
+    nacimiento: formatDateForInput(userEdit?.nacimiento) || '',
+    telefono: userEdit?.telefono || '',
+    rol: userEdit?.rol || '',
   });
-
-  useEffect(() => {
-    if (editingUser !== null) {
-      const userToEdit = users.find((user) => user.id === editingUser);
-      setFormData({
-        nombre_completo: userToEdit?.nombre_completo || '',
-        username: userToEdit?.username || '',
-        password: userToEdit?.password || '',
-        email: userToEdit?.email || '',
-        direccion: userToEdit?.direccion || '',
-        provincia: userToEdit?.provincia || '',
-        pais: userToEdit?.pais || '',
-        nacimiento: formatDateForInput(userToEdit?.nacimiento) || '',
-        telefono: userToEdit?.telefono || '',
-        rol: userToEdit?.rol || '',
-      });
-    } else {
-      // Si no hay un usuario existente (estamos en modo creación), inicializa el estado con campos vacíos
-      setFormData({
-        nombre_completo: '',
-        username: '',
-        password: '',
-        email: '',
-        direccion: '',
-        provincia: '',
-        pais: '',
-        nacimiento: '',
-        telefono: '',
-        rol: '',
-      });
-    }
-  }, [editingUser, users]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,37 +52,88 @@ export const AdminUsers = () => {
    const updateUsersContext = (updatedUsersList) => {
     setUsers(updatedUsersList);
   };
-  // Función para manejar la edición del usuario
-  const handleEditUser = () => {
-    // Realiza una solicitud POST al servidor con los datos modificados
-    fetch(`/adminUsers/${editingUser}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        // La solicitud se completó con éxito, recibe la lista actualizada de usuarios del servidor
-        return response.json();
-      })
-      .then((updatedUsersList) => {
-        // Actualiza el contexto con la lista de usuarios actualizada
-        updateUsersContext(updatedUsersList);
 
-        // Después de actualizar los datos, cierra el modal y reinicia el estado de edición
-        handleClose();
-      })
-      .catch((error) => {
-        // Manejar errores si ocurre alguno al hacer la solicitud al servidor
-        console.error('Error al actualizar el usuario:', error);
-        // Puedes mostrar un mensaje de error o realizar alguna otra acción en caso de error.
-      });
+ // Función para manejar la edición del usuario
+ const editarUser = (e) => {
+  e.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+  fetch(`http://localhost:3000/adminUsers/${editingUser}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      // La solicitud se completó con éxito, recibe la lista actualizada de usuarios del servidor
+      return response.json();
+    })
+    .then((updatedUsersList) => {
+      // Actualiza el contexto con la lista de usuarios actualizada
+      updateUsersContext(updatedUsersList);
+
+      // Después de actualizar los datos, cierra el modal y reinicia el estado de edición
+      handleClose();
+      alert('Usuario modificado correctamente');
+    })
+    .catch((error) => {
+      // Manejar errores si ocurre alguno al hacer la solicitud al servidor
+      console.error('Error al actualizar el usuario:', error);
+      // Puedes mostrar un mensaje de error o realizar alguna otra acción en caso de error.
+    });
+};
+
+  //eliminar user
+  const eliminarUsuario = async (userId) => {
+     try{ 
+      const resp = await fetch(`http://localhost:3000/deleteUser/${userId}`, {
+      method: 'POST',
+    });
+      if (resp.ok) {
+        console.log('Usuario eliminado correctamente.');
+        setUsers(users.filter(user => user.id !== userId));
+      } else {
+        console.log('Error al eliminar el Usuario en el servidor.');
+      }
+    }catch (error) {
+      console.log('Error al conectarse con el servidor:', error);
+    }
   };
 
+  const handleClose = () => {
+    setShow(false);
+    setEditingUser(null);
+  };
+  const handleShow = (userId) => {
+    setShow(true);
+    setEditingUser(userId);
+    setUserEdit(users.find((user) => user.id === userId));
+  }
+
+  useEffect(() => {
+    // Actualiza el formData cuando userEdit cambie
+    setFormData({
+      nombre_completo: userEdit?.nombre_completo || '',
+      username: userEdit?.username || '',
+      password: userEdit?.password || '',
+      email: userEdit?.email || '',
+      direccion: userEdit?.direccion || '',
+      provincia: userEdit?.provincia || '',
+      pais: userEdit?.pais || '',
+      nacimiento: formatDateForInput(userEdit?.nacimiento) || '',
+      telefono: userEdit?.telefono || '',
+      rol: userEdit?.rol || '',
+    });
+  }, [userEdit]);
+
+  useEffect(() => {
+    // Obtener el usuario que se está editando cuando cambia el estado de "editingUser"
+    const user = users.find((user) => user.id === editingUser);
+    setUserEdit(user);
+  }, [editingUser, users]);
 
   return (
     <>
@@ -169,11 +183,11 @@ export const AdminUsers = () => {
                     <td>{user.telefono}</td>
                     <td>{user.rol}</td>
                     <td>
-                      <form action={`/deleteUser/${user.id}`} method="post">
-                        <button className="btnAdmin">
+                     
+                        <button className="btnAdmin" onClick={() => eliminarUsuario(user.id)}>
                           <i className="bi bi-trash3"></i>
                         </button>
-                      </form>
+                      
                     </td>
                     <td>
                       <form>
@@ -199,7 +213,7 @@ export const AdminUsers = () => {
                 <div>
                   <h5 ></h5>
                   <div className="modal-body">
-                    <form action={`/adminUsers/${editingUser}`} method="post">
+                    <form action={`/updateUser/${editingUser}`} method="post" onSubmit={editarUser}>
                       <div>
                         <label htmlFor="nombre_completo">Nombre:</label>
                         <input
@@ -217,7 +231,7 @@ export const AdminUsers = () => {
                           type="text"
                           name="username"
                           placeholder={userToEdit?.username || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, username: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, username: e.target.value })}
                         />
                       </div>
                       <div>
@@ -227,7 +241,7 @@ export const AdminUsers = () => {
                           type="password"
                           name="password"
                           placeholder={userToEdit?.password || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, password: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, password: e.target.value })}
                         />
                       </div>
                       <div>
@@ -237,7 +251,7 @@ export const AdminUsers = () => {
                           type="email"
                           name="email"
                           placeholder={userToEdit?.email || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, email: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, email: e.target.value })}
                         />
                       </div>
                       <div>
@@ -247,7 +261,7 @@ export const AdminUsers = () => {
                           type="text"
                           name="direccion"
                           placeholder={userToEdit?.direccion || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, direccion: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, direccion: e.target.value })}
                         />
                       </div>
                       <div>
@@ -257,7 +271,7 @@ export const AdminUsers = () => {
                           type="text"
                           name="provincia"
                           placeholder={userToEdit?.provincia || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, provincia: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, provincia: e.target.value })}
                         />
                       </div>
                       <div>
@@ -267,7 +281,7 @@ export const AdminUsers = () => {
                           type="text"
                           name="pais"
                           placeholder={userToEdit?.pais || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, pais: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, pais: e.target.value })}
                         />
                       </div>
                       <div>
@@ -277,7 +291,7 @@ export const AdminUsers = () => {
                           type="date"
                           name="nacimiento"
                           placeholder={formatDateForInput(userToEdit?.nacimiento) || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, nacimiento: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, nacimiento: e.target.value })}
                         />
                       </div>
                       <div>
@@ -287,7 +301,7 @@ export const AdminUsers = () => {
                           type="tel"
                           name="telefono"
                           placeholder={userToEdit?.telefono || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, telefono: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, telefono: e.target.value })}
                         />
                       </div>
                       <div>
@@ -297,10 +311,10 @@ export const AdminUsers = () => {
                           type="text"
                           name="rol"
                           placeholder={userToEdit?.rol || ''}
-                          onChange={(e) => setUserToEdit({ ...userToEdit, rol: e.target.value })}
+                          onChange={(e) => setUserEdit({ ...userToEdit, rol: e.target.value })}
                         />
                       </div>
-                      <Button variant="" type="submit" className="btn_cart btnAdmin text-btn" onClick={handleChange}>
+                      <Button variant="" type="submit" className="btn_cart btnAdmin text-btn">
                         <i className="bi bi-save"></i>
                       </Button>
                     </form>
@@ -316,10 +330,6 @@ export const AdminUsers = () => {
             Volver al Panel Admin
           </Link>
         </div>
-
-
-
-
       </div>
     </>
   );

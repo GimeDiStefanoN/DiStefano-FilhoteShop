@@ -201,8 +201,6 @@ const loginView = (req,res) =>{
 
 const loginUser = async (req, res) =>{
     const {username, password} = req.body;
-    console.log("🚀 ~ file: controllers.js:207 ~ loginUser ~ password:", password)
-    console.log("🚀 ~ file: controllers.js:207 ~ loginUser ~ username:", username)
   
     try{// Validar valores mínimos y mostrar mensajes:
         const errors = validationResult(req);
@@ -251,6 +249,7 @@ const registerView = (req,res) =>{
 }
 
 //! REGISTRAR/AGREGAR USUARIO
+// AGREGAR USUARIO
 
 const addUser = async (req, res, next) => {
     const errors = validationResult(req);
@@ -302,22 +301,21 @@ const addUser = async (req, res, next) => {
         }
     }
 };
+// EDITAR USUARIO
 
 const editUser = async (req, res) => {
     try {
       const userId = req.params.id;
       const userEdit = await Usuario.findByPk(userId);
   
-      // Lógica para mostrar la vista de edición del usuario (Si es necesario)
+      // Lógica para mostrar la vista de edición del usuario
   
-      res.render(path.resolve(__dirname, './views/admin/all_Users.ejs'), {
-        users: [], // Puedes incluir aquí la lista de usuarios si es necesario para la vista
-        userEdit: userEdit,
-      });
+      res.json({ userEdit });
+
     } catch (error) {
       console.error('Error al obtener usuario para editar:', error);
       // Manejar el error de forma apropiada, por ejemplo, renderizar una página de error o devolver una respuesta de error.
-      res.status(500).send('Error al obtener usuario para editar: ' + error.message);
+      res.status(500).json({ error: 'Error al obtener usuario para editar' });
     }
   };
   
@@ -339,16 +337,15 @@ const editUser = async (req, res) => {
       const user = await Usuario.findByPk(userId);
       if (!user) {
         // Manejar el caso si el usuario no existe en la base de datos
-        res.status(404).send('Usuario no encontrado');
+        res.status(404).json({ error: 'Usuario no encontrado' });
         return;
       }
-      console.log(userData.nacimiento)
       await user.update(userData);
-      res.redirect('/adminUsers');
+      res.json({ success: true, message: 'Usuario actualizado correctamente' });
     } catch (error) {
       console.error('Error al actualizar usuario:', error);
-      // Manejar el error de forma apropiada, por ejemplo, renderizar una página de error o devolver una respuesta de error.
-      res.status(500).send('Error al actualizar usuario: ' + error.message);
+      // Manejar el error 
+      res.status(500).json({ error: 'Error al actualizar usuario' });
     }
   };
   
@@ -358,14 +355,20 @@ const editUser = async (req, res) => {
         const userId = req.params.id;
 
         try {
-          await delUsers(userId);
-          res.redirect('/adminUsers');
+          const borrarUs = await Usuario.destroy({
+            where: { id: userId },
+          });
+      
+          if (borrarUs) {
+            return res.status(200).json({ success: true, message: 'Usuario eliminado correctamente.' });
+          } else {
+            return res.status(404).json({ success: false, message: 'Usuario no encontrado.' });
+          }
         } catch (error) {
-          console.error('Error al eliminar usuario:', error);
-          res.status(500).send('Error al eliminar usuario');
+          console.error('Error al eliminar el Usuario:', error);
+          return res.status(500).json({ success: false, mensaje: 'Error al eliminar el Usuario.' });
         }
-    };
-
+  }
 
 //vistas para el ADMIN (TODOS LOS USUARIOS)
 const adminView = async (req,res) =>{
@@ -386,6 +389,60 @@ const adminView = async (req,res) =>{
     }
 }
 
+
+// Función para agregar un nuevo producto al catálogo
+const addProductAdmin = async (req, res) => {
+  try {
+    const { nombre_producto, detalle_producto, precio_producto, stock_producto, url_imagen_producto, id_categoria } = req.body;
+    // Valida los datos recibidos (puedes agregar más validaciones según tus necesidades)
+    if (!nombre_producto || !detalle_producto || !precio_producto || !stock_producto || !url_imagen_producto || !id_categoria) {
+      return res.status(400).json({ error: 'Debes proporcionar todos los campos del producto.' });
+    }
+    // Crea el nuevo producto en la base de datos
+    const newProduct = await Producto.create({
+      nombre_producto,
+      detalle_producto,
+      precio_producto,
+      stock_producto,
+      url_imagen_producto,
+      id_categoria,
+    });
+    return res.status(201).json(newProduct);
+  } catch (error) {
+    console.log('Error al agregar el producto:', error);
+    return res.status(500).json({ error: 'Hubo un error al agregar el producto.' });
+  }
+};
+
+// Función para editar un producto existente en el catálogo
+const updateProductAdmin = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nombre_producto, detalle_producto, precio_producto, stock_producto, url_imagen_producto, id_categoria } = req.body;
+    // Valida los datos recibidos (puedes agregar más validaciones según tus necesidades)
+    if (!nombre_producto || !detalle_producto || !precio_producto || !stock_producto || !url_imagen_producto || !id_categoria) {
+      return res.status(400).json({ error: 'Debes proporcionar todos los campos del producto.' });
+    }
+    // Busca el producto por su ID en la base de datos
+    const product = await Producto.findByPk(id);
+    if (!product) {
+      return res.status(404).json({ error: 'El producto no existe.' });
+    }
+    // Actualiza los datos del producto
+    product.nombre_producto = nombre_producto;
+    product.detalle_producto = detalle_producto;
+    product.precio_producto = precio_producto;
+    product.stock_producto = stock_producto;
+    product.url_imagen_producto = url_imagen_producto;
+    product.id_categoria = id_categoria;
+    // Guarda los cambios en la base de datos
+    await product.save();
+    return res.status(200).json(product);
+  } catch (error) {
+    console.log('Error al editar el producto:', error);
+    return res.status(500).json({ error: 'Hubo un error al editar el producto.' });
+  }
+};
  //! VISTA ERROR
  const errorView = (req,res) =>{
     res.render(path.join(__dirname, '../views/error.ejs'),
@@ -413,5 +470,7 @@ module.exports ={
     addProduct,
     deleteProduct,
     logOut,
+    addProductAdmin,
+    updateProductAdmin,
     
 }

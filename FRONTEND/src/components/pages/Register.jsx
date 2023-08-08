@@ -22,7 +22,7 @@ export const Register = () => {
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await fetch('http://localhost:3000/addUser', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -32,10 +32,13 @@ export const Register = () => {
       });
 
       const data = await response.json();
+      console.log(data)
       if (data.error) {
         setValidaciones(data.validaciones);
       } else {
         setShowModal(true);
+        window.alert('¡Usuario registrado con éxito!');
+
       }
     } catch (error) {
       console.error('Error:', error);

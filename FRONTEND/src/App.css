@@ -1263,7 +1263,9 @@ fieldset{
     gap: 1rem;
     width: 90%;
 }
-
+.elemento select{
+    height:30px
+}
 .checks > .elemento{
     display: flex;
     flex-direction: row;
@@ -1752,7 +1754,9 @@ nav.pasosCompra span.rayaConectora {
     .grupoDetail1 .container{
         height:300px;
     }
-
+    .comprar .btn_cart{
+        width:100%
+    }
     /*SECCION CARRITO*/
     .mainCarrito{
         height: 100vh;
