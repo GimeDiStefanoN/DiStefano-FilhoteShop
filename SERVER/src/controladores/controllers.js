@@ -319,35 +319,35 @@ const editUser = async (req, res) => {
     }
   };
   
-  const updateUser = async (req, res) => {
-    const userId = req.params.id;
-    const userData = {
-      nombre_completo: req.body.nombre_completo,
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-      direccion: req.body.direccion,
-      provincia: req.body.provincia,
-      pais: req.body.pais,
-      nacimiento: req.body.nacimiento,
-      telefono: req.body.telefono,
-    };
-  
-    try {
-      const user = await Usuario.findByPk(userId);
-      if (!user) {
-        // Manejar el caso si el usuario no existe en la base de datos
-        res.status(404).json({ error: 'Usuario no encontrado' });
-        return;
-      }
-      await user.update(userData);
-      res.json({ success: true, message: 'Usuario actualizado correctamente' });
-    } catch (error) {
-      console.error('Error al actualizar usuario:', error);
-      // Manejar el error 
-      res.status(500).json({ error: 'Error al actualizar usuario' });
-    }
+const updateUser = async (req, res) => {
+  const userId = req.params.id;
+  const userData = {
+    nombre_completo: req.body.nombre_completo,
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    direccion: req.body.direccion,
+    provincia: req.body.provincia,
+    pais: req.body.pais,
+    nacimiento: req.body.nacimiento,
+    telefono: req.body.telefono,
   };
+
+  try {
+    const user = await Usuario.findByPk(userId);
+    if (!user) {
+      // Manejar el caso si el usuario no existe en la base de datos
+      res.status(404).json({ error: 'Usuario no encontrado' });
+      return;
+    }
+    await user.update(userData);
+    res.json({ success: true, message: 'Usuario actualizado correctamente' });
+  } catch (error) {
+    console.error('Error al actualizar usuario:', error);
+    // Manejar el error 
+    res.status(500).json({ error: 'Error al actualizar usuario' });
+  }
+};
   
 // ELIMINAR USUARIO
 
@@ -443,6 +443,25 @@ const updateProductAdmin = async (req, res) => {
     return res.status(500).json({ error: 'Hubo un error al editar el producto.' });
   }
 };
+
+const deleteProductAdmin = async (req,res)=>{
+  const productId = req.params.id;
+
+  try {
+    const borrarProducto = await Producto.destroy({
+      where: { id: productId },
+    });
+
+    if (borrarProducto) {
+      return res.status(200).json({ success: true, message: 'Producto eliminado correctamente.' });
+    } else {
+      return res.status(404).json({ success: false, message: 'Producto no encontrado.' });
+    }
+  } catch (error) {
+    console.error('Error al eliminar el Producto:', error);
+    return res.status(500).json({ success: false, mensaje: 'Error al eliminar el Producto.' });
+  }
+}
  //! VISTA ERROR
  const errorView = (req,res) =>{
     res.render(path.join(__dirname, '../views/error.ejs'),
@@ -472,5 +491,5 @@ module.exports ={
     logOut,
     addProductAdmin,
     updateProductAdmin,
-    
+    deleteProductAdmin
 }

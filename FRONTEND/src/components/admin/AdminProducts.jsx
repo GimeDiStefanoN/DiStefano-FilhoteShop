@@ -4,9 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
+import { productStore } from '../../stores/store';
 
 export const AdminProducts = () => {
-  const { products } = useContext(dataContext);
+  const { products, setProducts } = useContext(dataContext);
   const [show, setShow] = useState(false);
   // const [productData, setProductData] = useState({
   //   nombre_producto: '',
@@ -17,6 +18,7 @@ export const AdminProducts = () => {
   //   id_categoria: '',
   // });
   const { id } = useParams();
+  const product = productStore((state) => state.product);
 
 
   // funciones
@@ -53,6 +55,8 @@ export const AdminProducts = () => {
 //     console.log('Error al conectar con el servidor:', error);
 //   }
 // };
+
+
   //ELIMINAR PRODUCTO
   const eliminarProducto = async (productId) => {
     try{ 
@@ -61,6 +65,8 @@ export const AdminProducts = () => {
    });
      if (resp.ok) {
        console.log('Producto eliminado correctamente.');
+       setProducts(products.filter(product => product.id !== productId));
+
      } else {
        console.log('Error al eliminar el Producto en el servidor.');
      }
