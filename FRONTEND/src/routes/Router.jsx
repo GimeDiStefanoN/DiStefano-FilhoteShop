@@ -51,7 +51,7 @@ export const routesConfig = [
     name: 'REGISTRO'
   },
   {
-    path: '/cart/:id?',
+    path: '/cart',
     component: Cart,
     name: 'MI CARRITO'
   },
@@ -60,11 +60,7 @@ export const routesConfig = [
     component: OrdenCompra,
     name: 'TU COMPRA'
   },
-  {
-    path: '*',
-    component: Error,
-    name: 'ERROR'
-  },
+  
   {
     path: '/adminUsers/:id?',
     component: AdminUsers,
@@ -84,6 +80,11 @@ export const routesConfig = [
     path: '/logout',
     component: Logout,
     
+  },
+  {
+    path: '*',
+    component: Error,
+    name: 'ERROR'
   }
 ];
 

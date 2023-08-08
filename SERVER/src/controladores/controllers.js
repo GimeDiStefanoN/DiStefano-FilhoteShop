@@ -81,9 +81,10 @@ const aboutView = (req,res) => {
 
  // VISTA CART
 const cartView = (req,res) =>{ 
+  try {
     const cart = getCart()
     const totalPrice = cart.productsCart.reduce((total, product) => total + parseFloat(product.precio), 0);
-
+    res.json(cart);
     res.render(path.join(__dirname,'../views/cart.ejs'),
         {
             title: 'Mi Carrito',
@@ -92,6 +93,10 @@ const cartView = (req,res) =>{
             totalPrice: totalPrice
         }
         )
+  } catch (error) {
+    console.error('Error al obtener el carrito:', error);
+    res.status(500).json({ error: 'Server Error', message: 'Error al obtener el carrito' });
+  }
 }
 
 // -EXTRA - AGREGAR PRODUCTO AL CARRITO
@@ -99,8 +104,8 @@ const cartView = (req,res) =>{
 const addProduct = async (req, res) => {
   try {
     // Verificar si el userId está en la sesión
-    if (!req.session.userId) {
-      return res.redirect('/login');
+    if (!req.session.userId || req.session.userRole !== 'customer') {
+      return res.status(401).json({ error: 'Unauthorized', message: 'Debes iniciar sesión como cliente para agregar productos al carrito.' });
     }
 
     const selectedProductId = parseInt(req.params.id);
@@ -116,47 +121,15 @@ const addProduct = async (req, res) => {
     // Llamar a la función del servicio para agregar el producto al carrito
     await writeProduct(cart, selectedProductId);
 
-    res.redirect('/cart');
+    res.status(200).json({ success: true, message: 'Producto agregado al carrito con éxito' });
     console.log('Producto agregado al carrito con éxito');
   } catch (error) {
     console.error('Error al agregar producto al carrito:', error);
-    res.status(500).send('Error al agregar producto al carrito');
+    res.status(500).json({ error: 'Server Error', message: 'Error al agregar producto al carrito' });
   }
 };
   
-// const addProduct = (req,res) =>{
-//     const products = getProducts(); //traigo todos los productos
 
-//     const selectedProductId = parseInt(req.params.id); //obtengo el ID del producto elegido
-//     const selectedProduct = products.find(product => product.id === selectedProductId); //lo busco 
-
-//     if (!selectedProduct) {
-//         // Si hay algun problema, arroja error
-//         res.status(404).send("Intentá nuevamente");
-//         return;
-//       }
-
-//       const cart = getCart();
-      
-//       const maxID = cart.productsCart.length + 1;  //obtengo el ID del ultimo producto agregado al carrito
-//       const newProduct = { //creo el producto dentro del carrito con el ID para el carrito y los datos de la base
-//         id: maxID,
-//         idProduct: selectedProduct.id,
-//         nombre: selectedProduct.nombre,
-//         precio: selectedProduct.precio,
-//         imagen: selectedProduct.imagen,
-//         descripcion: selectedProduct.descripcion,
-//         categoria: selectedProduct.categoria,
-//         stock: selectedProduct.stock
-//       }
-   
-//     cart.productsCart.push(newProduct); // Agrego el producto al carrito
-//     writeProduct(cart.productsCart); // Guardo el carrito actualizado
-    
-//     res.redirect('/cart');
-    
-//     console.log('producto agregado ok');
-// }
 
 // -EXTRA - ELIMINAR PRODUCTO DEL CARRITO
 
@@ -218,9 +191,16 @@ const loginUser = async (req, res) =>{
                 maxAge: 15 * 60 * 1000, // Caduca después de 15 minutos
                 httpOnly: true, // La cookie solo se puede leer desde el servidor
               });
-        req.session.userId = user.id; // Almacena el ID del usuario en la sesión
+          req.session.userId = user.id; // Almacena el ID del usuario en la sesión
           req.session.username = username;
           req.session.showGreeting = true;
+          // Asegúrate de que el campo 'rol' esté presente en el objeto 'user' y establécelo en la sesión
+          if (user.rol) {
+            req.session.userRol = user.rol;
+          } else {
+            // Si el campo 'rol' no está presente en el objeto 'user', puedes establecer un valor predeterminado para el rol del usuario
+            req.session.userRol = 'customer';
+          }
           return res.status(200).json(user);
         } else {
           // Si el usuario o la contraseña son incorrectos, muestro modal de datos incorrectos
@@ -389,7 +369,6 @@ const adminView = async (req,res) =>{
     }
 }
 
-
 // Función para agregar un nuevo producto al catálogo
 const addProductAdmin = async (req, res) => {
   try {
@@ -443,7 +422,7 @@ const updateProductAdmin = async (req, res) => {
     return res.status(500).json({ error: 'Hubo un error al editar el producto.' });
   }
 };
-
+// Función para eliminar un producto existente en el catálogo
 const deleteProductAdmin = async (req,res)=>{
   const productId = req.params.id;
 

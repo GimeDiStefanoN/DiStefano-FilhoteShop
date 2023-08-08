@@ -153,7 +153,7 @@ const Products = () => {
           <Desplegable
             placeholder='Elegí una categoria'
             onChange={categoriaFilter}
-            value={buscadorCategoria}
+            defaultValue={buscadorCategoria}
           ></Desplegable>
 
           <Check

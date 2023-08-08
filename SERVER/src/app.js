@@ -28,7 +28,7 @@ const viewsPath = path.join(__dirname, 'views');
 const publicPath = path.join(__dirname, '../public');
 
 //configuro
-
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs'); //la ingenieria que usamos para las vistas es "ejs"
 app.set('views', viewsPath);

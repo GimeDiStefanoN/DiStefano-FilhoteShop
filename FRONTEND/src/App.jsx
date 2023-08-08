@@ -25,18 +25,17 @@ export default function App() {
 
   return (
     <>
-      <UserProvider>
-        <DataProvider>
-          <BrowserRouter>
-            <Header className="header"/>
-            <main>
-              {isLoading ? <Loading /> : <RouterApp />}
-            </main>
-            <Footer className="footer"/>
-          </BrowserRouter>
-        </DataProvider>
-      </UserProvider>
-
+        <UserProvider>
+          <DataProvider>
+            <BrowserRouter>
+              <Header className="header" />
+              <main>
+                {isLoading ? <Loading /> : <RouterApp />}
+              </main>
+              <Footer className="footer" />
+            </BrowserRouter>
+          </DataProvider>
+        </UserProvider>
     </>
   )
 }

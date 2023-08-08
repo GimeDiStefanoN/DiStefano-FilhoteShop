@@ -49,6 +49,7 @@ export const OrdenCompra = () => {
                 </div>
                 <div className="datosCompra">
                     <h5>Datos del Pedido</h5>
+                    <p>Numero de Factura <b>B-060674</b></p>
                     <div className="contenidoCompra">
                         <div className="detalle">
                             <table className="tablaProductos">

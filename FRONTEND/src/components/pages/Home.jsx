@@ -43,7 +43,7 @@ export const Home = () => {
             <ul className="catalogo">
               {products.map((product) => (
                 <li key={product.id}>
-                  <Card product={product} />
+                  <Card product={product} id={product.id}/>
                 </li>
               ))}
             </ul>

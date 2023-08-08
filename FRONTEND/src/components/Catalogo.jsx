@@ -8,7 +8,7 @@ const Catalogo = ({ products }) => {
 
             {products.map((product) => (
                 <li key={product.id}>
-                    <Card product={product} />
+                    <Card product={product} id={product.id} />
                 </li>
             ))}
         </ul>    

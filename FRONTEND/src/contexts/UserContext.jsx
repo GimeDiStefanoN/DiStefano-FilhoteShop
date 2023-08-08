@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { userStore } from '../stores/store';
 
 export const UserContext = createContext();    
     
@@ -18,8 +19,12 @@ const userProvider = ({children}) =>{
         console.error(error);
         });
     },[])
+
+      // Obtener el valor de 'user' del estado 'userStore'
+    const { user } = userStore();
+
     return (
-        <UserContext.Provider value={{ users, setUsers }}>
+        <UserContext.Provider value={{ users, setUsers, user }}>
             {children}
         </UserContext.Provider>
     )
