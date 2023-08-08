@@ -7,7 +7,7 @@ export const userStore = create((set) => ({
       localStorage.setItem('user', JSON.stringify(user));
     },
   }));
-  
+
 export const productStore = create((set) => ({
     product: JSON.parse(localStorage.getItem('product')) || null,
     setProduct: (product) => {
@@ -16,8 +16,8 @@ export const productStore = create((set) => ({
     },
   }));
 
-export const cartStore = create((set)=>{
-    return{
+// export const cartStore = create((set)=>{
+//     return{
        
-    }
-});
+//     }
+// });

@@ -122,8 +122,8 @@ module.exports = function(app){
     app.post('/deleteUser/:id', controllers.deleteUser) //Eliminar usuarios
 
     app.post('/deleteProductAdmin/:id', controllers.deleteProductAdmin) //Eliminar productos del panel admin
-    app.post('/adminProduct/:id', controllers.updateProductAdmin) //Editar productos del panel admin
-    app.post('/addProductAdmin/:id', controllers.addProductAdmin) //Agregar productos del panel admin
+    app.put('/adminProduct/:id', controllers.updateProductAdmin) //Editar productos del panel admin
+    app.post('/adminProduct', controllers.addProductAdmin) //Agregar productos del panel admin
     //
 
     app.get('/error', controllers.errorView);

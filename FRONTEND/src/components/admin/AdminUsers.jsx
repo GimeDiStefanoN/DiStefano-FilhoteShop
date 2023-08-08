@@ -3,16 +3,13 @@ import { UserContext } from '../../contexts/UserContext';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Link, useParams } from 'react-router-dom';
-import { userStore } from '../../stores/store';
+import { Link } from 'react-router-dom';
 
 export const AdminUsers = () => {
   const { users, setUsers  } = useContext(UserContext);
   const [editingUser, setEditingUser] = useState(null);
   const [userEdit, setUserEdit] = useState(null); 
-  const { id } = useParams();
   const [show, setShow] = useState(false);
-  const user = userStore((state) => state.user);
  
   
   const userToEdit = users.find(user => user.id === editingUser);
@@ -48,7 +45,7 @@ export const AdminUsers = () => {
     });
   };
 
-   // Función para actualizar el contexto con la lista de usuarios actualizada
+   // Función para actualizar el contexto
    const updateUsersContext = (updatedUsersList) => {
     setUsers(updatedUsersList);
   };
@@ -107,6 +104,7 @@ export const AdminUsers = () => {
     setShow(false);
     setEditingUser(null);
   };
+
   const handleShow = (userId) => {
     setShow(true);
     setEditingUser(userId);

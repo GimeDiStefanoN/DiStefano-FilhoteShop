@@ -9,53 +9,68 @@ import { productStore } from '../../stores/store';
 export const AdminProducts = () => {
   const { products, setProducts } = useContext(dataContext);
   const [show, setShow] = useState(false);
-  // const [productData, setProductData] = useState({
-  //   nombre_producto: '',
-  //   detalle_producto: '',
-  //   precio_producto: '',
-  //   stock_producto: '',
-  //   url_imagen_producto: '',
-  //   id_categoria: '',
-  // });
+  
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [productEdit, setProductEdit] = useState({
+    nombre_producto: '',
+    detalle_producto: '',
+    precio_producto: '',
+    stock_producto: '',
+    url_imagen_producto: '',
+    id_categoria: '',
+  });
   const { id } = useParams();
   const product = productStore((state) => state.product);
-
+  const [isEditing, setIsEditing] = useState(false); // Para indicar si estás editando un producto existente
+  const [modalTitle, setModalTitle] = useState('Agregar Producto'); // Título del modal
 
   // funciones
-  //AGREGAR PRODUCTO
-    // crear funcion para agregar productos
-  //MODIFICAR PRODUCTO
-    // crear funcion para editar productos
-// Función para manejar el cambio en los campos del formulario
-// const handleInputChange = (event) => {
-//   const { name, value } = event.target;
-//   setProductData({
-//     ...productData,
-//     [name]: value,
-//   });
-// };
+
+
+const productToEdit = products.find((p) => p.id === id);
+
+const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  setProductEdit({
+    ...productEdit,
+    [name]: value,
+  });
+};
 
 // Función para enviar la solicitud POST para agregar o editar un producto
-// const handleSubmit = async () => {
-//   try {
-//     const requestOptions = {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(productData),
-//     };
-//     if (id) {
-//       await fetch(`http://localhost:3000/adminProduct/${id}`, requestOptions);
-//     } else {
-//       await fetch('http://localhost:3000/addProductAdmin', requestOptions);
-//     }
-//     handleClose();
-//     // Realizar una nueva solicitud para obtener los productos actualizados desde el servidor
-//     // Esto actualizará la lista de productos mostrados en la tabla
-//   } catch (error) {
-//     console.log('Error al conectar con el servidor:', error);
-//   }
-// };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  try {
+
+    const opciones = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productEdit),
+    };
+
+    if (isEditing) {
+      const response = await fetch(`http://localhost:3000/adminProduct/${id}`, opciones);
+      if (response.ok) {
+        window.alert('Producto Modificado OK')
+      } else {
+        console.log('No se pudo editar producto.');
+      }
+    } else {
+      const response = await fetch('http://localhost:3000/adminProduct', opciones);
+      if (response.ok) {
+        window.alert('Producto Agregado')
+      } else {
+        console.log('No se pudo agregar producto');
+      }
+    }
+  } catch (error) {
+    console.log('Error al conectarse con el servidor:', error);
+  }
+};
 
   //ELIMINAR PRODUCTO
   const eliminarProducto = async (productId) => {
@@ -78,11 +93,30 @@ export const AdminProducts = () => {
   const handleClose = () => {
     setShow(false);
   };
-  const handleShow = () => {
+
+  const handleShow = (productId) => {
+    if (productId) {
+      console.log('El botón tiene asociado el id:', productId);
+      const productToEdit = products.find((product) => product.id === productId);
+      // Establecer el estado productEdit con los valores del producto a editar
+      setProductEdit(productToEdit);
+      setIsEditing(true); // Estás editando un producto existente
+      setModalTitle('Editar Producto'); // Actualiza el título del modal
+    } else {
+      console.log('El botón no tiene asociado ningún id.');
+      setProductEdit(null);
+      setIsEditing(false); // Estás agregando un nuevo producto
+      setModalTitle('Agregar Producto'); // Actualiza el título del modal
+    }
     setShow(true);
-    
   }
 
+  
+  useEffect(() => {
+    // Obtener el producto que se está editando
+    const product = products.find((product) => product.id === editingProduct);
+    setEditingProduct(product);
+  }, [editingProduct, products]);
   return (
     <>
     
@@ -94,7 +128,12 @@ export const AdminProducts = () => {
           <table className="table table-bordered table-hover">
             <thead className="thead-dark">
               <tr>
-                <th colSpan="12" className='contenedorAddProd'><button className='btnAdmin'><i className="bi bi-plus-circle"></i> Agregar Producto</button></th>
+                <th colSpan="12" className='contenedorAddProd'>
+                  <Button variant="" className="btnAdmin" onClick={() => handleShow()}>
+                    <i className="bi bi-plus-circle"></i>
+                    Agregar Producto
+                  </Button>
+                </th>
               </tr>
               <tr>
                 <th colSpan="12">CONTROL DE PRODUCTOS</th>
@@ -122,19 +161,14 @@ export const AdminProducts = () => {
                   <td>{product.url_imagen_producto}</td>
                   <td>{product.id_categoria}</td>
                   <td>
-                    <button className="btnAdmin" onClick={() => eliminarProducto(product.id)}>
+                    <Button variant="" className="btnAdmin" onClick={() => eliminarProducto(product.id)}>
                           <i className="bi bi-trash3"></i>
-                    </button>
+                    </Button>
                   </td>
                   <td>
-                    <form>
-                      <button
-                        className="btnAdmin"
-                        onClick={() => (window.location.href = `#openModal${product.id}`)}
-                      >
+                      <Button variant="" className="btnAdmin" onClick={() => handleShow(product.id)}>
                         <i className="bi bi-pencil"></i>
-                      </button>
-                    </form>
+                      </Button>
                   </td>
                 </tr>
               ))}
@@ -147,23 +181,23 @@ export const AdminProducts = () => {
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title className="modal-title" id="editModalLabel">
-                  {/* {id ? 'Editar Producto' : 'Agregar Producto'}   */}
+                {modalTitle}
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div>
                   <h5 ></h5>
                   <div className="modal-body">
-                    <form action="" method="post" onSubmit="">
+                    <form action={id ? `http://localhost:3000/adminProduct/${id}` : 'http://localhost:3000/addProductAdmin'} method="post" onSubmit={handleSubmit}>
                       <div>
                         <label htmlFor="nombre_producto">Nombre:</label>
                         <input
                           className="inputAdmin"
                           type="text"
                           name="nombre_producto"
-                          placeholder=""
-                          // value={productData.nombre_producto}
-                          // onChange={handleInputChange}
+                          placeholder={productToEdit?.nombre_producto}
+                          value={productEdit?.nombre_producto}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -172,9 +206,9 @@ export const AdminProducts = () => {
                           className="inputAdmin"
                           type="text"
                           name="detalle_producto"
-                          placeholder=""
-                          // value={productData.detalle_producto}
-                          // onChange={handleInputChange}
+                          placeholder={productToEdit?.detalle_producto}
+                          value={productEdit?.detalle_producto}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -183,9 +217,9 @@ export const AdminProducts = () => {
                           className="inputAdmin"
                           type="text"
                           name="precio_producto"
-                          placeholder=""
-                          // value={productData.precio_producto}
-                          // onChange={handleInputChange}
+                          placeholder={productToEdit?.precio_producto}
+                          value={productEdit?.precio_producto}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -194,9 +228,9 @@ export const AdminProducts = () => {
                           className="inputAdmin"
                           type="text"
                           name="stock_producto"
-                          placeholder=""
-                          // value={productData.stock_producto}
-                          // onChange={handleInputChange}
+                          placeholder={productToEdit?.stock_producto}
+                          value={productEdit?.stock_producto}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -205,9 +239,9 @@ export const AdminProducts = () => {
                           className="inputAdmin"
                           type="text"
                           name="url_imagen_producto"
-                          placeholder=""
-                          // value={productData.url_imagen_producto}
-                          // onChange={handleInputChange}
+                          placeholder={productToEdit?.url_imagen_producto}
+                          value={productEdit?.url_imagen_producto}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -216,13 +250,13 @@ export const AdminProducts = () => {
                           className="inputAdmin"
                           type="text"
                           name="id_categoria"
-                          placeholder=""
-                          // value={productData.id_categoria}
-                          // onChange={handleInputChange}
+                          placeholder={productToEdit?.id_categoria}
+                          value={productEdit?.id_categoria}
+                          onChange={handleInputChange}
                         />
                       </div>
                     
-                      {/* onClick={handleSubmit} */}
+                      {/*  */}
                       <Button variant="" type="submit" className="btn_cart btnAdmin text-btn" > 
                         <i className="bi bi-save"></i>
                       </Button>
