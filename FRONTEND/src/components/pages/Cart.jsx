@@ -1,21 +1,34 @@
 
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { dataContext } from '../../contexts/DataContext';
 import { useState, useEffect } from 'react';
+import { CartContext } from '../../contexts/CartContext';
 
 export const Cart = () => {
-  const { products, setProducts } = useContext(dataContext);
   //const [localProducts, setLocalProducts] = useState([]);
   const [subtotal, setSubtotal] = useState(0); // Agrega el estado para el subtotal
   const [envioOption, setEnvioOption] = useState('valueO');
   const [totalCompra, setTotalCompra] = useState(0);
-  const { cart, setCart } = useContext(dataContext);
-  // ...
-  const compraProductos = (product) => {
-    console.log(product);
-    setCart([...cart, product]);
-  };
+  const { cart } = useContext(CartContext);
+  console.log("🚀 ~ file: Cart.jsx:13 ~ Cart ~ cart:", cart)
+
+
+  useEffect(() => {
+    // Calcular el subtotal
+    const calculatedSubtotal = cart.reduce((total, product) => total + product.precio_producto, 0);
+    setSubtotal(calculatedSubtotal);
+
+    // Calcular el total de la compra considerando el costo de envío
+    let calculatedTotal = calculatedSubtotal;
+    if (envioOption === 'value1') {
+      calculatedTotal += 1000;
+    } else if (envioOption === 'value2') {
+      calculatedTotal += 2000;
+    } else if (envioOption === 'value3') {
+      // No se agrega costo de envío
+    }
+    setTotalCompra(calculatedTotal);
+  }, [cart, envioOption]);
 
   return (
     <>
@@ -89,7 +102,7 @@ export const Cart = () => {
                   <td>
                     <tr>
                       <td>SUBTOTAL</td>
-                      <td>${subtotal}</td>
+                      <td>${subtotal.toFixed(2)}</td>
                     </tr>
 
                     <tr>
@@ -113,7 +126,7 @@ export const Cart = () => {
                     </tr>
                     <tr>
                       <td>TOTAL COMPRA</td>
-                      <td>${totalCompra}</td>
+                      <td>${totalCompra.toFixed(2)}</td>
                     </tr>
 
                   </td>

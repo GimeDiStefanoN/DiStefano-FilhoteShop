@@ -7,6 +7,7 @@ import { Header } from '../src/components/partials/Header';
 import { Footer } from '../src/components/partials/Footer';
 import DataProvider from './contexts/DataContext';
 import UserProvider from './contexts/UserContext';
+import CartProvider from './contexts/CartContext';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,7 @@ export default function App() {
     <>
         <UserProvider>
           <DataProvider>
+            <CartProvider>
             <BrowserRouter>
               <Header className="header" />
               <main>
@@ -34,6 +36,7 @@ export default function App() {
               </main>
               <Footer className="footer" />
             </BrowserRouter>
+            </CartProvider>
           </DataProvider>
         </UserProvider>
     </>

@@ -101,35 +101,67 @@ const cartView = (req,res) =>{
 
 // -EXTRA - AGREGAR PRODUCTO AL CARRITO
 
+// const addProduct = async (req, res) => {
+//   const datosCompra = req.body
+//   const user = req.body.user; 
+//   try {
+//     // Verificar si el userId está en la sesión
+//     if (!user.id || user.rol !== 'customer') {
+    
+//       return res.status(401).json({ error: 'Unauthorized', message: 'Debes iniciar sesión como cliente para agregar productos al carrito.' });
+//     }
+
+//     const selectedProductId = parseInt(req.params.id);
+
+
+//     // Buscar el carrito del usuario en la base de datos
+//     let cart = await Carrito_Compra.findOne({ where: { id_usuario: user.id } });
+
+//     if (!cart) {
+//       // Si no existe un carrito para el usuario, crearlo y asignar el id_producto
+//       cart = await Carrito_Compra.create({ id_usuario: user.id, id_producto: selectedProductId });
+//     }
+
+//     // Llamar a la función del servicio para agregar el producto al carrito
+//     await writeProduct(cart, selectedProductId);
+
+//     res.status(200).json({ success: true, message: 'Producto agregado al carrito con éxito' });
+//     console.log('Producto agregado al carrito con éxito');
+//   } catch (error) {
+//     console.error('Error al agregar producto al carrito:', error);
+//     res.status(500).json({ error: 'Server Error', message: 'Error al agregar producto al carrito' });
+//   }
+// };
+  
 const addProduct = async (req, res) => {
   try {
-    // Verificar si el userId está en la sesión
-    if (!req.session.userId || req.session.userRole !== 'customer') {
-      return res.status(401).json({ error: 'Unauthorized', message: 'Debes iniciar sesión como cliente para agregar productos al carrito.' });
+    const datosCompra = req.body;
+    console.log("🚀 ~ file: controllers.js:139 ~ addProduct ~ datosCompra:", datosCompra)
+    const user = req.body.user;
+    console.log("🚀 ~ file: controllers.js:140 ~ addProduct ~ user:", user)
+
+    // Validar la sesión y el rol del usuario
+    if (!user || user.rol !== 'customer') {
+      return res.status(403).json({ message: 'Acceso no autorizado' });
     }
 
-    const selectedProductId = parseInt(req.params.id);
+    // Agregar el producto al carrito
+    const productoAgregado = await Carrito_Compra.create({
+      id_usuario: user.id,
+      id_producto: datosCompra.id_producto,
+      nombre_producto: datosCompra.nombre_producto,
+      precio_producto: datosCompra.precio_producto,
+      url_imagen_producto: datosCompra.url_imagen_producto,
+      cantidad: 1, // Puedes ajustar la cantidad según tu lógica
+    });
 
-    // Buscar el carrito del usuario en la base de datos
-    let cart = await Carrito_Compra.findOne({ where: { id_usuario: req.session.userId } });
-
-    if (!cart) {
-      // Si no existe un carrito para el usuario, crearlo y asignar el id_producto
-      cart = await Carrito_Compra.create({ id_usuario: req.session.userId, id_producto: selectedProductId });
-    }
-
-    // Llamar a la función del servicio para agregar el producto al carrito
-    await writeProduct(cart, selectedProductId);
-
-    res.status(200).json({ success: true, message: 'Producto agregado al carrito con éxito' });
-    console.log('Producto agregado al carrito con éxito');
+    // Puedes emitir una respuesta de éxito o enviar el producto agregado como respuesta
+    res.status(201).json({ message: 'Producto agregado al carrito', productoAgregado });
   } catch (error) {
-    console.error('Error al agregar producto al carrito:', error);
-    res.status(500).json({ error: 'Server Error', message: 'Error al agregar producto al carrito' });
+    console.error(error);
+    res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
-  
-
 
 // -EXTRA - ELIMINAR PRODUCTO DEL CARRITO
 
